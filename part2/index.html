@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AYUVANT — AI Intelligence & Zone System</title>
+    <meta name="description" content="AYUVANT Part 2 - AI demand prediction, zone map, smart alerts, and AI assistant">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="grid-pattern"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app-container">
+
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <div class="logo-mark">
+                    <span class="logo-icon">⬡</span>
+                    <span class="logo-text">AYUVANT</span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <div class="status-pill">
+                    <span class="pulse-dot"></span>
+                    <span class="status-text">AI Active</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="record-sale" id="tab-record-sale">
+                <span class="material-icons-round">point_of_sale</span>
+                <span class="tab-label">Sale</span>
+            </button>
+            <button class="tab-btn" data-tab="zone-map" id="tab-zone-map">
+                <span class="material-icons-round">map</span>
+                <span class="tab-label">Zones</span>
+            </button>
+            <button class="tab-btn" data-tab="predictions" id="tab-predictions">
+                <span class="material-icons-round">insights</span>
+                <span class="tab-label">Predict</span>
+            </button>
+            <button class="tab-btn" data-tab="ai-assistant" id="tab-ai-assistant">
+                <span class="material-icons-round">psychology</span>
+                <span class="tab-label">AI Q&A</span>
+            </button>
+            <button class="tab-btn" data-tab="alerts" id="tab-alerts">
+                <span class="material-icons-round">notifications</span>
+                <span class="tab-label">Alerts</span>
+                <span class="alert-badge" id="alert-count" style="display:none;">0</span>
+            </button>
+        </nav>
+
+        <!-- ========== RECORD SALE VIEW ========== -->
+        <main id="view-record-sale" class="view active">
+            <div class="view-header">
+                <h1 class="view-title">Record Sale</h1>
+                <div class="status-badge">
+                    <span class="pulse-dot pulse-dot-cyan"></span>
+                    <span>Sale Entry</span>
+                </div>
+            </div>
+
+            <form id="sale-form" class="glass-card form-card" autocomplete="off">
+                <!-- 1. Search Medicine -->
+                <div class="form-group">
+                    <label class="form-label" for="sale-medicine-search">
+                        <span class="material-icons-round field-icon">search</span>
+                        Search Medicine
+                    </label>
+                    <input type="text" id="sale-medicine-search" class="form-input" placeholder="Type medicine name..." required>
+                    <div id="medicine-search-results" class="search-results"></div>
+                    <span class="field-hint">Search from your inventory</span>
+                </div>
+
+                <!-- Selected medicine display -->
+                <div id="selected-medicine-display" class="selected-medicine" style="display:none;">
+                    <div class="selected-medicine-info">
+                        <span class="material-icons-round" style="color:var(--primary);">medication</span>
+                        <div>
+                            <span class="selected-name" id="selected-med-name"></span>
+                            <span class="selected-stock" id="selected-med-stock"></span>
+                        </div>
+                    </div>
+                    <button type="button" class="clear-selection" id="clear-medicine-btn">
+                        <span class="material-icons-round">close</span>
+                    </button>
+                </div>
+
+                <!-- 2. Batch Number -->
+                <div class="form-group" id="batch-select-group" style="display:none;">
+                    <label class="form-label" for="sale-batch">
+                        <span class="material-icons-round field-icon">qr_code_2</span>
+                        Select Batch Number
+                    </label>
+                    <div id="batch-chips" class="batch-chips"></div>
+                    <span class="field-hint">Select the batch being sold from</span>
+                </div>
+
+                <!-- 3. Quantity Sold -->
+                <div class="form-group" id="qty-sold-group" style="display:none;">
+                    <label class="form-label" for="sale-quantity">
+                        <span class="material-icons-round field-icon">inventory</span>
+                        Quantity Sold
+                    </label>
+                    <div class="stepper-wrapper">
+                        <button type="button" class="stepper-btn" id="sale-qty-minus">
+                            <span class="material-icons-round">remove</span>
+                        </button>
+                        <input type="number" id="sale-quantity" class="form-input stepper-input" placeholder="0" min="1" required>
+                        <button type="button" class="stepper-btn" id="sale-qty-plus">
+                            <span class="material-icons-round">add</span>
+                        </button>
+                    </div>
+                    <span class="field-hint" id="sale-qty-hint">Number of units sold</span>
+                </div>
+
+                <!-- 4. Buyer Zone Number -->
+                <div class="form-group" id="zone-group" style="display:none;">
+                    <label class="form-label" for="buyer-zone">
+                        <span class="material-icons-round field-icon">location_on</span>
+                        Buyer Zone
+                    </label>
+                    <input type="text" id="buyer-zone" class="form-input" placeholder="e.g. Z-4521" required>
+                    <span class="field-hint">Zone number of buyer location</span>
+                </div>
+
+                <!-- Confirm Sale Button -->
+                <button type="submit" class="submit-btn" id="sale-submit-btn" style="display:none;">
+                    <span class="material-icons-round">check_circle</span>
+                    Confirm Sale
+                </button>
+            </form>
+
+            <!-- Recent Sales -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Recent Sales</h2>
+            </div>
+            <div id="recent-sales-list" class="batch-list"></div>
+            <div id="sales-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">receipt_long</span>
+                <p class="empty-title">No sales recorded</p>
+                <p class="empty-text">Record your first sale above</p>
+            </div>
+        </main>
+
+        <!-- ========== ZONE MAP VIEW ========== -->
+        <main id="view-zone-map" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Zone Map</h1>
+                <div class="status-badge status-badge-green">
+                    <span class="pulse-dot"></span>
+                    <span>Live Zone View</span>
+                </div>
+            </div>
+
+            <!-- Zone Map Grid -->
+            <div class="glass-card zone-map-container">
+                <div class="zone-grid" id="zone-grid">
+                    <!-- Generated by JS: 5x5 grid centered on chemist -->
+                </div>
+                <!-- Legend -->
+                <div class="zone-legend">
+                    <div class="legend-item"><span class="legend-dot legend-critical"></span>Critical</div>
+                    <div class="legend-item"><span class="legend-dot legend-high"></span>High</div>
+                    <div class="legend-item"><span class="legend-dot legend-moderate"></span>Moderate</div>
+                    <div class="legend-item"><span class="legend-dot legend-stable"></span>Stable</div>
+                </div>
+            </div>
+
+            <!-- Your Zone Info -->
+            <div class="glass-card zone-info-card" id="my-zone-card">
+                <div class="zone-info-header">
+                    <span class="material-icons-round" style="color:var(--primary);font-size:20px;">my_location</span>
+                    <span class="zone-info-title">Your Zone</span>
+                </div>
+                <div class="zone-info-body">
+                    <div class="zone-info-item">
+                        <span class="zone-info-label">Zone Number</span>
+                        <span class="zone-info-value" id="my-zone-number">—</span>
+                    </div>
+                    <div class="zone-info-item">
+                        <span class="zone-info-label">Coordinates</span>
+                        <span class="zone-info-value" id="my-zone-coords">—</span>
+                    </div>
+                    <div class="zone-info-item">
+                        <span class="zone-info-label">Demand Status</span>
+                        <span class="zone-info-value zone-status-stable" id="my-zone-status">Stable</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nearby Zones -->
+            <div class="section-header" style="margin-top:16px;">
+                <h2 class="section-title">Nearby Zones</h2>
+            </div>
+            <div class="zone-scroll" id="nearby-zones-scroll">
+                <!-- Generated by JS -->
+            </div>
+        </main>
+
+        <!-- ========== PREDICTIONS VIEW ========== -->
+        <main id="view-predictions" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Demand Predictions</h1>
+                <div class="status-badge status-badge-green">
+                    <span class="pulse-dot"></span>
+                    <span>AI Active • Self-Learning</span>
+                </div>
+            </div>
+
+            <!-- Time Toggle -->
+            <div class="time-toggle">
+                <button class="toggle-btn active" data-period="weekly" id="toggle-weekly">Weekly</button>
+                <button class="toggle-btn" data-period="monthly" id="toggle-monthly">Monthly</button>
+            </div>
+
+            <!-- Prediction Cards -->
+            <div id="prediction-cards" class="prediction-list">
+                <!-- Generated by JS -->
+            </div>
+
+            <!-- Overall Demand Score -->
+            <div class="glass-card demand-score-card" id="demand-score-card">
+                <div class="demand-score-title">Overall Demand Score</div>
+                <div class="demand-gauge" id="demand-gauge">
+                    <svg viewBox="0 0 120 120" class="gauge-svg">
+                        <circle cx="60" cy="60" r="52" class="gauge-bg"/>
+                        <circle cx="60" cy="60" r="52" class="gauge-fill" id="gauge-fill"/>
+                    </svg>
+                    <span class="gauge-value" id="gauge-value">0</span>
+                </div>
+                <div class="demand-score-label">Averaged from all medicine scores</div>
+            </div>
+
+            <!-- Model Info -->
+            <div class="model-info-bar" id="model-info">
+                <span class="material-icons-round" style="font-size:14px;color:var(--primary);">memory</span>
+                <span>Model: Self-Improving • Last trained: <span id="last-trained">—</span> • Accuracy: <span id="model-accuracy">—</span></span>
+            </div>
+        </main>
+
+        <!-- ========== AI ASSISTANT VIEW ========== -->
+        <main id="view-ai-assistant" class="view">
+            <div class="view-header">
+                <h1 class="view-title">AI Assistant</h1>
+                <div class="status-badge status-badge-cyan">
+                    <span class="pulse-dot pulse-dot-cyan"></span>
+                    <span>Model Active • Self-Learning</span>
+                </div>
+            </div>
+
+            <!-- Pre-fixed Question Cards -->
+            <div class="qa-list" id="qa-list">
+                <div class="qa-card" data-question="medicine-needed">
+                    <div class="qa-card-left">
+                        <span class="material-icons-round qa-icon">medication</span>
+                    </div>
+                    <div class="qa-card-content">
+                        <span class="qa-question">Is there any medicine needed?</span>
+                        <span class="qa-desc">Shows medicines running low or predicted to run out</span>
+                    </div>
+                    <span class="material-icons-round qa-arrow">chevron_right</span>
+                </div>
+
+                <div class="qa-card" data-question="zone-medicine">
+                    <div class="qa-card-left">
+                        <span class="material-icons-round qa-icon">map</span>
+                    </div>
+                    <div class="qa-card-content">
+                        <span class="qa-question">Which zone around requires which medicine?</span>
+                        <span class="qa-desc">Zone-wise medicine demand for nearby zones</span>
+                    </div>
+                    <span class="material-icons-round qa-arrow">chevron_right</span>
+                </div>
+
+                <div class="qa-card" data-question="date-prediction">
+                    <div class="qa-card-left">
+                        <span class="material-icons-round qa-icon">event</span>
+                    </div>
+                    <div class="qa-card-content">
+                        <span class="qa-question">When and on which date will medicine be required?</span>
+                        <span class="qa-desc">Date predictions for specific medicines</span>
+                    </div>
+                    <span class="material-icons-round qa-arrow">chevron_right</span>
+                </div>
+
+                <div class="qa-card" data-question="days-remaining">
+                    <div class="qa-card-left">
+                        <span class="material-icons-round qa-icon">timer</span>
+                    </div>
+                    <div class="qa-card-content">
+                        <span class="qa-question">After how many days will medicine be needed?</span>
+                        <span class="qa-desc">Countdown before shortage</span>
+                    </div>
+                    <span class="material-icons-round qa-arrow">chevron_right</span>
+                </div>
+
+                <div class="qa-card" data-question="fastest-selling">
+                    <div class="qa-card-left">
+                        <span class="material-icons-round qa-icon">trending_up</span>
+                    </div>
+                    <div class="qa-card-content">
+                        <span class="qa-question">Which medicine is selling fastest this week?</span>
+                        <span class="qa-desc">Trending medicines by selling speed</span>
+                    </div>
+                    <span class="material-icons-round qa-arrow">chevron_right</span>
+                </div>
+
+                <div class="qa-card" data-question="specific-demand">
+                    <div class="qa-card-left">
+                        <span class="material-icons-round qa-icon">target</span>
+                    </div>
+                    <div class="qa-card-content">
+                        <span class="qa-question">Demand prediction for specific medicine</span>
+                        <span class="qa-desc">Targeted forecast for a chosen medicine</span>
+                    </div>
+                    <span class="material-icons-round qa-arrow">chevron_right</span>
+                </div>
+            </div>
+
+            <!-- AI Answer Panel (shown when question is tapped) -->
+            <div id="ai-answer-panel" class="ai-answer-panel" style="display:none;">
+                <div class="ai-answer-header">
+                    <button class="back-btn" id="ai-back-btn">
+                        <span class="material-icons-round">arrow_back</span>
+                    </button>
+                    <span class="ai-answer-title" id="ai-answer-title"></span>
+                </div>
+                <div class="glass-card ai-answer-body" id="ai-answer-body">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+        </main>
+
+        <!-- ========== ALERTS VIEW ========== -->
+        <main id="view-alerts" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Smart Alerts</h1>
+                <div class="status-badge">
+                    <span class="pulse-dot pulse-dot-cyan"></span>
+                    <span>Monitoring</span>
+                </div>
+            </div>
+
+            <!-- Alert Category Toggle -->
+            <div class="alert-categories" id="alert-categories">
+                <button class="category-pill active" data-cat="all">All</button>
+                <button class="category-pill" data-cat="shortage">Shortage</button>
+                <button class="category-pill" data-cat="zone">Zone Demand</button>
+                <button class="category-pill" data-cat="supply">Supply</button>
+                <button class="category-pill" data-cat="trending">Trending</button>
+            </div>
+
+            <!-- Alert Cards -->
+            <div id="alert-list" class="alert-list">
+                <!-- Generated by JS -->
+            </div>
+
+            <div id="alerts-empty" class="empty-state">
+                <span class="material-icons-round empty-icon">notifications_none</span>
+                <p class="empty-title">No alerts yet</p>
+                <p class="empty-text">Alerts will appear as the AI analyzes your data</p>
+            </div>
+        </main>
+
+        <!-- Toast -->
+        <div id="toast" class="toast">
+            <span class="material-icons-round toast-icon">check_circle</span>
+            <span class="toast-text">Success!</span>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

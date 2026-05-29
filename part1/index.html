@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AYUVANT — Smart Pharmacy System</title>
+    <meta name="description" content="AYUVANT - AI-powered smart pharmacy inventory and batch management system">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="grid-pattern"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app-container">
+
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <div class="logo-mark">
+                    <span class="logo-icon">⬡</span>
+                    <span class="logo-text">AYUVANT</span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <div class="status-pill">
+                    <span class="pulse-dot"></span>
+                    <span class="status-text">System Active</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="dashboard" id="tab-dashboard">
+                <span class="material-icons-round">dashboard</span>
+                <span class="tab-label">Dashboard</span>
+            </button>
+            <button class="tab-btn" data-tab="add-batch" id="tab-add-batch">
+                <span class="material-icons-round">add_circle</span>
+                <span class="tab-label">Add Batch</span>
+            </button>
+        </nav>
+
+        <!-- ========== DASHBOARD VIEW ========== -->
+        <main id="view-dashboard" class="view active">
+            <div class="view-header">
+                <h1 class="view-title">Inventory Dashboard</h1>
+                <p class="view-subtitle">All medicine batches</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <span class="stat-value" id="stat-total">0</span>
+                    <span class="stat-label">Total Batches</span>
+                </div>
+                <div class="stat-card stat-card-cyan">
+                    <span class="stat-value" id="stat-medicines">0</span>
+                    <span class="stat-label">Total Units</span>
+                </div>
+                <div class="stat-card stat-card-warning">
+                    <span class="stat-value" id="stat-expiring">0</span>
+                    <span class="stat-label">Expiring Soon</span>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-bar">
+                <span class="material-icons-round search-icon">search</span>
+                <input type="text" id="search-input" placeholder="Search by medicine name or batch..." class="search-input">
+            </div>
+
+            <!-- Batch List -->
+            <div id="batch-list" class="batch-list">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state">
+                <span class="material-icons-round empty-icon">inventory_2</span>
+                <p class="empty-title">No batches yet</p>
+                <p class="empty-text">Tap "Add Batch" to enter your first medicine batch</p>
+            </div>
+        </main>
+
+        <!-- ========== ADD BATCH VIEW ========== -->
+        <main id="view-add-batch" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Add Medicine Batch</h1>
+                <div class="status-badge">
+                    <span class="pulse-dot pulse-dot-cyan"></span>
+                    <span>New Batch Entry</span>
+                </div>
+            </div>
+
+            <form id="batch-form" class="glass-card form-card" autocomplete="off">
+
+                <!-- 1. Batch Number -->
+                <div class="form-group">
+                    <label class="form-label" for="batchNumber">
+                        <span class="material-icons-round field-icon">qr_code_2</span>
+                        Batch Number
+                    </label>
+                    <input type="text" id="batchNumber" class="form-input" placeholder="e.g. BTH-2026-05-001" required>
+                    <span class="field-hint">Unique identifier for this batch</span>
+                </div>
+
+                <!-- 2. Medicine Name -->
+                <div class="form-group">
+                    <label class="form-label" for="medicineName">
+                        <span class="material-icons-round field-icon">medication</span>
+                        Medicine Name
+                    </label>
+                    <input type="text" id="medicineName" class="form-input" placeholder="e.g. Paracetamol 500mg" required>
+                    <span class="field-hint">Name of the medicine</span>
+                </div>
+
+                <!-- 3. Quantity -->
+                <div class="form-group">
+                    <label class="form-label" for="quantity">
+                        <span class="material-icons-round field-icon">inventory</span>
+                        Number of Medicines in Batch
+                    </label>
+                    <div class="stepper-wrapper">
+                        <button type="button" class="stepper-btn" id="qty-minus">
+                            <span class="material-icons-round">remove</span>
+                        </button>
+                        <input type="number" id="quantity" class="form-input stepper-input" placeholder="0" min="1" required>
+                        <button type="button" class="stepper-btn" id="qty-plus">
+                            <span class="material-icons-round">add</span>
+                        </button>
+                    </div>
+                    <span class="field-hint">Total units in this batch</span>
+                </div>
+
+                <!-- 4. Manufacturing Date -->
+                <div class="form-group">
+                    <label class="form-label" for="mfgDate">
+                        <span class="material-icons-round field-icon">event</span>
+                        Date of Manufacturing
+                    </label>
+                    <input type="date" id="mfgDate" class="form-input" required>
+                    <span class="field-hint">When this batch was manufactured</span>
+                </div>
+
+                <!-- 5. Expiry Date -->
+                <div class="form-group">
+                    <label class="form-label" for="expDate">
+                        <span class="material-icons-round field-icon">event_busy</span>
+                        Date of Use (Expiry)
+                    </label>
+                    <input type="date" id="expDate" class="form-input" required>
+                    <span class="field-hint" id="expiry-hint">When this batch expires</span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span class="material-icons-round">check_circle</span>
+                    Submit Batch
+                </button>
+            </form>
+        </main>
+
+        <!-- Success Toast -->
+        <div id="toast" class="toast">
+            <span class="material-icons-round toast-icon">check_circle</span>
+            <span class="toast-text">Batch added successfully!</span>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
