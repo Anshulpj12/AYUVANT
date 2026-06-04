@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AYUVANT — Smart Distribution & Patient Intelligence</title>
+    <meta name="description" content="AYUVANT Part 3 - Stock transfer, medicine alternatives, pharmacist feedback, patient tracking, health patterns, and network insights">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!-- Ambient Background -->
+    <div class="ambient-bg">
+        <div class="grid-pattern"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+    </div>
+
+    <!-- App Container -->
+    <div id="app" class="app-container">
+
+        <!-- Top Navigation Bar -->
+        <header class="top-bar">
+            <div class="top-bar-left">
+                <div class="logo-mark">
+                    <span class="logo-icon">⬡</span>
+                    <span class="logo-text">AYUVANT</span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <div class="status-pill">
+                    <span class="pulse-dot pulse-dot-cyan"></span>
+                    <span class="status-text">Network Active</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Tab Navigation (6 tabs, horizontal scroll) -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="transfer" id="tab-transfer">
+                <span class="material-icons-round">swap_horiz</span>
+                <span class="tab-label">Transfer</span>
+            </button>
+            <button class="tab-btn" data-tab="alternatives" id="tab-alternatives">
+                <span class="material-icons-round">medication</span>
+                <span class="tab-label">Alts</span>
+            </button>
+            <button class="tab-btn" data-tab="feedback" id="tab-feedback">
+                <span class="material-icons-round">rate_review</span>
+                <span class="tab-label">Feedback</span>
+                <span class="alert-badge" id="feedback-badge" style="display:none;">0</span>
+            </button>
+            <button class="tab-btn" data-tab="patients" id="tab-patients">
+                <span class="material-icons-round">person</span>
+                <span class="tab-label">Patients</span>
+            </button>
+            <button class="tab-btn" data-tab="patterns" id="tab-patterns">
+                <span class="material-icons-round">pattern</span>
+                <span class="tab-label">Patterns</span>
+            </button>
+            <button class="tab-btn" data-tab="insights" id="tab-insights">
+                <span class="material-icons-round">analytics</span>
+                <span class="tab-label">Insights</span>
+            </button>
+        </nav>
+
+        <!-- ========== TAB 1: STOCK TRANSFER ========== -->
+        <main id="view-transfer" class="view active">
+            <div class="view-header">
+                <h1 class="view-title">Stock Transfer</h1>
+                <div class="status-badge"><span class="pulse-dot pulse-dot-cyan"></span>Network Monitoring</div>
+            </div>
+
+            <!-- Search Medicine Across Network -->
+            <div class="search-bar">
+                <span class="material-icons-round search-icon">search</span>
+                <input type="text" id="transfer-search" class="search-input" placeholder="Search medicine to find nearby stock...">
+            </div>
+
+            <!-- Transfer Search Results (AI Recommendation) -->
+            <div id="transfer-results" style="display:none;">
+                <div class="section-header">
+                    <h2 class="section-title">Nearby Availability</h2>
+                    <span class="section-subtitle" id="transfer-results-count"></span>
+                </div>
+                <div id="nearby-pharmacies-grid" class="pharmacy-grid"></div>
+            </div>
+
+            <!-- Active Transfers -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Active Transfers</h2>
+            </div>
+            <div id="active-transfers-list"></div>
+            <div id="transfers-active-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">local_shipping</span>
+                <p class="empty-title">No active transfers</p>
+                <p class="empty-text">Search for a medicine to find nearby pharmacy stock</p>
+            </div>
+
+            <!-- Transfer History -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Transfer History</h2>
+            </div>
+            <div id="transfer-history-list"></div>
+            <div id="transfers-history-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">history</span>
+                <p class="empty-title">No transfer history</p>
+                <p class="empty-text">Completed transfers will appear here</p>
+            </div>
+        </main>
+
+        <!-- ========== TAB 2: ALTERNATIVES ========== -->
+        <main id="view-alternatives" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Medicine Alternatives</h1>
+                <div class="status-badge status-badge-green"><span class="pulse-dot"></span>Salt Matching Active</div>
+            </div>
+
+            <!-- Search Medicine -->
+            <div class="search-bar">
+                <span class="material-icons-round search-icon">search</span>
+                <input type="text" id="alt-search" class="search-input" placeholder="Search medicine for alternatives...">
+            </div>
+            <div id="alt-search-results" class="search-results"></div>
+
+            <!-- Original Medicine Info Card -->
+            <div id="alt-medicine-info" class="medicine-info-card glass-card" style="display:none;">
+                <!-- JS fills: medicine name, salts, category, stock status -->
+            </div>
+
+            <!-- Alternative Recommendations -->
+            <div id="alt-results" style="display:none;">
+                <div class="section-header">
+                    <h2 class="section-title">Recommended Alternatives</h2>
+                    <span class="section-subtitle" id="alt-results-subtitle"></span>
+                </div>
+                <div id="alt-recommendations-list"></div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="alt-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">medication</span>
+                <p class="empty-title">Find alternatives by active salt</p>
+                <p class="empty-text">Search any medicine to see therapeutically equivalent options</p>
+            </div>
+        </main>
+
+        <!-- ========== TAB 3: FEEDBACK ========== -->
+        <main id="view-feedback" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Pharmacist Feedback</h1>
+                <div class="status-badge"><span class="pulse-dot pulse-dot-cyan"></span>AI Learning</div>
+            </div>
+
+            <!-- Pending Feedback Alert -->
+            <div id="feedback-pending" class="glass-card" style="display:none; padding:16px 20px; margin-bottom:16px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span class="material-icons-round" style="color:var(--warning);">pending_actions</span>
+                    <div>
+                        <span style="font-weight:600; font-size:14px;">Pending Feedback</span>
+                        <span id="feedback-pending-count" style="font-size:12px; color:var(--on-surface-variant); display:block;"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Feedback Form (shown when substitute sale happens) -->
+            <div id="feedback-active-form" style="display:none;"></div>
+
+            <!-- No pending feedback state -->
+            <div id="feedback-no-pending" class="empty-state show">
+                <span class="material-icons-round empty-icon">rate_review</span>
+                <p class="empty-title">No pending feedback</p>
+                <p class="empty-text">Feedback forms appear after substitute medicine sales</p>
+            </div>
+
+            <!-- AI Learning Insights -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">AI Learning Insights</h2>
+            </div>
+            <div id="feedback-insights"></div>
+
+            <!-- Feedback History -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Feedback History</h2>
+            </div>
+            <div id="feedback-history"></div>
+            <div id="feedback-history-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">history</span>
+                <p class="empty-title">No feedback recorded yet</p>
+                <p class="empty-text">Your feedback helps the AI improve recommendations</p>
+            </div>
+        </main>
+
+        <!-- ========== TAB 4: PATIENTS ========== -->
+        <main id="view-patients" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Patient Tracker</h1>
+                <div class="status-badge status-badge-green"><span class="pulse-dot"></span>Health Monitoring</div>
+            </div>
+
+            <!-- Search / Register Patient -->
+            <div class="search-bar">
+                <span class="material-icons-round search-icon">search</span>
+                <input type="text" id="patient-search" class="search-input" placeholder="Search by mobile number or name...">
+            </div>
+
+            <!-- Register New Patient Card -->
+            <div id="patient-register-card" class="glass-card form-card" style="display:none;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+                    <span class="material-icons-round" style="color:var(--primary);">person_add</span>
+                    <span style="font-family:var(--font-headline); font-size:16px; font-weight:600;">Register New Patient</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patient-mobile"><span class="material-icons-round field-icon">phone</span>Mobile Number</label>
+                    <input type="tel" id="patient-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10" pattern="[0-9]{10}">
+                    <span class="field-hint">Unique patient ID will be generated from this number</span>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patient-name"><span class="material-icons-round field-icon">badge</span>Patient Name (Optional)</label>
+                    <input type="text" id="patient-name" class="form-input" placeholder="Enter patient name">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="patient-age"><span class="material-icons-round field-icon">cake</span>Age (Optional)</label>
+                    <input type="number" id="patient-age" class="form-input" placeholder="Age" min="0" max="150">
+                </div>
+                <div class="form-group">
+                    <label class="form-label"><span class="material-icons-round field-icon">wc</span>Gender (Optional)</label>
+                    <div class="chip-group">
+                        <button class="chip" data-value="M">Male</button>
+                        <button class="chip" data-value="F">Female</button>
+                        <button class="chip" data-value="Other">Other</button>
+                    </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px; padding:12px; background:rgba(0,229,255,0.04); border-radius:var(--radius); border:1px solid rgba(0,229,255,0.08);">
+                    <input type="checkbox" id="patient-consent" checked>
+                    <label for="patient-consent" style="font-size:12px; color:var(--on-surface-variant);">Patient consents to purchase tracking for health insights</label>
+                </div>
+                <button id="patient-register-btn" class="submit-btn">
+                    <span class="material-icons-round">person_add</span> Register Patient
+                </button>
+            </div>
+
+            <!-- Patient Profile (shown when patient found/selected) -->
+            <div id="patient-profile" style="display:none;"></div>
+
+            <!-- Recent Patients List -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Recent Patients</h2>
+            </div>
+            <div id="patient-list"></div>
+            <div id="patient-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">people</span>
+                <p class="empty-title">No patients registered</p>
+                <p class="empty-text">Search or register patients to start tracking health patterns</p>
+            </div>
+        </main>
+
+        <!-- ========== TAB 5: PATTERNS ========== -->
+        <main id="view-patterns" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Health Patterns</h1>
+                <div class="status-badge"><span class="pulse-dot pulse-dot-cyan"></span>Pattern Analysis</div>
+            </div>
+
+            <!-- Category filter pills -->
+            <div class="alert-categories" id="pattern-categories">
+                <button class="category-pill active" data-cat="all">All</button>
+                <button class="category-pill" data-cat="batch">Batch Issues</button>
+                <button class="category-pill" data-cat="medicine">Medicine</button>
+                <button class="category-pill" data-cat="escalation">Escalation</button>
+                <button class="category-pill" data-cat="trajectory">Trajectories</button>
+            </div>
+
+            <!-- Batch Patterns -->
+            <div id="batch-patterns"></div>
+
+            <!-- Medicine Patterns -->
+            <div id="medicine-patterns"></div>
+
+            <!-- Patient Trajectories -->
+            <div id="patient-trajectories"></div>
+
+            <!-- Anomaly Alerts -->
+            <div id="anomaly-alerts"></div>
+
+            <!-- Empty State -->
+            <div id="patterns-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">pattern</span>
+                <p class="empty-title">No patterns detected yet</p>
+                <p class="empty-text">Patterns emerge as more patient purchases are recorded</p>
+            </div>
+        </main>
+
+        <!-- ========== TAB 6: INSIGHTS ========== -->
+        <main id="view-insights" class="view">
+            <div class="view-header">
+                <h1 class="view-title">Network Insights</h1>
+                <div class="status-badge status-badge-green"><span class="pulse-dot"></span>Live Analytics</div>
+            </div>
+
+            <!-- Stats Row -->
+            <div class="stats-row" id="insight-stats">
+                <div class="stat-card">
+                    <span class="stat-value stat-value-cyan" id="insight-total-patients">0</span>
+                    <span class="stat-label">Patients</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value stat-value-green" id="insight-total-transfers">0</span>
+                    <span class="stat-label">Transfers</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value stat-value-purple" id="insight-total-substitutions">0</span>
+                    <span class="stat-label">Substitutions</span>
+                </div>
+            </div>
+
+            <!-- Substitution Success Rate -->
+            <div class="glass-card demand-score-card" id="substitution-success-card">
+                <div class="demand-score-title">Substitution Success Rate</div>
+                <div class="demand-gauge" id="substitution-gauge">
+                    <svg viewBox="0 0 120 120" class="gauge-svg">
+                        <circle cx="60" cy="60" r="52" class="gauge-bg"/>
+                        <circle cx="60" cy="60" r="52" class="gauge-fill" id="sub-gauge-fill"/>
+                    </svg>
+                    <span class="gauge-value" id="sub-gauge-value">0%</span>
+                </div>
+                <div class="demand-score-label">Based on pharmacist feedback ratings</div>
+            </div>
+
+            <!-- Top Substitution Pairs -->
+            <div class="section-header">
+                <h2 class="section-title">Top Substitution Pairs</h2>
+            </div>
+            <div id="top-alternatives"></div>
+
+            <!-- Network Overview -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Network Overview</h2>
+            </div>
+            <div id="network-overview"></div>
+
+            <!-- AI Confidence Trend -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">AI Confidence Trend</h2>
+            </div>
+            <div id="ai-confidence" class="glass-card" style="padding:20px;">
+                <div class="model-info-bar">
+                    <span class="material-icons-round" style="font-size:14px;color:var(--primary);">memory</span>
+                    <span>Feedback Learning Engine • <span id="feedback-count-total">0</span> entries processed</span>
+                </div>
+            </div>
+
+            <!-- Patient Health Summary -->
+            <div class="section-header" style="margin-top:24px;">
+                <h2 class="section-title">Patient Health Summary</h2>
+            </div>
+            <div id="patient-summary"></div>
+            <div id="insights-empty" class="empty-state show">
+                <span class="material-icons-round empty-icon">analytics</span>
+                <p class="empty-title">Insights coming soon</p>
+                <p class="empty-text">Record sales, register patients, and submit feedback to generate insights</p>
+            </div>
+        </main>
+
+        <!-- Modal Overlay -->
+        <div id="modal-overlay" class="modal-overlay">
+            <div class="modal-container glass-card">
+                <div class="modal-header">
+                    <span class="modal-title" id="modal-title"></span>
+                    <button class="modal-close" id="modal-close"><span class="material-icons-round">close</span></button>
+                </div>
+                <div class="modal-body" id="modal-body"></div>
+            </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="toast" class="toast">
+            <span class="material-icons-round toast-icon">check_circle</span>
+            <span class="toast-text">Success!</span>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/medicines.js"></script>
+    <script src="modules/pharmacy-network.js"></script>
+    <script src="modules/alternatives.js"></script>
+    <script src="modules/feedback.js"></script>
+    <script src="modules/patient-tracker.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
