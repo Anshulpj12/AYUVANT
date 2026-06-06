@@ -132,12 +132,26 @@
             case 'insights':
                 renderInsightsTab();
                 break;
+            case 'diagnose':
+                renderDiagnoseTab();
+                break;
+            case 'followup':
+                renderFollowUpTab();
+                break;
         }
     }
 
     // ---- State ----
     var selectedOriginalMedicine = null;
     var currentPatientId = null;
+
+    // Diagnose tab state
+    var dxCurrentStep = 1;
+    var dxSelectedDisease = null;
+    var dxSelectedSymptoms = [];
+    var dxSelectedMedicine = null;
+    var dxRecommendations = [];
+    var dxSelectedCategory = 'All';
 
     // ================================================
     // TAB 1: STOCK TRANSFER
@@ -910,6 +924,747 @@
     }
 
     // ================================================
+    // TAB 7: DIAGNOSE — 4-Step Clinical Flow
+    // ================================================
+    function renderDiagnoseTab() {
+        renderDxStep(dxCurrentStep);
+        if (dxCurrentStep === 1) {
+            renderDiseaseCategories();
+            renderDiseaseGrid();
+        }
+    }
+
+    function renderDxStep(step) {
+        dxCurrentStep = step;
+        // Update stepper
+        var steps = document.querySelectorAll('#dx-stepper .dx-step');
+        var lines = document.querySelectorAll('#dx-stepper .dx-step-line');
+        steps.forEach(function (s, i) {
+            var num = i + 1;
+            s.classList.remove('active', 'completed');
+            if (num < step) s.classList.add('completed');
+            else if (num === step) s.classList.add('active');
+        });
+        lines.forEach(function (l, i) {
+            l.classList.remove('completed');
+            if (i + 1 < step) l.classList.add('completed');
+        });
+
+        // Show correct panel
+        document.querySelectorAll('.dx-panel').forEach(function (p) { p.classList.remove('active'); });
+        var panel = document.getElementById('dx-step-' + step);
+        if (panel) panel.classList.add('active');
+    }
+
+    function renderDiseaseCategories() {
+        var container = document.getElementById('dx-disease-categories');
+        if (!container) return;
+        var categories = ClinicalEngine.getDiseaseCategories();
+        var html = '<button class="category-pill ' + (dxSelectedCategory === 'All' ? 'active' : '') + '" data-cat="All">All</button>';
+        categories.forEach(function (cat) {
+            html += '<button class="category-pill ' + (dxSelectedCategory === cat ? 'active' : '') + '" data-cat="' + escapeHtml(cat) + '">' + escapeHtml(cat) + '</button>';
+        });
+        container.innerHTML = html;
+    }
+
+    function renderDiseaseGrid(query) {
+        var container = document.getElementById('dx-disease-grid');
+        if (!container) return;
+
+        var diseases;
+        if (query && query.trim().length > 0) {
+            diseases = ClinicalEngine.getDiseases(query);
+        } else {
+            diseases = ClinicalEngine.getDiseasesByCategory(dxSelectedCategory);
+        }
+
+        if (diseases.length === 0) {
+            container.innerHTML = '<div class="empty-state show"><span class="material-icons-round empty-icon">search_off</span><p class="empty-title">No diseases found</p></div>';
+            return;
+        }
+
+        var html = '';
+        diseases.forEach(function (d) {
+            html += '<div class="dx-disease-card glass-card" data-id="' + d.id + '" data-cat="' + escapeHtml(d.category) + '">' +
+                '<div class="dx-disease-name">' + escapeHtml(d.name) + '</div>' +
+                '<div class="dx-disease-category">' + escapeHtml(d.category) + '</div>' +
+                '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function renderSymptomChips() {
+        var container = document.getElementById('dx-symptom-chips');
+        var diseaseEl = document.getElementById('dx-selected-disease');
+        var subtitleEl = document.getElementById('dx-symptom-subtitle');
+        if (!container || !dxSelectedDisease) return;
+
+        // Show selected disease
+        diseaseEl.style.display = 'flex';
+        diseaseEl.innerHTML = '<div class="selected-medicine-info">' +
+            '<span class="material-icons-round" style="color:var(--primary);">medical_services</span>' +
+            '<div><span class="selected-name">' + escapeHtml(dxSelectedDisease.name) + '</span>' +
+            '<span class="selected-stock">' + escapeHtml(dxSelectedDisease.category) + 
+            (dxSelectedDisease.icd_code ? ' <span class="badge icd-badge">' + escapeHtml(dxSelectedDisease.icd_code) + '</span>' : '') + '</span></div>' +
+            '</div>' +
+            '<button class="clear-selection" id="dx-clear-disease"><span class="material-icons-round">close</span></button>';
+
+        subtitleEl.textContent = 'Common symptoms for ' + dxSelectedDisease.name;
+
+        var symptoms = ClinicalEngine.getSymptomsForDisease(dxSelectedDisease.id);
+        var html = '';
+        symptoms.forEach(function (s) {
+            var isSelected = dxSelectedSymptoms.indexOf(s.id) !== -1;
+            html += '<div class="dx-symptom-chip ' + (isSelected ? 'selected' : '') + '" data-id="' + s.id + '">' +
+                '<span class="severity-dot ' + escapeHtml(s.severity) + '"></span>' +
+                escapeHtml(s.name) +
+                '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function renderRecommendations() {
+        var container = document.getElementById('dx-recommendations-list');
+        var subtitleEl = document.getElementById('dx-rec-subtitle');
+        if (!container || !dxSelectedDisease) return;
+
+        dxRecommendations = ClinicalEngine.getRecommendations(dxSelectedDisease.id, dxSelectedSymptoms);
+        subtitleEl.textContent = dxRecommendations.length + ' medicines found for ' + dxSelectedDisease.name;
+
+        if (dxRecommendations.length === 0) {
+            container.innerHTML = '<div class="empty-state show"><span class="material-icons-round empty-icon">medication</span><p class="empty-title">No recommendations</p></div>';
+            return;
+        }
+
+        var html = '';
+        dxRecommendations.forEach(function (rec) {
+            var med = rec.medicine;
+            var conf = rec.confidence;
+            var confClass = conf >= 70 ? 'high' : (conf >= 40 ? 'medium' : 'low');
+            var successPct = Math.round(rec.historicalSuccess * 100);
+
+            // Salt tags
+            var saltHtml = '';
+            rec.mapping.saltCompositions.forEach(function (salt) {
+                saltHtml += '<span class="salt-tag-small">' + escapeHtml(salt) + '</span>';
+            });
+
+            // Reasons
+            var reasonsHtml = '';
+            rec.reasons.forEach(function (r) {
+                reasonsHtml += '<span class="dx-rec-reason">' + escapeHtml(r) + '</span>';
+            });
+
+            // Side effects warning with severity tags
+            var sideHtml = '';
+            if (rec.sideEffects && rec.sideEffects.effects.length > 0) {
+                var sideEffectsListHtml = '';
+                rec.sideEffects.effects.forEach(function (eff) {
+                    var severity = (rec.sideEffects.severity_map && rec.sideEffects.severity_map[eff]) || 'mild';
+                    var badgeClass = 'severity-' + severity;
+                    sideEffectsListHtml += '<span class="side-effect-tag ' + badgeClass + '" style="margin-right:4px; margin-bottom:4px; display:inline-block; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:600; text-transform:capitalize;">' + 
+                        escapeHtml(eff) + ' (' + severity + ')</span>';
+                });
+                sideHtml = '<div class="dx-side-effects" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center; margin-top:8px;">' +
+                    '<strong style="font-size:11px; color:var(--on-surface-variant); margin-right:4px;">Side Effects:</strong> ' + sideEffectsListHtml + '</div>';
+            }
+
+            var otcBadgeClass = (med.subCategory && med.subCategory.toLowerCase() === 'otc') ? 'badge-otc' : 'badge-rx';
+            var otcLabel = med.subCategory || 'Rx';
+
+            html += '<div class="dx-rec-card" data-med-id="' + med.id + '">' +
+                '<div class="dx-rec-header">' +
+                '<div class="dx-rec-confidence ' + confClass + '">' + conf + '%</div>' +
+                '<div class="dx-rec-info">' +
+                '<div class="dx-rec-name">' + escapeHtml(med.name) + 
+                ' <span class="badge ' + otcBadgeClass + '">' + escapeHtml(otcLabel) + '</span></div>' +
+                '<div class="dx-rec-generic">' + escapeHtml(med.genericName) + ' • <span style="color:var(--primary); font-size:11px;">' + escapeHtml(med.dosageForm) + '</span></div>' +
+                '</div></div>' +
+                '<div class="dx-rec-salt">' + saltHtml + '</div>' +
+                '<div class="dx-rec-reasons">' + reasonsHtml + '</div>' +
+                '<div class="dx-rec-footer">' +
+                '<div class="dx-rec-meta">' +
+                '<span class="dx-rec-uses">' + rec.totalUses + ' uses</span>' +
+                '<div class="dx-rec-success-bar"><div class="dx-rec-success-fill" style="width:' + successPct + '%;"></div></div>' +
+                '<span class="dx-rec-uses">' + successPct + '%</span>' +
+                '</div>' +
+                '<button class="dx-rec-select-btn" data-med-id="' + med.id + '">' +
+                '<span class="material-icons-round">check_circle</span>Select</button>' +
+                '</div>' +
+                sideHtml +
+                '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function renderPrescriptionForm() {
+        var container = document.getElementById('dx-prescription-card');
+        if (!container || !dxSelectedMedicine || !dxSelectedDisease) return;
+
+        var details = ClinicalEngine.getMedicineDetails(dxSelectedMedicine.id, dxSelectedDisease.id);
+        if (!details) return;
+
+        var med = details.medicine;
+
+        // Salt composition pills
+        var saltPills = '';
+        details.saltCompositions.forEach(function (s, i) {
+            saltPills += '<div class="dx-selector-pill' + (i === 0 ? ' selected' : '') + '" data-type="salt" data-value="' + escapeHtml(s) + '">' + escapeHtml(s) + '</div>';
+        });
+
+        // Dosage strengths dropdown options
+        var dosageOptions = '';
+        details.dosageStrengths.forEach(function (d) {
+            dosageOptions += '<option value="' + escapeHtml(d) + '">' + escapeHtml(d) + '</option>';
+        });
+        
+        var dosageSelectHtml = '<select id="dx-dosage-select" class="form-input" style="background:rgba(25, 25, 31, 0.6); border:1px solid rgba(255,255,255,0.08); color:var(--on-surface); border-radius:var(--radius); padding:10px; width:100%; cursor:pointer;">' + 
+            (dosageOptions || '<option value="">No dosage strength suggestions available</option>') + 
+            '</select>';
+
+        // Usage guidelines checklist
+        var usageChecklistHtml = '';
+        if (details.usageGuidelines) {
+            var items = details.usageGuidelines.split('; ');
+            items.forEach(function (item, idx) {
+                var itemId = 'dx-usage-item-' + idx;
+                usageChecklistHtml += '<div class="usage-checklist-item" style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;">' +
+                    '<input type="checkbox" id="' + itemId + '" class="usage-checkbox" checked style="margin-top:3px; accent-color:var(--primary); cursor:pointer;">' +
+                    '<label for="' + itemId + '" style="font-size:12.5px; color:var(--on-surface-variant); cursor:pointer; line-height:1.4;">' + escapeHtml(item) + '</label>' +
+                    '</div>';
+            });
+        } else {
+            usageChecklistHtml = '<div style="font-size:12px; color:var(--outline);">No guidelines available for this medicine type</div>';
+        }
+
+        // Side effects warning with severity badges
+        var sideHtml = '';
+        if (details.sideEffects && details.sideEffects.effects.length > 0) {
+            var sideEffectsListHtml = '';
+            details.sideEffects.effects.forEach(function (eff) {
+                var severity = (details.sideEffects.severity_map && details.sideEffects.severity_map[eff]) || 'mild';
+                var badgeClass = 'severity-' + severity;
+                sideEffectsListHtml += '<span class="side-effect-tag ' + badgeClass + '" style="margin-right:6px; margin-bottom:6px; display:inline-block; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:600; text-transform:capitalize;">' + 
+                    escapeHtml(eff) + ' (' + severity + ')</span>';
+            });
+            
+            sideHtml = '<div class="dx-side-effects-container" style="margin-bottom:18px; padding:12px; background:rgba(255,255,255,0.01); border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius);">' +
+                '<div style="font-size:12px; font-weight:600; color:var(--on-surface-variant); margin-bottom:8px; display:flex; align-items:center; gap:6px;">' +
+                '<span class="material-icons-round" style="font-size:16px; color:var(--warning);">warning</span>Potential Side Effects & Severity</div>' +
+                '<div style="display:flex; flex-wrap:wrap;">' + sideEffectsListHtml + '</div>' +
+                '</div>';
+        }
+
+        var otcBadgeClass = (med.subCategory && med.subCategory.toLowerCase() === 'otc') ? 'badge-otc' : 'badge-rx';
+        var otcLabel = med.subCategory || 'Rx';
+
+        container.innerHTML =
+            '<div class="dx-prescription-header">' +
+            '<div class="dx-prescription-icon"><span class="material-icons-round">medication</span></div>' +
+            '<div><div class="dx-prescription-title">' + escapeHtml(med.name) + 
+            ' <span class="badge ' + otcBadgeClass + '">' + escapeHtml(otcLabel) + '</span></div>' +
+            '<div class="dx-prescription-sub">' + escapeHtml(med.genericName) + ' • <span style="color:var(--primary); font-weight:500;">' + escapeHtml(med.dosageForm) + '</span></div></div>' +
+            '</div>' +
+            // Salt Composition
+            '<div class="dx-selector-group">' +
+            '<div class="dx-selector-label"><span class="material-icons-round field-icon">science</span>Active Salt & Drug Class <span class="badge drug-class-badge">' + escapeHtml(med.therapeuticClass) + '</span></div>' +
+            '<div class="dx-selector-pills" id="dx-salt-pills">' + saltPills + '</div>' +
+            '</div>' +
+            // Dosage Strength (dropdown)
+            '<div class="dx-selector-group">' +
+            '<div class="dx-selector-label"><span class="material-icons-round field-icon">straighten</span>Select Dosage Strength</div>' +
+            '<div style="margin-top:8px;">' + dosageSelectHtml + '</div>' +
+            '</div>' +
+            // Usage Guidelines (checklist)
+            '<div class="dx-selector-group">' +
+            '<div class="dx-selector-label"><span class="material-icons-round field-icon">description</span>Verify Usage Instructions</div>' +
+            '<div class="dx-usage-card" style="background:rgba(25, 25, 31, 0.4); border:1px solid rgba(255,255,255,0.04); border-radius:var(--radius); padding:12px; margin-top:8px;">' + usageChecklistHtml + '</div>' +
+            '</div>' +
+            // Side Effects
+            sideHtml +
+            // Patient Mobile (optional)
+            '<div class="form-group">' +
+            '<label class="form-label"><span class="material-icons-round field-icon">phone</span>Patient Mobile (Optional)</label>' +
+            '<input type="tel" id="dx-patient-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10">' +
+            '</div>' +
+            // Batch Number (optional)
+            '<div class="form-group">' +
+            '<label class="form-label"><span class="material-icons-round field-icon">qr_code_2</span>Batch Number (Optional)</label>' +
+            '<input type="text" id="dx-batch-number" class="form-input" placeholder="Enter batch number">' +
+            '</div>' +
+            // Pharmacist Notes
+            '<div class="form-group">' +
+            '<label class="form-label"><span class="material-icons-round field-icon">notes</span>Pharmacist Notes</label>' +
+            '<textarea id="dx-notes" class="feedback-textarea" placeholder="Any observations or notes..."></textarea>' +
+            '</div>' +
+            // Submit
+            '<button class="submit-btn" id="dx-submit-prescription">' +
+            '<span class="material-icons-round">task_alt</span>Record Prescription' +
+            '</button>';
+    }
+
+    function setupDiagnoseEvents() {
+        // Disease search
+        var diseaseSearch = document.getElementById('dx-disease-search');
+        if (diseaseSearch) {
+            diseaseSearch.addEventListener('input', debounce(function () {
+                renderDiseaseGrid(diseaseSearch.value.trim());
+            }, 200));
+        }
+
+        // Disease category pills
+        var catContainer = document.getElementById('dx-disease-categories');
+        if (catContainer) {
+            catContainer.addEventListener('click', function (e) {
+                var pill = e.target.closest('.category-pill');
+                if (!pill) return;
+                dxSelectedCategory = pill.dataset.cat;
+                catContainer.querySelectorAll('.category-pill').forEach(function (p) { p.classList.remove('active'); });
+                pill.classList.add('active');
+                var searchInput = document.getElementById('dx-disease-search');
+                if (searchInput) searchInput.value = '';
+                renderDiseaseGrid();
+            });
+        }
+
+        // Disease grid click
+        var diseaseGrid = document.getElementById('dx-disease-grid');
+        if (diseaseGrid) {
+            diseaseGrid.addEventListener('click', function (e) {
+                var card = e.target.closest('.dx-disease-card');
+                if (!card) return;
+                var diseaseId = card.dataset.id;
+                dxSelectedDisease = ClinicalEngine.getDiseaseById(diseaseId);
+                dxSelectedSymptoms = [];
+                if (dxSelectedDisease) {
+                    renderDxStep(2);
+                    renderSymptomChips();
+                }
+            });
+        }
+
+        // Symptom chips click
+        var symptomChips = document.getElementById('dx-symptom-chips');
+        if (symptomChips) {
+            symptomChips.addEventListener('click', function (e) {
+                var chip = e.target.closest('.dx-symptom-chip');
+                if (!chip) return;
+                var symId = chip.dataset.id;
+                var idx = dxSelectedSymptoms.indexOf(symId);
+                if (idx !== -1) {
+                    dxSelectedSymptoms.splice(idx, 1);
+                    chip.classList.remove('selected');
+                } else {
+                    dxSelectedSymptoms.push(symId);
+                    chip.classList.add('selected');
+                }
+            });
+        }
+
+        // Clear disease selection
+        document.addEventListener('click', function (e) {
+            if (e.target.closest('#dx-clear-disease')) {
+                dxSelectedDisease = null;
+                dxSelectedSymptoms = [];
+                renderDxStep(1);
+                renderDiseaseGrid();
+            }
+        });
+
+        // Symptoms → Recommendations
+        var symptomsNext = document.getElementById('dx-symptoms-next');
+        if (symptomsNext) {
+            symptomsNext.addEventListener('click', function () {
+                if (!dxSelectedDisease) {
+                    showToast('Please select a disease first', 'error');
+                    return;
+                }
+                renderDxStep(3);
+                renderRecommendations();
+            });
+        }
+
+        // Recommendation select
+        var recList = document.getElementById('dx-recommendations-list');
+        if (recList) {
+            recList.addEventListener('click', function (e) {
+                var btn = e.target.closest('.dx-rec-select-btn');
+                if (!btn) return;
+                var medId = btn.dataset.medId;
+                var medicines = window.AYUVANT_MEDICINES || [];
+                for (var i = 0; i < medicines.length; i++) {
+                    if (medicines[i].id === medId) {
+                        dxSelectedMedicine = medicines[i];
+                        break;
+                    }
+                }
+                if (dxSelectedMedicine) {
+                    renderDxStep(4);
+                    renderPrescriptionForm();
+                }
+            });
+        }
+
+        // Prescription pill selectors
+        document.getElementById('dx-prescription-card').addEventListener('click', function (e) {
+            var pill = e.target.closest('.dx-selector-pill');
+            if (!pill) return;
+            var type = pill.dataset.type;
+            // Deselect siblings
+            var parent = pill.parentElement;
+            parent.querySelectorAll('.dx-selector-pill').forEach(function (p) { p.classList.remove('selected'); });
+            pill.classList.add('selected');
+        });
+
+        // Submit prescription
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('#dx-submit-prescription')) return;
+
+            if (!dxSelectedDisease || !dxSelectedMedicine) {
+                showToast('Missing disease or medicine', 'error');
+                return;
+            }
+
+            // Get selected values
+            var selectedSalt = document.querySelector('#dx-salt-pills .dx-selector-pill.selected');
+            var dosageSelect = document.getElementById('dx-dosage-select');
+            var dosageStrength = dosageSelect ? dosageSelect.value : '';
+            var mobileInput = document.getElementById('dx-patient-mobile');
+            var batchInput = document.getElementById('dx-batch-number');
+            var notesInput = document.getElementById('dx-notes');
+
+            var details = ClinicalEngine.getMedicineDetails(dxSelectedMedicine.id, dxSelectedDisease.id);
+
+            // Get symptom names
+            var symptomNames = dxSelectedSymptoms.map(function (sid) {
+                var sym = ClinicalEngine.getSymptomById(sid);
+                return sym ? sym.name : sid;
+            });
+
+            // Gather customized usage guidelines from checklist
+            var checkedGuidelines = [];
+            var checkboxes = document.querySelectorAll('.usage-checkbox');
+            checkboxes.forEach(function (cb) {
+                if (cb.checked) {
+                    var label = document.querySelector('label[for="' + cb.id + '"]');
+                    if (label) checkedGuidelines.push(label.textContent);
+                }
+            });
+            var usageGuidelinesStr = checkedGuidelines.join('; ') || (details ? details.usageGuidelines : '');
+
+            var txn = ClinicalEngine.recordTransaction({
+                diseaseId: dxSelectedDisease.id,
+                diseaseName: dxSelectedDisease.name,
+                symptomIds: dxSelectedSymptoms,
+                symptomNames: symptomNames,
+                medicineId: dxSelectedMedicine.id,
+                medicineName: dxSelectedMedicine.name,
+                saltComposition: selectedSalt ? selectedSalt.dataset.value : '',
+                dosageStrength: dosageStrength,
+                usageGuidelines: usageGuidelinesStr,
+                patientMobile: mobileInput ? mobileInput.value.trim() : '',
+                batchNumber: batchInput ? batchInput.value.trim() : '',
+                pharmacistNotes: notesInput ? notesInput.value.trim() : ''
+            });
+
+            showToast('Prescription recorded: ' + txn.id, 'success');
+
+            // Reset and go back to step 1
+            dxCurrentStep = 1;
+            dxSelectedDisease = null;
+            dxSelectedSymptoms = [];
+            dxSelectedMedicine = null;
+            dxRecommendations = [];
+            dxSelectedCategory = 'All';
+
+            renderDxStep(1);
+            renderDiseaseCategories();
+            renderDiseaseGrid();
+            updateFollowUpBadge();
+        });
+
+        // Back buttons
+        var back1 = document.getElementById('dx-back-to-1');
+        if (back1) back1.addEventListener('click', function () {
+            dxSelectedDisease = null;
+            dxSelectedSymptoms = [];
+            renderDxStep(1);
+            renderDiseaseGrid();
+        });
+        var back2 = document.getElementById('dx-back-to-2');
+        if (back2) back2.addEventListener('click', function () {
+            renderDxStep(2);
+            renderSymptomChips();
+        });
+        var back3 = document.getElementById('dx-back-to-3');
+        if (back3) back3.addEventListener('click', function () {
+            dxSelectedMedicine = null;
+            renderDxStep(3);
+            renderRecommendations();
+        });
+    }
+
+    // ================================================
+    // TAB 8: FOLLOW-UP & OUTCOMES
+    // ================================================
+    function renderFollowUpTab() {
+        renderFollowUpStats();
+        renderFollowUpAnomalies();
+        renderSuspiciousHealthIssues();
+        renderPendingFollowups();
+        renderCompletedOutcomes();
+    }
+
+    function renderSuspiciousHealthIssues() {
+        var container = document.getElementById('fu-shi-alerts');
+        var header = document.getElementById('fu-shi-header');
+        if (!container || !header) return;
+
+        var completedOutcomes = ClinicalEngine.getCompletedOutcomes() || [];
+        var anomalies = ClinicalEngine.detectBatchAnomalies() || [];
+
+        // Determine which types of alerts to trigger based on historical patterns
+        var triggerTypes = [];
+        var hasIneffective = completedOutcomes.some(function(o) { return o.outcome === 'ineffective'; });
+        var hasSideEffect = completedOutcomes.some(function(o) { return o.outcome === 'side_effect'; });
+        var hasBatchAnomaly = anomalies.length > 0;
+
+        if (hasIneffective) {
+            triggerTypes.push('outcome_failure', 'treatment_failure', 'treatment_inadequacy');
+        }
+        if (hasSideEffect) {
+            triggerTypes.push('side_effect_spike', 'allergy_event', 'serious_adverse_event', 'hepatotoxicity_signal');
+        }
+        if (hasBatchAnomaly) {
+            triggerTypes.push('batch_quality_signal', 'quality_control_breach', 'batch_contamination_signal');
+        }
+
+        // Always show at least 2 default educational alerts if there are no triggers yet (so the panel is never empty/boring!)
+        if (triggerTypes.length === 0) {
+            // Seed a couple of interesting alerts, e.g. overuse_misuse or drug_drug_interaction
+            triggerTypes.push('overuse_misuse', 'drug_drug_interaction');
+        }
+
+        // Fetch alerts matching these types
+        var triggeredAlerts = [];
+        triggerTypes.forEach(function(type) {
+            var matches = ClinicalEngine.getSuspiciousHealthIssues(type);
+            matches.forEach(function(item) {
+                // Avoid duplicates
+                if (triggeredAlerts.indexOf(item) === -1) {
+                    triggeredAlerts.push(item);
+                }
+            });
+        });
+
+        // Limit to top 5 alerts to keep it clean
+        triggeredAlerts = triggeredAlerts.slice(0, 5);
+
+        if (triggeredAlerts.length === 0) {
+            container.innerHTML = '';
+            header.style.display = 'none';
+            return;
+        }
+
+        header.style.display = 'block';
+
+        var html = '';
+        triggeredAlerts.forEach(function (alert) {
+            var severityClass = 'outcome_failure'; // Default
+            if (alert.flagType.indexOf('side_effect') !== -1 || alert.flagType.indexOf('allergy') !== -1 || alert.flagType.indexOf('hepatotox') !== -1 || alert.flagType.indexOf('adverse') !== -1) {
+                severityClass = 'side_effect_spike';
+            } else if (alert.flagType.indexOf('drug_drug') !== -1 || alert.flagType.indexOf('misuse') !== -1 || alert.flagType.indexOf('abuse') !== -1) {
+                severityClass = 'off_label_use';
+            }
+
+            var typeLabel = alert.flagType.replace(/_/g, ' ');
+
+            html += '<div class="shi-alert-card ' + severityClass + '">' +
+                '<div class="shi-alert-header">' +
+                '<span class="shi-alert-title">Rule: ' + escapeHtml(alert.id) + '</span>' +
+                '<span class="shi-alert-badge ' + severityClass + '">' + escapeHtml(typeLabel) + '</span>' +
+                '</div>' +
+                '<div class="shi-alert-desc">' + escapeHtml(alert.issue) + '</div>' +
+                '<div class="shi-alert-action"><strong>Recommended Action:</strong> ' + escapeHtml(alert.action) + '</div>' +
+                '</div>';
+        });
+
+        container.innerHTML = html;
+    }
+
+    function renderFollowUpStats() {
+        var stats = ClinicalEngine.getOutcomeStats();
+        var pending = ClinicalEngine.getPendingFollowups();
+        var totalEl = document.getElementById('fu-stat-total');
+        var pendingEl = document.getElementById('fu-stat-pending');
+        var successEl = document.getElementById('fu-stat-success');
+        if (totalEl) totalEl.textContent = ClinicalEngine.getTransactionCount();
+        if (pendingEl) pendingEl.textContent = pending.length;
+        if (successEl) successEl.textContent = stats.successRate + '%';
+    }
+
+    function renderFollowUpAnomalies() {
+        var container = document.getElementById('fu-anomaly-alerts');
+        if (!container) return;
+
+        var anomalies = ClinicalEngine.detectBatchAnomalies();
+        var alerts = ClinicalEngine.generateCrossPharmacyAlerts();
+
+        if (anomalies.length === 0 && alerts.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        var html = '';
+        anomalies.forEach(function (a) {
+            html += '<div class="fu-anomaly-card ' + (a.severity === 'warning' ? 'warning' : '') + '">' +
+                '<div class="fu-anomaly-header">' +
+                '<span class="anomaly-indicator"></span>' +
+                '<span class="fu-anomaly-title">' + escapeHtml(a.message) + '</span>' +
+                '</div>' +
+                '<div class="fu-anomaly-detail">Medicine: ' + escapeHtml(a.medicineName) + ' | ' +
+                a.negativeReports + '/' + a.totalReports + ' negative | ' +
+                a.sideEffectReports + ' side effects</div>' +
+                '</div>';
+        });
+
+        alerts.forEach(function (a) {
+            if (a.type === 'medicine_concern') {
+                html += '<div class="fu-anomaly-card warning">' +
+                    '<div class="fu-anomaly-header">' +
+                    '<span class="material-icons-round" style="color:var(--warning);font-size:18px;">warning</span>' +
+                    '<span class="fu-anomaly-title">' + escapeHtml(a.message) + '</span>' +
+                    '</div></div>';
+            }
+        });
+
+        container.innerHTML = html;
+    }
+
+    function renderPendingFollowups() {
+        var container = document.getElementById('fu-pending-list');
+        if (!container) return;
+
+        var pending = ClinicalEngine.getPendingFollowups();
+        toggleEmpty('fu-pending-empty', pending.length === 0);
+
+        if (pending.length === 0) { container.innerHTML = ''; return; }
+
+        var html = '';
+        pending.forEach(function (t) {
+            html += '<div class="fu-pending-card" data-txn-id="' + t.id + '">' +
+                '<div class="fu-pending-header">' +
+                '<span class="fu-pending-medicine">' + escapeHtml(t.medicineName) + '</span>' +
+                '<span class="fu-pending-time">' + timeAgo(t.timestamp) + '</span>' +
+                '</div>' +
+                '<div class="fu-pending-detail">' +
+                escapeHtml(t.diseaseName) + ' • ' +
+                escapeHtml(t.saltComposition) + ' • ' +
+                escapeHtml(t.dosageStrength) +
+                '</div>' +
+                '<div class="fu-outcome-btns">' +
+                '<button class="fu-outcome-btn effective" data-txn="' + t.id + '" data-outcome="effective">' +
+                '<span class="material-icons-round">check_circle</span>Effective</button>' +
+                '<button class="fu-outcome-btn partial" data-txn="' + t.id + '" data-outcome="partial">' +
+                '<span class="material-icons-round">remove_circle</span>Partial</button>' +
+                '<button class="fu-outcome-btn ineffective" data-txn="' + t.id + '" data-outcome="ineffective">' +
+                '<span class="material-icons-round">cancel</span>Ineffective</button>' +
+                '<button class="fu-outcome-btn side_effect" data-txn="' + t.id + '" data-outcome="side_effect">' +
+                '<span class="material-icons-round">report</span>Side Effect</button>' +
+                '</div></div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function renderCompletedOutcomes() {
+        var container = document.getElementById('fu-outcomes-list');
+        if (!container) return;
+
+        var outcomes = ClinicalEngine.getCompletedOutcomes();
+        toggleEmpty('fu-outcomes-empty', outcomes.length === 0);
+
+        if (outcomes.length === 0) { container.innerHTML = ''; return; }
+
+        var outcomeIcons = {
+            effective: 'check_circle',
+            partial: 'remove_circle',
+            ineffective: 'cancel',
+            side_effect: 'report'
+        };
+        var outcomeColors = {
+            effective: 'var(--tertiary)',
+            partial: 'var(--primary)',
+            ineffective: 'var(--warning)',
+            side_effect: 'var(--error)'
+        };
+
+        var html = '';
+        outcomes.forEach(function (o) {
+            html += '<div class="fu-outcome-card">' +
+                '<div class="fu-outcome-icon ' + escapeHtml(o.outcome) + '">' +
+                '<span class="material-icons-round">' + (outcomeIcons[o.outcome] || 'help') + '</span></div>' +
+                '<div class="fu-outcome-info">' +
+                '<div class="fu-outcome-medicine">' + escapeHtml(o.medicineName || '') + '</div>' +
+                '<div class="fu-outcome-detail">' + escapeHtml(o.diseaseName || '') + ' • ' + timeAgo(o.timestamp) + '</div>' +
+                '</div>' +
+                '<span class="fu-outcome-result" style="color:' + (outcomeColors[o.outcome] || 'inherit') + ';">' + escapeHtml(o.outcome.replace('_', ' ')) + '</span>' +
+                '</div>';
+        });
+        container.innerHTML = html;
+    }
+
+    function updateFollowUpBadge() {
+        var badge = document.getElementById('followup-badge');
+        if (!badge) return;
+        var pending = ClinicalEngine.getPendingFollowups();
+        if (pending.length > 0) {
+            badge.textContent = pending.length;
+            badge.style.display = 'inline-block';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    function setupFollowUpEvents() {
+        // Outcome buttons
+        var pendingList = document.getElementById('fu-pending-list');
+        if (pendingList) {
+            pendingList.addEventListener('click', function (e) {
+                var btn = e.target.closest('.fu-outcome-btn');
+                if (!btn) return;
+                var txnId = btn.dataset.txn;
+                var outcome = btn.dataset.outcome;
+
+                ClinicalEngine.recordOutcome(txnId, outcome, '');
+                showToast('Outcome recorded: ' + outcome.replace('_', ' '), 'success');
+
+                renderFollowUpTab();
+                updateFollowUpBadge();
+            });
+        }
+
+        // CSV Export
+        var csvBtn = document.getElementById('fu-export-csv');
+        if (csvBtn) {
+            csvBtn.addEventListener('click', function () {
+                var csv = ClinicalEngine.exportTransactionData('csv');
+                ClinicalEngine.triggerDownload(csv, 'ayuvant_clinical_data.csv', 'text/csv');
+                showToast('CSV exported successfully', 'success');
+            });
+        }
+
+        // JSON Export
+        var jsonBtn = document.getElementById('fu-export-json');
+        if (jsonBtn) {
+            jsonBtn.addEventListener('click', function () {
+                var json = ClinicalEngine.exportTransactionData('json');
+                ClinicalEngine.triggerDownload(json, 'ayuvant_clinical_data.json', 'application/json');
+                showToast('JSON exported successfully', 'success');
+            });
+        }
+    }
+
+    // ================================================
     // INITIALIZATION
     // ================================================
     document.addEventListener('DOMContentLoaded', function () {
@@ -918,6 +1673,7 @@
         Alternatives.init();
         Feedback.init();
         PatientTracker.init();
+        ClinicalEngine.init();
 
         // Setup navigation
         setupTabs();
@@ -928,13 +1684,16 @@
         setupFeedbackEvents();
         setupPatientEvents();
         setupPatternsEvents();
+        setupDiagnoseEvents();
+        setupFollowUpEvents();
         setupGlobalEvents();
 
         // Initial render
         renderTransferTab();
         updateFeedbackBadge();
+        updateFollowUpBadge();
 
-        console.log('AYUVANT Part 3 — Smart Distribution & Patient Intelligence loaded');
+        console.log('AYUVANT Part 3 — Smart Distribution & Patient Intelligence + Clinical Intelligence loaded');
     });
 
 })();

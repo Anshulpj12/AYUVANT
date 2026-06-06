@@ -1,0 +1,6936 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-06-05",
+    "description": "Comprehensive Pharmacy Intelligence Dataset for ML-Powered Recommendation System",
+    "total_diseases": 110,
+    "total_symptoms": 120,
+    "total_medicines": 115,
+    "total_salt_compositions": 111,
+    "total_side_effects": 105,
+    "total_suspicious_health_issues": 100
+  },
+  "diseases": [
+    {
+      "id": "D001",
+      "name": "Common Cold",
+      "category": "Respiratory",
+      "icd_code": "J00"
+    },
+    {
+      "id": "D002",
+      "name": "Influenza",
+      "category": "Respiratory",
+      "icd_code": "J11"
+    },
+    {
+      "id": "D003",
+      "name": "Fever (Viral)",
+      "category": "Systemic",
+      "icd_code": "R50.9"
+    },
+    {
+      "id": "D004",
+      "name": "Typhoid Fever",
+      "category": "Bacterial Infection",
+      "icd_code": "A01.0"
+    },
+    {
+      "id": "D005",
+      "name": "Dengue Fever",
+      "category": "Viral Infection",
+      "icd_code": "A90"
+    },
+    {
+      "id": "D006",
+      "name": "Malaria",
+      "category": "Parasitic Infection",
+      "icd_code": "B54"
+    },
+    {
+      "id": "D007",
+      "name": "Bronchitis (Acute)",
+      "category": "Respiratory",
+      "icd_code": "J20.9"
+    },
+    {
+      "id": "D008",
+      "name": "Asthma",
+      "category": "Respiratory",
+      "icd_code": "J45.9"
+    },
+    {
+      "id": "D009",
+      "name": "Pneumonia",
+      "category": "Respiratory",
+      "icd_code": "J18.9"
+    },
+    {
+      "id": "D010",
+      "name": "Sinusitis",
+      "category": "Respiratory",
+      "icd_code": "J32.9"
+    },
+    {
+      "id": "D011",
+      "name": "Allergic Rhinitis",
+      "category": "Allergy",
+      "icd_code": "J30.1"
+    },
+    {
+      "id": "D012",
+      "name": "Urticaria (Hives)",
+      "category": "Allergy",
+      "icd_code": "L50.0"
+    },
+    {
+      "id": "D013",
+      "name": "Eczema / Dermatitis",
+      "category": "Skin",
+      "icd_code": "L20.9"
+    },
+    {
+      "id": "D014",
+      "name": "Acne Vulgaris",
+      "category": "Skin",
+      "icd_code": "L70.0"
+    },
+    {
+      "id": "D015",
+      "name": "Fungal Skin Infection",
+      "category": "Skin",
+      "icd_code": "B35.9"
+    },
+    {
+      "id": "D016",
+      "name": "Scabies",
+      "category": "Skin",
+      "icd_code": "B86"
+    },
+    {
+      "id": "D017",
+      "name": "Chickenpox",
+      "category": "Viral Infection",
+      "icd_code": "B01.9"
+    },
+    {
+      "id": "D018",
+      "name": "Measles",
+      "category": "Viral Infection",
+      "icd_code": "B05.9"
+    },
+    {
+      "id": "D019",
+      "name": "Acid Reflux / GERD",
+      "category": "Gastrointestinal",
+      "icd_code": "K21.0"
+    },
+    {
+      "id": "D020",
+      "name": "Peptic Ulcer",
+      "category": "Gastrointestinal",
+      "icd_code": "K27.9"
+    },
+    {
+      "id": "D021",
+      "name": "Gastritis",
+      "category": "Gastrointestinal",
+      "icd_code": "K29.7"
+    },
+    {
+      "id": "D022",
+      "name": "Irritable Bowel Syndrome",
+      "category": "Gastrointestinal",
+      "icd_code": "K58.9"
+    },
+    {
+      "id": "D023",
+      "name": "Diarrhea (Acute)",
+      "category": "Gastrointestinal",
+      "icd_code": "K59.1"
+    },
+    {
+      "id": "D024",
+      "name": "Constipation",
+      "category": "Gastrointestinal",
+      "icd_code": "K59.0"
+    },
+    {
+      "id": "D025",
+      "name": "Food Poisoning",
+      "category": "Gastrointestinal",
+      "icd_code": "A05.9"
+    },
+    {
+      "id": "D026",
+      "name": "Nausea & Vomiting",
+      "category": "Gastrointestinal",
+      "icd_code": "R11"
+    },
+    {
+      "id": "D027",
+      "name": "Appendicitis",
+      "category": "Gastrointestinal",
+      "icd_code": "K37"
+    },
+    {
+      "id": "D028",
+      "name": "Hepatitis A",
+      "category": "Hepatic",
+      "icd_code": "B15.9"
+    },
+    {
+      "id": "D029",
+      "name": "Jaundice",
+      "category": "Hepatic",
+      "icd_code": "R17"
+    },
+    {
+      "id": "D030",
+      "name": "Urinary Tract Infection (UTI)",
+      "category": "Urological",
+      "icd_code": "N39.0"
+    },
+    {
+      "id": "D031",
+      "name": "Kidney Stones",
+      "category": "Urological",
+      "icd_code": "N20.0"
+    },
+    {
+      "id": "D032",
+      "name": "Prostatitis",
+      "category": "Urological",
+      "icd_code": "N41.9"
+    },
+    {
+      "id": "D033",
+      "name": "Tension Headache",
+      "category": "Neurological",
+      "icd_code": "G44.2"
+    },
+    {
+      "id": "D034",
+      "name": "Migraine",
+      "category": "Neurological",
+      "icd_code": "G43.9"
+    },
+    {
+      "id": "D035",
+      "name": "Vertigo",
+      "category": "Neurological",
+      "icd_code": "H81.1"
+    },
+    {
+      "id": "D036",
+      "name": "Insomnia",
+      "category": "Neurological/Psychiatric",
+      "icd_code": "G47.0"
+    },
+    {
+      "id": "D037",
+      "name": "Anxiety Disorder",
+      "category": "Psychiatric",
+      "icd_code": "F41.9"
+    },
+    {
+      "id": "D038",
+      "name": "Depression",
+      "category": "Psychiatric",
+      "icd_code": "F32.9"
+    },
+    {
+      "id": "D039",
+      "name": "Hypertension",
+      "category": "Cardiovascular",
+      "icd_code": "I10"
+    },
+    {
+      "id": "D040",
+      "name": "Hypotension",
+      "category": "Cardiovascular",
+      "icd_code": "I95.9"
+    },
+    {
+      "id": "D041",
+      "name": "Palpitations",
+      "category": "Cardiovascular",
+      "icd_code": "R00.2"
+    },
+    {
+      "id": "D042",
+      "name": "Anemia (Iron Deficiency)",
+      "category": "Hematological",
+      "icd_code": "D50.9"
+    },
+    {
+      "id": "D043",
+      "name": "Type 2 Diabetes",
+      "category": "Endocrine",
+      "icd_code": "E11.9"
+    },
+    {
+      "id": "D044",
+      "name": "Hypothyroidism",
+      "category": "Endocrine",
+      "icd_code": "E03.9"
+    },
+    {
+      "id": "D045",
+      "name": "Hyperthyroidism",
+      "category": "Endocrine",
+      "icd_code": "E05.9"
+    },
+    {
+      "id": "D046",
+      "name": "Vitamin D Deficiency",
+      "category": "Nutritional",
+      "icd_code": "E55.9"
+    },
+    {
+      "id": "D047",
+      "name": "Vitamin B12 Deficiency",
+      "category": "Nutritional",
+      "icd_code": "E53.8"
+    },
+    {
+      "id": "D048",
+      "name": "Obesity",
+      "category": "Metabolic",
+      "icd_code": "E66.9"
+    },
+    {
+      "id": "D049",
+      "name": "Gout",
+      "category": "Musculoskeletal",
+      "icd_code": "M10.9"
+    },
+    {
+      "id": "D050",
+      "name": "Osteoarthritis",
+      "category": "Musculoskeletal",
+      "icd_code": "M19.9"
+    },
+    {
+      "id": "D051",
+      "name": "Rheumatoid Arthritis",
+      "category": "Musculoskeletal/Autoimmune",
+      "icd_code": "M06.9"
+    },
+    {
+      "id": "D052",
+      "name": "Back Pain (Lumbar)",
+      "category": "Musculoskeletal",
+      "icd_code": "M54.5"
+    },
+    {
+      "id": "D053",
+      "name": "Neck Pain (Cervical)",
+      "category": "Musculoskeletal",
+      "icd_code": "M54.2"
+    },
+    {
+      "id": "D054",
+      "name": "Muscle Cramps / Spasms",
+      "category": "Musculoskeletal",
+      "icd_code": "R25.2"
+    },
+    {
+      "id": "D055",
+      "name": "Fracture (Minor)",
+      "category": "Orthopedic",
+      "icd_code": "M84.4"
+    },
+    {
+      "id": "D056",
+      "name": "Conjunctivitis (Pink Eye)",
+      "category": "Ophthalmological",
+      "icd_code": "H10.9"
+    },
+    {
+      "id": "D057",
+      "name": "Dry Eyes",
+      "category": "Ophthalmological",
+      "icd_code": "H04.1"
+    },
+    {
+      "id": "D058",
+      "name": "Glaucoma",
+      "category": "Ophthalmological",
+      "icd_code": "H40.9"
+    },
+    {
+      "id": "D059",
+      "name": "Otitis Media (Ear Infection)",
+      "category": "ENT",
+      "icd_code": "H66.9"
+    },
+    {
+      "id": "D060",
+      "name": "Tinnitus",
+      "category": "ENT",
+      "icd_code": "H93.1"
+    },
+    {
+      "id": "D061",
+      "name": "Tonsillitis",
+      "category": "ENT",
+      "icd_code": "J35.0"
+    },
+    {
+      "id": "D062",
+      "name": "Pharyngitis (Sore Throat)",
+      "category": "ENT",
+      "icd_code": "J02.9"
+    },
+    {
+      "id": "D063",
+      "name": "Laryngitis",
+      "category": "ENT",
+      "icd_code": "J37.0"
+    },
+    {
+      "id": "D064",
+      "name": "Toothache / Dental Pain",
+      "category": "Dental",
+      "icd_code": "K08.8"
+    },
+    {
+      "id": "D065",
+      "name": "Mouth Ulcers / Canker Sores",
+      "category": "Oral",
+      "icd_code": "K12.0"
+    },
+    {
+      "id": "D066",
+      "name": "Menstrual Cramps (Dysmenorrhea)",
+      "category": "Gynecological",
+      "icd_code": "N94.4"
+    },
+    {
+      "id": "D067",
+      "name": "PCOS",
+      "category": "Gynecological",
+      "icd_code": "E28.2"
+    },
+    {
+      "id": "D068",
+      "name": "Vaginal Candidiasis",
+      "category": "Gynecological",
+      "icd_code": "B37.3"
+    },
+    {
+      "id": "D069",
+      "name": "Menopause Symptoms",
+      "category": "Gynecological",
+      "icd_code": "N95.1"
+    },
+    {
+      "id": "D070",
+      "name": "Pregnancy Nausea",
+      "category": "Obstetric",
+      "icd_code": "O21.0"
+    },
+    {
+      "id": "D071",
+      "name": "Burns (Minor/1st Degree)",
+      "category": "Dermatological/Trauma",
+      "icd_code": "T30.0"
+    },
+    {
+      "id": "D072",
+      "name": "Wound Infection",
+      "category": "Dermatological/Infection",
+      "icd_code": "T79.3"
+    },
+    {
+      "id": "D073",
+      "name": "Insect Bite / Sting Reaction",
+      "category": "Allergy/Dermatology",
+      "icd_code": "T63.4"
+    },
+    {
+      "id": "D074",
+      "name": "Contact Dermatitis",
+      "category": "Skin/Allergy",
+      "icd_code": "L23.9"
+    },
+    {
+      "id": "D075",
+      "name": "Psoriasis",
+      "category": "Skin/Autoimmune",
+      "icd_code": "L40.0"
+    },
+    {
+      "id": "D076",
+      "name": "Hemorrhoids / Piles",
+      "category": "Colorectal",
+      "icd_code": "K64.9"
+    },
+    {
+      "id": "D077",
+      "name": "Fissure-in-Ano",
+      "category": "Colorectal",
+      "icd_code": "K60.2"
+    },
+    {
+      "id": "D078",
+      "name": "Dehydration",
+      "category": "Metabolic",
+      "icd_code": "E86.0"
+    },
+    {
+      "id": "D079",
+      "name": "Heat Stroke / Exhaustion",
+      "category": "Environmental",
+      "icd_code": "T67.0"
+    },
+    {
+      "id": "D080",
+      "name": "Motion Sickness",
+      "category": "Neurological",
+      "icd_code": "T75.3"
+    },
+    {
+      "id": "D081",
+      "name": "Whooping Cough (Pertussis)",
+      "category": "Respiratory/Bacterial",
+      "icd_code": "A37.9"
+    },
+    {
+      "id": "D082",
+      "name": "Cholera",
+      "category": "Gastrointestinal/Bacterial",
+      "icd_code": "A00.9"
+    },
+    {
+      "id": "D083",
+      "name": "Tuberculosis (Pulmonary)",
+      "category": "Respiratory/Bacterial",
+      "icd_code": "A15.0"
+    },
+    {
+      "id": "D084",
+      "name": "COVID-19 (Mild)",
+      "category": "Viral Respiratory",
+      "icd_code": "U07.1"
+    },
+    {
+      "id": "D085",
+      "name": "Herpes Zoster (Shingles)",
+      "category": "Viral/Skin",
+      "icd_code": "B02.9"
+    },
+    {
+      "id": "D086",
+      "name": "Warts",
+      "category": "Viral/Skin",
+      "icd_code": "B07"
+    },
+    {
+      "id": "D087",
+      "name": "Ringworm (Tinea Corporis)",
+      "category": "Fungal/Skin",
+      "icd_code": "B35.4"
+    },
+    {
+      "id": "D088",
+      "name": "Dandruff (Seborrheic Dermatitis)",
+      "category": "Skin",
+      "icd_code": "L21.0"
+    },
+    {
+      "id": "D089",
+      "name": "Alopecia (Hair Loss)",
+      "category": "Dermatological",
+      "icd_code": "L65.9"
+    },
+    {
+      "id": "D090",
+      "name": "Nail Fungus (Onychomycosis)",
+      "category": "Fungal",
+      "icd_code": "B35.1"
+    },
+    {
+      "id": "D091",
+      "name": "Epistaxis (Nosebleed)",
+      "category": "ENT",
+      "icd_code": "R04.0"
+    },
+    {
+      "id": "D092",
+      "name": "Hyperuricemia",
+      "category": "Metabolic",
+      "icd_code": "E79.0"
+    },
+    {
+      "id": "D093",
+      "name": "Fatty Liver Disease",
+      "category": "Hepatic",
+      "icd_code": "K76.0"
+    },
+    {
+      "id": "D094",
+      "name": "Cholecystitis / Gallstones",
+      "category": "Hepatic/GI",
+      "icd_code": "K80.2"
+    },
+    {
+      "id": "D095",
+      "name": "Peripheral Neuropathy",
+      "category": "Neurological",
+      "icd_code": "G62.9"
+    },
+    {
+      "id": "D096",
+      "name": "Carpal Tunnel Syndrome",
+      "category": "Neurological/Orthopedic",
+      "icd_code": "G56.0"
+    },
+    {
+      "id": "D097",
+      "name": "Sciatica",
+      "category": "Neurological/Musculoskeletal",
+      "icd_code": "M54.4"
+    },
+    {
+      "id": "D098",
+      "name": "Deep Vein Thrombosis (DVT)",
+      "category": "Vascular",
+      "icd_code": "I80.2"
+    },
+    {
+      "id": "D099",
+      "name": "Varicose Veins",
+      "category": "Vascular",
+      "icd_code": "I83.9"
+    },
+    {
+      "id": "D100",
+      "name": "Hyperlipidemia / High Cholesterol",
+      "category": "Metabolic/Cardiovascular",
+      "icd_code": "E78.5"
+    },
+    {
+      "id": "D101",
+      "name": "Chronic Kidney Disease (Stage 1-2)",
+      "category": "Renal",
+      "icd_code": "N18.1"
+    },
+    {
+      "id": "D102",
+      "name": "Nocturnal Enuresis",
+      "category": "Urological/Pediatric",
+      "icd_code": "F98.0"
+    },
+    {
+      "id": "D103",
+      "name": "Chickenpox in Adults",
+      "category": "Viral",
+      "icd_code": "B01.9"
+    },
+    {
+      "id": "D104",
+      "name": "Herpes Simplex (Oral)",
+      "category": "Viral/Oral",
+      "icd_code": "B00.2"
+    },
+    {
+      "id": "D105",
+      "name": "Eye Stye (Hordeolum)",
+      "category": "Ophthalmological",
+      "icd_code": "H00.0"
+    },
+    {
+      "id": "D106",
+      "name": "Prickly Heat (Miliaria)",
+      "category": "Skin/Environmental",
+      "icd_code": "L74.0"
+    },
+    {
+      "id": "D107",
+      "name": "Teething Pain (Pediatric)",
+      "category": "Dental/Pediatric",
+      "icd_code": "K00.7"
+    },
+    {
+      "id": "D108",
+      "name": "Croup (Pediatric)",
+      "category": "Respiratory/Pediatric",
+      "icd_code": "J05.0"
+    },
+    {
+      "id": "D109",
+      "name": "Ear Wax Blockage",
+      "category": "ENT",
+      "icd_code": "H61.2"
+    },
+    {
+      "id": "D110",
+      "name": "Plantar Fasciitis",
+      "category": "Musculoskeletal/Orthopedic",
+      "icd_code": "M72.2"
+    }
+  ],
+  "symptoms": [
+    {
+      "id": "S001",
+      "name": "Fever",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D001",
+        "D002",
+        "D003",
+        "D004",
+        "D005",
+        "D006",
+        "D017",
+        "D025",
+        "D028",
+        "D061",
+        "D062",
+        "D084"
+      ]
+    },
+    {
+      "id": "S002",
+      "name": "Runny Nose",
+      "severity": "mild",
+      "linked_diseases": [
+        "D001",
+        "D002",
+        "D011",
+        "D010",
+        "D084"
+      ]
+    },
+    {
+      "id": "S003",
+      "name": "Nasal Congestion",
+      "severity": "mild",
+      "linked_diseases": [
+        "D001",
+        "D010",
+        "D011",
+        "D062"
+      ]
+    },
+    {
+      "id": "S004",
+      "name": "Dry Cough",
+      "severity": "mild",
+      "linked_diseases": [
+        "D001",
+        "D007",
+        "D008",
+        "D083",
+        "D084"
+      ]
+    },
+    {
+      "id": "S005",
+      "name": "Productive Cough (with Phlegm)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D007",
+        "D009",
+        "D081",
+        "D083"
+      ]
+    },
+    {
+      "id": "S006",
+      "name": "Sore Throat",
+      "severity": "mild",
+      "linked_diseases": [
+        "D001",
+        "D061",
+        "D062",
+        "D063",
+        "D084"
+      ]
+    },
+    {
+      "id": "S007",
+      "name": "Headache",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D033",
+        "D034",
+        "D001",
+        "D002",
+        "D003",
+        "D039"
+      ]
+    },
+    {
+      "id": "S008",
+      "name": "Body Ache / Myalgia",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D002",
+        "D003",
+        "D005",
+        "D006",
+        "D084"
+      ]
+    },
+    {
+      "id": "S009",
+      "name": "Fatigue / Weakness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D002",
+        "D042",
+        "D043",
+        "D044",
+        "D046",
+        "D047",
+        "D084"
+      ]
+    },
+    {
+      "id": "S010",
+      "name": "Nausea",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D026",
+        "D025",
+        "D019",
+        "D080",
+        "D070"
+      ]
+    },
+    {
+      "id": "S011",
+      "name": "Vomiting",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D026",
+        "D025",
+        "D082",
+        "D080",
+        "D070",
+        "D094"
+      ]
+    },
+    {
+      "id": "S012",
+      "name": "Diarrhea",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D023",
+        "D025",
+        "D082",
+        "D022"
+      ]
+    },
+    {
+      "id": "S013",
+      "name": "Constipation",
+      "severity": "mild",
+      "linked_diseases": [
+        "D024",
+        "D022",
+        "D076"
+      ]
+    },
+    {
+      "id": "S014",
+      "name": "Abdominal Pain",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D019",
+        "D020",
+        "D021",
+        "D022",
+        "D025",
+        "D027",
+        "D094"
+      ]
+    },
+    {
+      "id": "S015",
+      "name": "Heartburn / Acid Regurgitation",
+      "severity": "mild",
+      "linked_diseases": [
+        "D019",
+        "D020",
+        "D021"
+      ]
+    },
+    {
+      "id": "S016",
+      "name": "Bloating / Gas",
+      "severity": "mild",
+      "linked_diseases": [
+        "D019",
+        "D021",
+        "D022",
+        "D024"
+      ]
+    },
+    {
+      "id": "S017",
+      "name": "Loss of Appetite",
+      "severity": "mild",
+      "linked_diseases": [
+        "D021",
+        "D028",
+        "D029",
+        "D003",
+        "D004"
+      ]
+    },
+    {
+      "id": "S018",
+      "name": "Jaundice (Yellow Skin/Eyes)",
+      "severity": "severe",
+      "linked_diseases": [
+        "D028",
+        "D029",
+        "D093",
+        "D094"
+      ]
+    },
+    {
+      "id": "S019",
+      "name": "Skin Rash",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D012",
+        "D013",
+        "D015",
+        "D016",
+        "D017",
+        "D073",
+        "D074",
+        "D085"
+      ]
+    },
+    {
+      "id": "S020",
+      "name": "Itching / Pruritus",
+      "severity": "mild",
+      "linked_diseases": [
+        "D012",
+        "D013",
+        "D015",
+        "D016",
+        "D029",
+        "D075",
+        "D090"
+      ]
+    },
+    {
+      "id": "S021",
+      "name": "Swelling / Edema",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D012",
+        "D039",
+        "D050",
+        "D051",
+        "D099",
+        "D101"
+      ]
+    },
+    {
+      "id": "S022",
+      "name": "Joint Pain",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D049",
+        "D050",
+        "D051",
+        "D005",
+        "D006"
+      ]
+    },
+    {
+      "id": "S023",
+      "name": "Back Pain",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D052",
+        "D097",
+        "D030",
+        "D031"
+      ]
+    },
+    {
+      "id": "S024",
+      "name": "Neck Pain / Stiffness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D053",
+        "D033"
+      ]
+    },
+    {
+      "id": "S025",
+      "name": "Muscle Pain / Cramps",
+      "severity": "mild",
+      "linked_diseases": [
+        "D054",
+        "D046",
+        "D047",
+        "D002"
+      ]
+    },
+    {
+      "id": "S026",
+      "name": "Chest Pain",
+      "severity": "severe",
+      "linked_diseases": [
+        "D039",
+        "D019",
+        "D041",
+        "D098"
+      ]
+    },
+    {
+      "id": "S027",
+      "name": "Shortness of Breath / Dyspnea",
+      "severity": "severe",
+      "linked_diseases": [
+        "D008",
+        "D009",
+        "D039",
+        "D084",
+        "D098"
+      ]
+    },
+    {
+      "id": "S028",
+      "name": "Palpitations",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D041",
+        "D039",
+        "D045",
+        "D037"
+      ]
+    },
+    {
+      "id": "S029",
+      "name": "Dizziness / Lightheadedness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D035",
+        "D040",
+        "D042",
+        "D078",
+        "D080"
+      ]
+    },
+    {
+      "id": "S030",
+      "name": "Ear Pain / Otalgia",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D059",
+        "D109"
+      ]
+    },
+    {
+      "id": "S031",
+      "name": "Ear Discharge",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D059"
+      ]
+    },
+    {
+      "id": "S032",
+      "name": "Hearing Loss (Temporary)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D059",
+        "D109",
+        "D060"
+      ]
+    },
+    {
+      "id": "S033",
+      "name": "Tinnitus (Ringing in Ears)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D060",
+        "D109"
+      ]
+    },
+    {
+      "id": "S034",
+      "name": "Red / Watery Eyes",
+      "severity": "mild",
+      "linked_diseases": [
+        "D056",
+        "D011",
+        "D057"
+      ]
+    },
+    {
+      "id": "S035",
+      "name": "Eye Discharge / Crusting",
+      "severity": "mild",
+      "linked_diseases": [
+        "D056",
+        "D105"
+      ]
+    },
+    {
+      "id": "S036",
+      "name": "Eye Pain / Discomfort",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D056",
+        "D058",
+        "D105"
+      ]
+    },
+    {
+      "id": "S037",
+      "name": "Blurry Vision",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D043",
+        "D058",
+        "D035"
+      ]
+    },
+    {
+      "id": "S038",
+      "name": "Frequent Urination",
+      "severity": "mild",
+      "linked_diseases": [
+        "D030",
+        "D043",
+        "D032"
+      ]
+    },
+    {
+      "id": "S039",
+      "name": "Burning Urination (Dysuria)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D030",
+        "D031",
+        "D068"
+      ]
+    },
+    {
+      "id": "S040",
+      "name": "Blood in Urine (Hematuria)",
+      "severity": "severe",
+      "linked_diseases": [
+        "D030",
+        "D031",
+        "D101"
+      ]
+    },
+    {
+      "id": "S041",
+      "name": "Excessive Thirst (Polydipsia)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D043",
+        "D078"
+      ]
+    },
+    {
+      "id": "S042",
+      "name": "Excessive Hunger (Polyphagia)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D043"
+      ]
+    },
+    {
+      "id": "S043",
+      "name": "Weight Loss (Unexplained)",
+      "severity": "severe",
+      "linked_diseases": [
+        "D043",
+        "D045",
+        "D083",
+        "D048"
+      ]
+    },
+    {
+      "id": "S044",
+      "name": "Weight Gain (Unexplained)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D044",
+        "D048",
+        "D067"
+      ]
+    },
+    {
+      "id": "S045",
+      "name": "Cold Intolerance",
+      "severity": "mild",
+      "linked_diseases": [
+        "D044"
+      ]
+    },
+    {
+      "id": "S046",
+      "name": "Heat Intolerance",
+      "severity": "mild",
+      "linked_diseases": [
+        "D045"
+      ]
+    },
+    {
+      "id": "S047",
+      "name": "Tremors / Shakiness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D045",
+        "D037"
+      ]
+    },
+    {
+      "id": "S048",
+      "name": "Sneezing",
+      "severity": "mild",
+      "linked_diseases": [
+        "D001",
+        "D011",
+        "D084"
+      ]
+    },
+    {
+      "id": "S049",
+      "name": "Watery Eyes (Lacrimation)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D011",
+        "D056"
+      ]
+    },
+    {
+      "id": "S050",
+      "name": "Skin Dryness / Scaling",
+      "severity": "mild",
+      "linked_diseases": [
+        "D013",
+        "D044",
+        "D075",
+        "D088"
+      ]
+    },
+    {
+      "id": "S051",
+      "name": "Pus / Boils on Skin",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D014",
+        "D015",
+        "D072"
+      ]
+    },
+    {
+      "id": "S052",
+      "name": "Blisters / Vesicles",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D017",
+        "D071",
+        "D085",
+        "D104"
+      ]
+    },
+    {
+      "id": "S053",
+      "name": "Mouth Sores / Ulcers",
+      "severity": "mild",
+      "linked_diseases": [
+        "D065",
+        "D104"
+      ]
+    },
+    {
+      "id": "S054",
+      "name": "Toothache",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D064"
+      ]
+    },
+    {
+      "id": "S055",
+      "name": "Swollen Lymph Nodes",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D002",
+        "D004",
+        "D061",
+        "D017"
+      ]
+    },
+    {
+      "id": "S056",
+      "name": "Night Sweats",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D083",
+        "D004",
+        "D044",
+        "D069"
+      ]
+    },
+    {
+      "id": "S057",
+      "name": "Chills / Rigors",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D006",
+        "D004",
+        "D002",
+        "D003"
+      ]
+    },
+    {
+      "id": "S058",
+      "name": "Menstrual Cramps",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D066",
+        "D067"
+      ]
+    },
+    {
+      "id": "S059",
+      "name": "Irregular Periods",
+      "severity": "mild",
+      "linked_diseases": [
+        "D067",
+        "D044",
+        "D045",
+        "D069"
+      ]
+    },
+    {
+      "id": "S060",
+      "name": "Vaginal Discharge (Abnormal)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D068"
+      ]
+    },
+    {
+      "id": "S061",
+      "name": "Hot Flashes / Night Sweats (Female)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D069"
+      ]
+    },
+    {
+      "id": "S062",
+      "name": "Numbness / Tingling",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D095",
+        "D096",
+        "D097",
+        "D043"
+      ]
+    },
+    {
+      "id": "S063",
+      "name": "Burning Feet / Hands",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D095",
+        "D043",
+        "D047"
+      ]
+    },
+    {
+      "id": "S064",
+      "name": "Memory Problems / Brain Fog",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D044",
+        "D047",
+        "D038",
+        "D036"
+      ]
+    },
+    {
+      "id": "S065",
+      "name": "Insomnia / Sleep Difficulty",
+      "severity": "mild",
+      "linked_diseases": [
+        "D036",
+        "D037",
+        "D038",
+        "D045"
+      ]
+    },
+    {
+      "id": "S066",
+      "name": "Anxiety / Panic Attacks",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D037",
+        "D045",
+        "D039"
+      ]
+    },
+    {
+      "id": "S067",
+      "name": "Mood Swings / Irritability",
+      "severity": "mild",
+      "linked_diseases": [
+        "D037",
+        "D038",
+        "D067",
+        "D069"
+      ]
+    },
+    {
+      "id": "S068",
+      "name": "Depressed Mood / Sadness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D038",
+        "D044",
+        "D047"
+      ]
+    },
+    {
+      "id": "S069",
+      "name": "Rectal Bleeding",
+      "severity": "severe",
+      "linked_diseases": [
+        "D076",
+        "D077"
+      ]
+    },
+    {
+      "id": "S070",
+      "name": "Anal Pain / Discomfort",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D076",
+        "D077"
+      ]
+    },
+    {
+      "id": "S071",
+      "name": "Leg Pain / Cramps",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D097",
+        "D098",
+        "D099",
+        "D054",
+        "D046"
+      ]
+    },
+    {
+      "id": "S072",
+      "name": "Foot Pain / Heel Pain",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D110",
+        "D049",
+        "D050"
+      ]
+    },
+    {
+      "id": "S073",
+      "name": "Stiffness in Joints (Morning)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D051",
+        "D050",
+        "D049"
+      ]
+    },
+    {
+      "id": "S074",
+      "name": "Pale Skin",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D042",
+        "D040",
+        "D029"
+      ]
+    },
+    {
+      "id": "S075",
+      "name": "Hair Loss / Thinning",
+      "severity": "mild",
+      "linked_diseases": [
+        "D089",
+        "D044",
+        "D047",
+        "D067"
+      ]
+    },
+    {
+      "id": "S076",
+      "name": "Brittle Nails",
+      "severity": "mild",
+      "linked_diseases": [
+        "D044",
+        "D047",
+        "D042"
+      ]
+    },
+    {
+      "id": "S077",
+      "name": "Dandruff / Flaky Scalp",
+      "severity": "mild",
+      "linked_diseases": [
+        "D088"
+      ]
+    },
+    {
+      "id": "S078",
+      "name": "Nail Discoloration / Thickening",
+      "severity": "mild",
+      "linked_diseases": [
+        "D090"
+      ]
+    },
+    {
+      "id": "S079",
+      "name": "Excessive Sweating",
+      "severity": "mild",
+      "linked_diseases": [
+        "D045",
+        "D043",
+        "D079"
+      ]
+    },
+    {
+      "id": "S080",
+      "name": "Dehydration Signs (Dry Mouth/Sunken Eyes)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D078",
+        "D023",
+        "D082"
+      ]
+    },
+    {
+      "id": "S081",
+      "name": "Sunburn / Skin Redness",
+      "severity": "mild",
+      "linked_diseases": [
+        "D071",
+        "D106"
+      ]
+    },
+    {
+      "id": "S082",
+      "name": "Wheezing",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D008",
+        "D007",
+        "D084"
+      ]
+    },
+    {
+      "id": "S083",
+      "name": "Hoarseness of Voice",
+      "severity": "mild",
+      "linked_diseases": [
+        "D063",
+        "D062",
+        "D061"
+      ]
+    },
+    {
+      "id": "S084",
+      "name": "Post-nasal Drip",
+      "severity": "mild",
+      "linked_diseases": [
+        "D010",
+        "D011",
+        "D001"
+      ]
+    },
+    {
+      "id": "S085",
+      "name": "Facial Pain / Pressure",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D010",
+        "D033",
+        "D034"
+      ]
+    },
+    {
+      "id": "S086",
+      "name": "Bad Breath (Halitosis)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D065",
+        "D010",
+        "D020"
+      ]
+    },
+    {
+      "id": "S087",
+      "name": "Increased Heart Rate (Tachycardia)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D041",
+        "D039",
+        "D045",
+        "D037",
+        "D079"
+      ]
+    },
+    {
+      "id": "S088",
+      "name": "Fainting / Syncope",
+      "severity": "severe",
+      "linked_diseases": [
+        "D040",
+        "D078",
+        "D042"
+      ]
+    },
+    {
+      "id": "S089",
+      "name": "High Blood Pressure Reading",
+      "severity": "severe",
+      "linked_diseases": [
+        "D039",
+        "D093",
+        "D101"
+      ]
+    },
+    {
+      "id": "S090",
+      "name": "Enlarged Thyroid (Goiter)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D044",
+        "D045"
+      ]
+    },
+    {
+      "id": "S091",
+      "name": "Bleeding Gums",
+      "severity": "mild",
+      "linked_diseases": [
+        "D064",
+        "D042"
+      ]
+    },
+    {
+      "id": "S092",
+      "name": "Nosebleed",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D091",
+        "D039"
+      ]
+    },
+    {
+      "id": "S093",
+      "name": "Difficulty Swallowing (Dysphagia)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D061",
+        "D062",
+        "D019"
+      ]
+    },
+    {
+      "id": "S094",
+      "name": "Abdominal Distension",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D022",
+        "D093",
+        "D094",
+        "D016"
+      ]
+    },
+    {
+      "id": "S095",
+      "name": "Dark Urine",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D028",
+        "D029",
+        "D078",
+        "D030"
+      ]
+    },
+    {
+      "id": "S096",
+      "name": "Foamy Urine",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D101",
+        "D043"
+      ]
+    },
+    {
+      "id": "S097",
+      "name": "Reduced Urine Output",
+      "severity": "severe",
+      "linked_diseases": [
+        "D101",
+        "D078",
+        "D031"
+      ]
+    },
+    {
+      "id": "S098",
+      "name": "Fever with Rash",
+      "severity": "severe",
+      "linked_diseases": [
+        "D017",
+        "D018",
+        "D005",
+        "D085"
+      ]
+    },
+    {
+      "id": "S099",
+      "name": "Sudden High Fever (>103F)",
+      "severity": "severe",
+      "linked_diseases": [
+        "D004",
+        "D005",
+        "D006",
+        "D009",
+        "D082"
+      ]
+    },
+    {
+      "id": "S100",
+      "name": "Slow Wound Healing",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D043",
+        "D042",
+        "D101"
+      ]
+    },
+    {
+      "id": "S101",
+      "name": "Motion Sickness (Nausea in Travel)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D080"
+      ]
+    },
+    {
+      "id": "S102",
+      "name": "Craving Salty / Sweet Foods",
+      "severity": "mild",
+      "linked_diseases": [
+        "D043",
+        "D067",
+        "D038"
+      ]
+    },
+    {
+      "id": "S103",
+      "name": "Sensitivity to Light (Photophobia)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D034",
+        "D056"
+      ]
+    },
+    {
+      "id": "S104",
+      "name": "Stiffness After Rest",
+      "severity": "mild",
+      "linked_diseases": [
+        "D050",
+        "D051",
+        "D052"
+      ]
+    },
+    {
+      "id": "S105",
+      "name": "Crepitus (Clicking Joints)",
+      "severity": "mild",
+      "linked_diseases": [
+        "D050",
+        "D053"
+      ]
+    },
+    {
+      "id": "S106",
+      "name": "Painful Urination in Females",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D030",
+        "D068"
+      ]
+    },
+    {
+      "id": "S107",
+      "name": "Genital Itching / Discharge",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D068"
+      ]
+    },
+    {
+      "id": "S108",
+      "name": "Low-grade Fever Persisting >7 Days",
+      "severity": "severe",
+      "linked_diseases": [
+        "D004",
+        "D083",
+        "D028",
+        "D005"
+      ]
+    },
+    {
+      "id": "S109",
+      "name": "Paroxysmal Fever (Every 2-3 Days)",
+      "severity": "severe",
+      "linked_diseases": [
+        "D006"
+      ]
+    },
+    {
+      "id": "S110",
+      "name": "Barking Cough (Croup)",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D108",
+        "D063"
+      ]
+    },
+    {
+      "id": "S111",
+      "name": "Stridor (High-pitched Breathing)",
+      "severity": "severe",
+      "linked_diseases": [
+        "D108",
+        "D061"
+      ]
+    },
+    {
+      "id": "S112",
+      "name": "Worsening Pain at Night",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D064",
+        "D052",
+        "D097"
+      ]
+    },
+    {
+      "id": "S113",
+      "name": "Abdominal Pain Right Side Lower",
+      "severity": "severe",
+      "linked_diseases": [
+        "D027",
+        "D030"
+      ]
+    },
+    {
+      "id": "S114",
+      "name": "Pain After Eating Fatty Food",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D094",
+        "D021",
+        "D019"
+      ]
+    },
+    {
+      "id": "S115",
+      "name": "Oily / Greasy Stools",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D093",
+        "D028",
+        "D094"
+      ]
+    },
+    {
+      "id": "S116",
+      "name": "Wrist Pain / Weakness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D096",
+        "D050"
+      ]
+    },
+    {
+      "id": "S117",
+      "name": "Eye Swelling / Stye",
+      "severity": "mild",
+      "linked_diseases": [
+        "D105"
+      ]
+    },
+    {
+      "id": "S118",
+      "name": "Excessive Ear Wax",
+      "severity": "mild",
+      "linked_diseases": [
+        "D109"
+      ]
+    },
+    {
+      "id": "S119",
+      "name": "Muscle Weakness",
+      "severity": "moderate",
+      "linked_diseases": [
+        "D046",
+        "D044",
+        "D095",
+        "D042"
+      ]
+    },
+    {
+      "id": "S120",
+      "name": "Loss of Taste / Smell",
+      "severity": "mild",
+      "linked_diseases": [
+        "D001",
+        "D084",
+        "D010"
+      ]
+    }
+  ],
+  "medicines": [
+    {
+      "id": "M001",
+      "name": "Paracetamol (Crocin / Dolo)",
+      "type": "Tablet/Syrup",
+      "category": "Analgesic/Antipyretic",
+      "otc": true,
+      "linked_diseases": [
+        "D001",
+        "D002",
+        "D003",
+        "D033",
+        "D066",
+        "D064"
+      ]
+    },
+    {
+      "id": "M002",
+      "name": "Ibuprofen (Brufen / Advil)",
+      "type": "Tablet",
+      "category": "NSAID",
+      "otc": true,
+      "linked_diseases": [
+        "D033",
+        "D034",
+        "D050",
+        "D051",
+        "D052",
+        "D064",
+        "D066"
+      ]
+    },
+    {
+      "id": "M003",
+      "name": "Aspirin",
+      "type": "Tablet",
+      "category": "NSAID/Antiplatelet",
+      "otc": true,
+      "linked_diseases": [
+        "D033",
+        "D039",
+        "D041"
+      ]
+    },
+    {
+      "id": "M004",
+      "name": "Diclofenac (Voveran / Voltaren)",
+      "type": "Tablet/Gel",
+      "category": "NSAID",
+      "otc": false,
+      "linked_diseases": [
+        "D050",
+        "D051",
+        "D052",
+        "D053",
+        "D054",
+        "D066",
+        "D097"
+      ]
+    },
+    {
+      "id": "M005",
+      "name": "Naproxen (Naprosyn)",
+      "type": "Tablet",
+      "category": "NSAID",
+      "otc": false,
+      "linked_diseases": [
+        "D050",
+        "D051",
+        "D049",
+        "D066",
+        "D034"
+      ]
+    },
+    {
+      "id": "M006",
+      "name": "Cetirizine (Zyrtec / Cetriz)",
+      "type": "Tablet/Syrup",
+      "category": "Antihistamine 2nd Gen",
+      "otc": true,
+      "linked_diseases": [
+        "D011",
+        "D012",
+        "D013",
+        "D073",
+        "D074"
+      ]
+    },
+    {
+      "id": "M007",
+      "name": "Loratadine (Claritin)",
+      "type": "Tablet",
+      "category": "Antihistamine 2nd Gen",
+      "otc": true,
+      "linked_diseases": [
+        "D011",
+        "D012",
+        "D073",
+        "D074"
+      ]
+    },
+    {
+      "id": "M008",
+      "name": "Fexofenadine (Allegra)",
+      "type": "Tablet",
+      "category": "Antihistamine 2nd Gen",
+      "otc": true,
+      "linked_diseases": [
+        "D011",
+        "D012",
+        "D073"
+      ]
+    },
+    {
+      "id": "M009",
+      "name": "Chlorpheniramine Maleate (Piriton)",
+      "type": "Tablet",
+      "category": "Antihistamine 1st Gen",
+      "otc": true,
+      "linked_diseases": [
+        "D011",
+        "D012",
+        "D001"
+      ]
+    },
+    {
+      "id": "M010",
+      "name": "Dextromethorphan (Robitussin DM)",
+      "type": "Syrup",
+      "category": "Cough Suppressant",
+      "otc": true,
+      "linked_diseases": [
+        "D001",
+        "D007",
+        "D084"
+      ]
+    },
+    {
+      "id": "M011",
+      "name": "Ambroxol (Mucosolvan)",
+      "type": "Tablet/Syrup",
+      "category": "Mucolytic",
+      "otc": true,
+      "linked_diseases": [
+        "D007",
+        "D009",
+        "D001"
+      ]
+    },
+    {
+      "id": "M012",
+      "name": "Guaifenesin (Mucinex)",
+      "type": "Tablet/Syrup",
+      "category": "Expectorant",
+      "otc": true,
+      "linked_diseases": [
+        "D007",
+        "D009",
+        "D010"
+      ]
+    },
+    {
+      "id": "M013",
+      "name": "Salbutamol (Ventolin) Inhaler",
+      "type": "Inhaler",
+      "category": "Bronchodilator",
+      "otc": false,
+      "linked_diseases": [
+        "D008",
+        "D007"
+      ]
+    },
+    {
+      "id": "M014",
+      "name": "Montelukast (Singulair)",
+      "type": "Tablet",
+      "category": "Leukotriene Inhibitor",
+      "otc": false,
+      "linked_diseases": [
+        "D008",
+        "D011"
+      ]
+    },
+    {
+      "id": "M015",
+      "name": "Budesonide Inhaler",
+      "type": "Inhaler",
+      "category": "Corticosteroid Inhaled",
+      "otc": false,
+      "linked_diseases": [
+        "D008",
+        "D007"
+      ]
+    },
+    {
+      "id": "M016",
+      "name": "Omeprazole (Omez / Prilosec)",
+      "type": "Capsule",
+      "category": "Proton Pump Inhibitor",
+      "otc": false,
+      "linked_diseases": [
+        "D019",
+        "D020",
+        "D021"
+      ]
+    },
+    {
+      "id": "M017",
+      "name": "Pantoprazole (Pantocid)",
+      "type": "Tablet",
+      "category": "Proton Pump Inhibitor",
+      "otc": false,
+      "linked_diseases": [
+        "D019",
+        "D020",
+        "D021"
+      ]
+    },
+    {
+      "id": "M018",
+      "name": "Famotidine (Pepcid)",
+      "type": "Tablet",
+      "category": "H2 Blocker",
+      "otc": true,
+      "linked_diseases": [
+        "D019",
+        "D020",
+        "D021"
+      ]
+    },
+    {
+      "id": "M019",
+      "name": "Antacid (Gelusil / Digene)",
+      "type": "Tablet/Liquid",
+      "category": "Antacid",
+      "otc": true,
+      "linked_diseases": [
+        "D019",
+        "D021",
+        "D026"
+      ]
+    },
+    {
+      "id": "M020",
+      "name": "Domperidone (Domstal)",
+      "type": "Tablet",
+      "category": "Prokinetic/Antiemetic",
+      "otc": false,
+      "linked_diseases": [
+        "D026",
+        "D019",
+        "D070",
+        "D080"
+      ]
+    },
+    {
+      "id": "M021",
+      "name": "Ondansetron (Emeset / Zofran)",
+      "type": "Tablet/Injection",
+      "category": "Antiemetic",
+      "otc": false,
+      "linked_diseases": [
+        "D026",
+        "D025",
+        "D070",
+        "D080"
+      ]
+    },
+    {
+      "id": "M022",
+      "name": "ORS (Oral Rehydration Salts)",
+      "type": "Powder/Sachet",
+      "category": "Rehydration Solution",
+      "otc": true,
+      "linked_diseases": [
+        "D023",
+        "D025",
+        "D082",
+        "D078"
+      ]
+    },
+    {
+      "id": "M023",
+      "name": "Loperamide (Imodium)",
+      "type": "Tablet",
+      "category": "Antidiarrheal",
+      "otc": true,
+      "linked_diseases": [
+        "D023",
+        "D022"
+      ]
+    },
+    {
+      "id": "M024",
+      "name": "Metronidazole (Flagyl)",
+      "type": "Tablet",
+      "category": "Antibiotic/Antiprotozoal",
+      "otc": false,
+      "linked_diseases": [
+        "D023",
+        "D025",
+        "D030",
+        "D082"
+      ]
+    },
+    {
+      "id": "M025",
+      "name": "Lactulose Syrup",
+      "type": "Syrup",
+      "category": "Laxative Osmotic",
+      "otc": true,
+      "linked_diseases": [
+        "D024",
+        "D076"
+      ]
+    },
+    {
+      "id": "M026",
+      "name": "Bisacodyl (Dulcolax)",
+      "type": "Tablet/Suppository",
+      "category": "Laxative Stimulant",
+      "otc": true,
+      "linked_diseases": [
+        "D024"
+      ]
+    },
+    {
+      "id": "M027",
+      "name": "Ispaghula Husk (Isabgol / Metamucil)",
+      "type": "Powder/Sachet",
+      "category": "Bulk-forming Laxative",
+      "otc": true,
+      "linked_diseases": [
+        "D024",
+        "D022",
+        "D076"
+      ]
+    },
+    {
+      "id": "M028",
+      "name": "Amoxicillin (Amoxil)",
+      "type": "Tablet/Capsule",
+      "category": "Antibiotic Penicillin",
+      "otc": false,
+      "linked_diseases": [
+        "D009",
+        "D030",
+        "D061",
+        "D062",
+        "D064"
+      ]
+    },
+    {
+      "id": "M029",
+      "name": "Azithromycin (Zithromax)",
+      "type": "Tablet",
+      "category": "Antibiotic Macrolide",
+      "otc": false,
+      "linked_diseases": [
+        "D009",
+        "D062",
+        "D004",
+        "D030",
+        "D068"
+      ]
+    },
+    {
+      "id": "M030",
+      "name": "Ciprofloxacin (Cipro)",
+      "type": "Tablet",
+      "category": "Antibiotic Fluoroquinolone",
+      "otc": false,
+      "linked_diseases": [
+        "D030",
+        "D023",
+        "D025",
+        "D072",
+        "D082"
+      ]
+    },
+    {
+      "id": "M031",
+      "name": "Ceftriaxone (Injection)",
+      "type": "Injection",
+      "category": "Antibiotic Cephalosporin",
+      "otc": false,
+      "linked_diseases": [
+        "D004",
+        "D009",
+        "D030",
+        "D082"
+      ]
+    },
+    {
+      "id": "M032",
+      "name": "Doxycycline",
+      "type": "Capsule",
+      "category": "Antibiotic Tetracycline",
+      "otc": false,
+      "linked_diseases": [
+        "D006",
+        "D014",
+        "D072"
+      ]
+    },
+    {
+      "id": "M033",
+      "name": "Cotrimoxazole (Septran / Bactrim)",
+      "type": "Tablet",
+      "category": "Antibiotic Sulfonamide",
+      "otc": false,
+      "linked_diseases": [
+        "D030",
+        "D009",
+        "D083"
+      ]
+    },
+    {
+      "id": "M034",
+      "name": "Hydroxychloroquine (Plaquenil)",
+      "type": "Tablet",
+      "category": "Antimalarial/DMARD",
+      "otc": false,
+      "linked_diseases": [
+        "D006",
+        "D051"
+      ]
+    },
+    {
+      "id": "M035",
+      "name": "Artemether-Lumefantrine (Coartem)",
+      "type": "Tablet",
+      "category": "Antimalarial",
+      "otc": false,
+      "linked_diseases": [
+        "D006"
+      ]
+    },
+    {
+      "id": "M036",
+      "name": "Clotrimazole Cream",
+      "type": "Cream",
+      "category": "Antifungal Topical",
+      "otc": true,
+      "linked_diseases": [
+        "D015",
+        "D068",
+        "D087",
+        "D090"
+      ]
+    },
+    {
+      "id": "M037",
+      "name": "Fluconazole (Diflucan)",
+      "type": "Tablet",
+      "category": "Antifungal Systemic",
+      "otc": false,
+      "linked_diseases": [
+        "D015",
+        "D068",
+        "D090"
+      ]
+    },
+    {
+      "id": "M038",
+      "name": "Terbinafine (Lamisil)",
+      "type": "Tablet/Cream",
+      "category": "Antifungal",
+      "otc": true,
+      "linked_diseases": [
+        "D015",
+        "D087",
+        "D090"
+      ]
+    },
+    {
+      "id": "M039",
+      "name": "Betamethasone Cream",
+      "type": "Cream",
+      "category": "Corticosteroid Topical",
+      "otc": false,
+      "linked_diseases": [
+        "D013",
+        "D074",
+        "D075",
+        "D073"
+      ]
+    },
+    {
+      "id": "M040",
+      "name": "Hydrocortisone Cream 1%",
+      "type": "Cream",
+      "category": "Corticosteroid Mild Topical",
+      "otc": true,
+      "linked_diseases": [
+        "D013",
+        "D074",
+        "D073",
+        "D106"
+      ]
+    },
+    {
+      "id": "M041",
+      "name": "Calamine Lotion",
+      "type": "Lotion",
+      "category": "Antipruritic/Soothing",
+      "otc": true,
+      "linked_diseases": [
+        "D012",
+        "D017",
+        "D073",
+        "D106"
+      ]
+    },
+    {
+      "id": "M042",
+      "name": "Permethrin Cream 5%",
+      "type": "Cream",
+      "category": "Scabicide",
+      "otc": false,
+      "linked_diseases": [
+        "D016"
+      ]
+    },
+    {
+      "id": "M043",
+      "name": "Acyclovir (Zovirax)",
+      "type": "Tablet/Cream",
+      "category": "Antiviral",
+      "otc": false,
+      "linked_diseases": [
+        "D017",
+        "D085",
+        "D104"
+      ]
+    },
+    {
+      "id": "M044",
+      "name": "Valacyclovir (Valtrex)",
+      "type": "Tablet",
+      "category": "Antiviral",
+      "otc": false,
+      "linked_diseases": [
+        "D085",
+        "D104",
+        "D103"
+      ]
+    },
+    {
+      "id": "M045",
+      "name": "Iron Supplements (Ferrous Sulfate)",
+      "type": "Tablet/Syrup",
+      "category": "Haematinic",
+      "otc": true,
+      "linked_diseases": [
+        "D042",
+        "D067"
+      ]
+    },
+    {
+      "id": "M046",
+      "name": "Vitamin B12 (Methylcobalamin)",
+      "type": "Tablet/Injection",
+      "category": "Vitamin Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D047",
+        "D095"
+      ]
+    },
+    {
+      "id": "M047",
+      "name": "Vitamin D3 (Cholecalciferol)",
+      "type": "Tablet/Capsule/Drops",
+      "category": "Vitamin Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D046",
+        "D050",
+        "D054"
+      ]
+    },
+    {
+      "id": "M048",
+      "name": "Calcium Carbonate + Vitamin D (Shelcal)",
+      "type": "Tablet",
+      "category": "Mineral Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D046",
+        "D050",
+        "D055",
+        "D069"
+      ]
+    },
+    {
+      "id": "M049",
+      "name": "Folic Acid",
+      "type": "Tablet",
+      "category": "Vitamin Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D042",
+        "D067",
+        "D070"
+      ]
+    },
+    {
+      "id": "M050",
+      "name": "Multivitamin (Supradyn / Revital)",
+      "type": "Tablet",
+      "category": "Nutritional Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D009",
+        "D042",
+        "D046",
+        "D047"
+      ]
+    },
+    {
+      "id": "M051",
+      "name": "Metformin (Glucophage)",
+      "type": "Tablet",
+      "category": "Antidiabetic Biguanide",
+      "otc": false,
+      "linked_diseases": [
+        "D043",
+        "D067"
+      ]
+    },
+    {
+      "id": "M052",
+      "name": "Glibenclamide / Glipizide",
+      "type": "Tablet",
+      "category": "Antidiabetic Sulfonylurea",
+      "otc": false,
+      "linked_diseases": [
+        "D043"
+      ]
+    },
+    {
+      "id": "M053",
+      "name": "Insulin (Regular/NPH)",
+      "type": "Injection",
+      "category": "Antidiabetic Insulin",
+      "otc": false,
+      "linked_diseases": [
+        "D043"
+      ]
+    },
+    {
+      "id": "M054",
+      "name": "Levothyroxine (Eltroxin)",
+      "type": "Tablet",
+      "category": "Thyroid Hormone",
+      "otc": false,
+      "linked_diseases": [
+        "D044"
+      ]
+    },
+    {
+      "id": "M055",
+      "name": "Methimazole / Carbimazole",
+      "type": "Tablet",
+      "category": "Antithyroid",
+      "otc": false,
+      "linked_diseases": [
+        "D045"
+      ]
+    },
+    {
+      "id": "M056",
+      "name": "Amlodipine (Norvasc)",
+      "type": "Tablet",
+      "category": "Antihypertensive CCB",
+      "otc": false,
+      "linked_diseases": [
+        "D039",
+        "D041"
+      ]
+    },
+    {
+      "id": "M057",
+      "name": "Lisinopril / Enalapril",
+      "type": "Tablet",
+      "category": "Antihypertensive ACE Inhibitor",
+      "otc": false,
+      "linked_diseases": [
+        "D039",
+        "D101"
+      ]
+    },
+    {
+      "id": "M058",
+      "name": "Metoprolol / Atenolol",
+      "type": "Tablet",
+      "category": "Beta Blocker",
+      "otc": false,
+      "linked_diseases": [
+        "D039",
+        "D041",
+        "D037"
+      ]
+    },
+    {
+      "id": "M059",
+      "name": "Furosemide (Lasix)",
+      "type": "Tablet",
+      "category": "Loop Diuretic",
+      "otc": false,
+      "linked_diseases": [
+        "D039",
+        "D101",
+        "D099"
+      ]
+    },
+    {
+      "id": "M060",
+      "name": "Atorvastatin / Rosuvastatin",
+      "type": "Tablet",
+      "category": "Statin Antilipidemic",
+      "otc": false,
+      "linked_diseases": [
+        "D100",
+        "D093"
+      ]
+    },
+    {
+      "id": "M061",
+      "name": "Allopurinol (Zyloric)",
+      "type": "Tablet",
+      "category": "Antigout Xanthine Oxidase Inhibitor",
+      "otc": false,
+      "linked_diseases": [
+        "D049",
+        "D092"
+      ]
+    },
+    {
+      "id": "M062",
+      "name": "Colchicine",
+      "type": "Tablet",
+      "category": "Antigout",
+      "otc": false,
+      "linked_diseases": [
+        "D049"
+      ]
+    },
+    {
+      "id": "M063",
+      "name": "Methotrexate (Low Dose)",
+      "type": "Tablet",
+      "category": "DMARD",
+      "otc": false,
+      "linked_diseases": [
+        "D051",
+        "D075"
+      ]
+    },
+    {
+      "id": "M064",
+      "name": "Prednisolone / Prednisone",
+      "type": "Tablet",
+      "category": "Corticosteroid Systemic",
+      "otc": false,
+      "linked_diseases": [
+        "D051",
+        "D008",
+        "D012",
+        "D013",
+        "D075"
+      ]
+    },
+    {
+      "id": "M065",
+      "name": "Betahistine (Serc)",
+      "type": "Tablet",
+      "category": "Anti-vertigo",
+      "otc": false,
+      "linked_diseases": [
+        "D035",
+        "D060"
+      ]
+    },
+    {
+      "id": "M066",
+      "name": "Cinnarizine / Meclizine",
+      "type": "Tablet",
+      "category": "Anti-vertigo Antihistamine",
+      "otc": true,
+      "linked_diseases": [
+        "D035",
+        "D080"
+      ]
+    },
+    {
+      "id": "M067",
+      "name": "Promethazine (Phenergan)",
+      "type": "Tablet/Syrup",
+      "category": "Antihistamine Antiemetic",
+      "otc": false,
+      "linked_diseases": [
+        "D080",
+        "D026",
+        "D011"
+      ]
+    },
+    {
+      "id": "M068",
+      "name": "Melatonin",
+      "type": "Tablet",
+      "category": "Sleep Aid Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D036"
+      ]
+    },
+    {
+      "id": "M069",
+      "name": "Zolpidem (Ambien)",
+      "type": "Tablet",
+      "category": "Sedative-Hypnotic",
+      "otc": false,
+      "linked_diseases": [
+        "D036"
+      ]
+    },
+    {
+      "id": "M070",
+      "name": "Alprazolam (Xanax)",
+      "type": "Tablet",
+      "category": "Benzodiazepine Anxiolytic",
+      "otc": false,
+      "linked_diseases": [
+        "D037",
+        "D036"
+      ]
+    },
+    {
+      "id": "M071",
+      "name": "Sertraline (Zoloft)",
+      "type": "Tablet",
+      "category": "SSRI Antidepressant",
+      "otc": false,
+      "linked_diseases": [
+        "D038",
+        "D037",
+        "D067"
+      ]
+    },
+    {
+      "id": "M072",
+      "name": "Escitalopram (Lexapro)",
+      "type": "Tablet",
+      "category": "SSRI Antidepressant",
+      "otc": false,
+      "linked_diseases": [
+        "D038",
+        "D037"
+      ]
+    },
+    {
+      "id": "M073",
+      "name": "Nasal Saline Spray",
+      "type": "Nasal Spray",
+      "category": "Nasal Moisturizer",
+      "otc": true,
+      "linked_diseases": [
+        "D001",
+        "D010",
+        "D011",
+        "D091"
+      ]
+    },
+    {
+      "id": "M074",
+      "name": "Xylometazoline Nasal Drops",
+      "type": "Nasal Drops",
+      "category": "Nasal Decongestant",
+      "otc": true,
+      "linked_diseases": [
+        "D001",
+        "D010",
+        "D091"
+      ]
+    },
+    {
+      "id": "M075",
+      "name": "Fluticasone Nasal Spray",
+      "type": "Nasal Spray",
+      "category": "Corticosteroid Nasal",
+      "otc": false,
+      "linked_diseases": [
+        "D011",
+        "D010"
+      ]
+    },
+    {
+      "id": "M076",
+      "name": "Chloramphenicol Eye Drops",
+      "type": "Eye Drops",
+      "category": "Antibiotic Eye Drop",
+      "otc": false,
+      "linked_diseases": [
+        "D056",
+        "D105"
+      ]
+    },
+    {
+      "id": "M077",
+      "name": "Artificial Tear Drops",
+      "type": "Eye Drops",
+      "category": "Lubricant Eye Drop",
+      "otc": true,
+      "linked_diseases": [
+        "D057",
+        "D056"
+      ]
+    },
+    {
+      "id": "M078",
+      "name": "Timolol Eye Drops",
+      "type": "Eye Drops",
+      "category": "Beta Blocker Ocular",
+      "otc": false,
+      "linked_diseases": [
+        "D058"
+      ]
+    },
+    {
+      "id": "M079",
+      "name": "Ciprofloxacin Ear Drops",
+      "type": "Ear Drops",
+      "category": "Antibiotic Ear Drop",
+      "otc": false,
+      "linked_diseases": [
+        "D059"
+      ]
+    },
+    {
+      "id": "M080",
+      "name": "Ear Wax Softener (H2O2 / Docusate)",
+      "type": "Ear Drops",
+      "category": "Cerumenolytic",
+      "otc": true,
+      "linked_diseases": [
+        "D109"
+      ]
+    },
+    {
+      "id": "M081",
+      "name": "Diclofenac Gel (Voveran Gel)",
+      "type": "Gel",
+      "category": "NSAID Topical",
+      "otc": true,
+      "linked_diseases": [
+        "D050",
+        "D052",
+        "D053",
+        "D054",
+        "D097",
+        "D110"
+      ]
+    },
+    {
+      "id": "M082",
+      "name": "Mupirocin Ointment (Bactroban)",
+      "type": "Ointment",
+      "category": "Antibiotic Topical",
+      "otc": false,
+      "linked_diseases": [
+        "D014",
+        "D072"
+      ]
+    },
+    {
+      "id": "M083",
+      "name": "Silver Sulfadiazine Cream",
+      "type": "Cream",
+      "category": "Antibiotic Burn Cream",
+      "otc": false,
+      "linked_diseases": [
+        "D071",
+        "D072"
+      ]
+    },
+    {
+      "id": "M084",
+      "name": "Povidone-Iodine Ointment",
+      "type": "Ointment",
+      "category": "Antiseptic",
+      "otc": true,
+      "linked_diseases": [
+        "D071",
+        "D072"
+      ]
+    },
+    {
+      "id": "M085",
+      "name": "Clobetasol Propionate Cream",
+      "type": "Cream",
+      "category": "Corticosteroid Topical Potent",
+      "otc": false,
+      "linked_diseases": [
+        "D013",
+        "D075",
+        "D074"
+      ]
+    },
+    {
+      "id": "M086",
+      "name": "Benzyl Benzoate Lotion",
+      "type": "Lotion",
+      "category": "Scabicide",
+      "otc": true,
+      "linked_diseases": [
+        "D016"
+      ]
+    },
+    {
+      "id": "M087",
+      "name": "Coal Tar Shampoo / Lotion",
+      "type": "Shampoo/Lotion",
+      "category": "Keratolytic Antipsoriatic",
+      "otc": true,
+      "linked_diseases": [
+        "D075",
+        "D088"
+      ]
+    },
+    {
+      "id": "M088",
+      "name": "Minoxidil Solution / Foam",
+      "type": "Solution/Foam",
+      "category": "Hair Growth Stimulant",
+      "otc": true,
+      "linked_diseases": [
+        "D089"
+      ]
+    },
+    {
+      "id": "M089",
+      "name": "Ketoconazole Shampoo",
+      "type": "Shampoo",
+      "category": "Antifungal Shampoo",
+      "otc": true,
+      "linked_diseases": [
+        "D088",
+        "D015",
+        "D087"
+      ]
+    },
+    {
+      "id": "M090",
+      "name": "Nitrofurantoin / Trimethoprim",
+      "type": "Tablet",
+      "category": "Antibiotic UTI Specific",
+      "otc": false,
+      "linked_diseases": [
+        "D030"
+      ]
+    },
+    {
+      "id": "M091",
+      "name": "Tamsulosin",
+      "type": "Capsule",
+      "category": "Alpha Blocker BPH/Prostatitis",
+      "otc": false,
+      "linked_diseases": [
+        "D032"
+      ]
+    },
+    {
+      "id": "M092",
+      "name": "Norethisterone / Mifepristone",
+      "type": "Tablet",
+      "category": "Progestogen Hormonal",
+      "otc": false,
+      "linked_diseases": [
+        "D066",
+        "D067"
+      ]
+    },
+    {
+      "id": "M093",
+      "name": "Mefenamic Acid (Ponstan)",
+      "type": "Tablet",
+      "category": "NSAID Menstrual Pain",
+      "otc": false,
+      "linked_diseases": [
+        "D066"
+      ]
+    },
+    {
+      "id": "M094",
+      "name": "Clotrimazole Vaginal Tablet/Cream",
+      "type": "Vaginal Tablet/Cream",
+      "category": "Antifungal Vaginal",
+      "otc": true,
+      "linked_diseases": [
+        "D068"
+      ]
+    },
+    {
+      "id": "M095",
+      "name": "Hormone Replacement Therapy (HRT)",
+      "type": "Tablet/Patch",
+      "category": "Hormonal Therapy Menopause",
+      "otc": false,
+      "linked_diseases": [
+        "D069"
+      ]
+    },
+    {
+      "id": "M096",
+      "name": "Dicyclomine / Mebeverine",
+      "type": "Tablet",
+      "category": "Antispasmodic",
+      "otc": false,
+      "linked_diseases": [
+        "D022",
+        "D019",
+        "D021"
+      ]
+    },
+    {
+      "id": "M097",
+      "name": "Sucralfate (Carafate)",
+      "type": "Tablet/Suspension",
+      "category": "Mucosal Protectant",
+      "otc": false,
+      "linked_diseases": [
+        "D020",
+        "D019"
+      ]
+    },
+    {
+      "id": "M098",
+      "name": "Ursodeoxycholic Acid (UDCA)",
+      "type": "Tablet",
+      "category": "Hepatoprotective",
+      "otc": false,
+      "linked_diseases": [
+        "D093",
+        "D028",
+        "D094"
+      ]
+    },
+    {
+      "id": "M099",
+      "name": "Silymarin (Milk Thistle Extract)",
+      "type": "Tablet/Capsule",
+      "category": "Hepatoprotective Herbal",
+      "otc": true,
+      "linked_diseases": [
+        "D093",
+        "D028",
+        "D029"
+      ]
+    },
+    {
+      "id": "M100",
+      "name": "Warfarin / Clopidogrel",
+      "type": "Tablet",
+      "category": "Anticoagulant Antiplatelet",
+      "otc": false,
+      "linked_diseases": [
+        "D098",
+        "D039"
+      ]
+    },
+    {
+      "id": "M101",
+      "name": "Compression Stockings",
+      "type": "Compression Garment",
+      "category": "Non-pharmacological Vascular",
+      "otc": true,
+      "linked_diseases": [
+        "D098",
+        "D099"
+      ]
+    },
+    {
+      "id": "M102",
+      "name": "Probiotic (Lactobacillus)",
+      "type": "Capsule/Sachet",
+      "category": "Probiotic",
+      "otc": true,
+      "linked_diseases": [
+        "D023",
+        "D022",
+        "D025"
+      ]
+    },
+    {
+      "id": "M103",
+      "name": "Zinc Supplements",
+      "type": "Tablet",
+      "category": "Mineral Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D001",
+        "D023",
+        "D042",
+        "D100"
+      ]
+    },
+    {
+      "id": "M104",
+      "name": "Magnesium Supplements",
+      "type": "Tablet",
+      "category": "Mineral Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D054",
+        "D033",
+        "D036"
+      ]
+    },
+    {
+      "id": "M105",
+      "name": "Omega-3 / Fish Oil",
+      "type": "Capsule",
+      "category": "Nutritional Supplement",
+      "otc": true,
+      "linked_diseases": [
+        "D100",
+        "D051",
+        "D043"
+      ]
+    },
+    {
+      "id": "M106",
+      "name": "Amitriptyline (Low Dose)",
+      "type": "Tablet",
+      "category": "TCA Neuropathic Pain Migraine Prophylaxis",
+      "otc": false,
+      "linked_diseases": [
+        "D034",
+        "D095",
+        "D036"
+      ]
+    },
+    {
+      "id": "M107",
+      "name": "Gabapentin (Neurontin)",
+      "type": "Capsule",
+      "category": "Anticonvulsant Neuropathic Pain",
+      "otc": false,
+      "linked_diseases": [
+        "D095",
+        "D097",
+        "D085"
+      ]
+    },
+    {
+      "id": "M108",
+      "name": "Sumatriptan (Imitrex)",
+      "type": "Tablet/Nasal Spray",
+      "category": "Triptan Antimigraine",
+      "otc": false,
+      "linked_diseases": [
+        "D034"
+      ]
+    },
+    {
+      "id": "M109",
+      "name": "Ergotamine + Caffeine (Cafergot)",
+      "type": "Tablet",
+      "category": "Ergot Alkaloid Antimigraine",
+      "otc": false,
+      "linked_diseases": [
+        "D034"
+      ]
+    },
+    {
+      "id": "M110",
+      "name": "Topiramate (Topamax)",
+      "type": "Tablet",
+      "category": "Anticonvulsant Migraine Prophylaxis",
+      "otc": false,
+      "linked_diseases": [
+        "D034",
+        "D036"
+      ]
+    },
+    {
+      "id": "M111",
+      "name": "Codeine Phosphate (Low Dose Cough)",
+      "type": "Tablet/Syrup",
+      "category": "Opioid Antitussive",
+      "otc": false,
+      "linked_diseases": [
+        "D001",
+        "D007",
+        "D083"
+      ]
+    },
+    {
+      "id": "M112",
+      "name": "Benzydamine Mouthwash / Spray",
+      "type": "Mouthwash/Spray",
+      "category": "Anti-inflammatory Oral",
+      "otc": true,
+      "linked_diseases": [
+        "D062",
+        "D065",
+        "D061"
+      ]
+    },
+    {
+      "id": "M113",
+      "name": "Chlorhexidine Mouthwash",
+      "type": "Mouthwash",
+      "category": "Antiseptic Oral",
+      "otc": true,
+      "linked_diseases": [
+        "D065",
+        "D064",
+        "D104"
+      ]
+    },
+    {
+      "id": "M114",
+      "name": "Salicylic Acid (Topical)",
+      "type": "Gel/Solution",
+      "category": "Keratolytic",
+      "otc": true,
+      "linked_diseases": [
+        "D086",
+        "D014",
+        "D088",
+        "D090"
+      ]
+    },
+    {
+      "id": "M115",
+      "name": "Diosmin + Hesperidin (Daflon)",
+      "type": "Tablet",
+      "category": "Phlebotonic Venotonic",
+      "otc": false,
+      "linked_diseases": [
+        "D076",
+        "D099"
+      ]
+    }
+  ],
+  "salt_compositions": [
+    {
+      "id": "SC001",
+      "salt_name": "Paracetamol",
+      "linked_medicines": [
+        "M001"
+      ],
+      "drug_class": "Analgesic/Antipyretic"
+    },
+    {
+      "id": "SC002",
+      "salt_name": "Ibuprofen",
+      "linked_medicines": [
+        "M002"
+      ],
+      "drug_class": "NSAID"
+    },
+    {
+      "id": "SC003",
+      "salt_name": "Aspirin (Acetylsalicylic Acid)",
+      "linked_medicines": [
+        "M003"
+      ],
+      "drug_class": "NSAID/Antiplatelet"
+    },
+    {
+      "id": "SC004",
+      "salt_name": "Diclofenac Sodium",
+      "linked_medicines": [
+        "M004",
+        "M081"
+      ],
+      "drug_class": "NSAID"
+    },
+    {
+      "id": "SC005",
+      "salt_name": "Naproxen Sodium",
+      "linked_medicines": [
+        "M005"
+      ],
+      "drug_class": "NSAID"
+    },
+    {
+      "id": "SC006",
+      "salt_name": "Cetirizine Hydrochloride",
+      "linked_medicines": [
+        "M006"
+      ],
+      "drug_class": "Antihistamine 2nd Gen"
+    },
+    {
+      "id": "SC007",
+      "salt_name": "Loratadine",
+      "linked_medicines": [
+        "M007"
+      ],
+      "drug_class": "Antihistamine 2nd Gen"
+    },
+    {
+      "id": "SC008",
+      "salt_name": "Fexofenadine Hydrochloride",
+      "linked_medicines": [
+        "M008"
+      ],
+      "drug_class": "Antihistamine 2nd Gen"
+    },
+    {
+      "id": "SC009",
+      "salt_name": "Chlorpheniramine Maleate",
+      "linked_medicines": [
+        "M009"
+      ],
+      "drug_class": "Antihistamine 1st Gen"
+    },
+    {
+      "id": "SC010",
+      "salt_name": "Dextromethorphan Hydrobromide",
+      "linked_medicines": [
+        "M010"
+      ],
+      "drug_class": "Cough Suppressant"
+    },
+    {
+      "id": "SC011",
+      "salt_name": "Ambroxol Hydrochloride",
+      "linked_medicines": [
+        "M011"
+      ],
+      "drug_class": "Mucolytic"
+    },
+    {
+      "id": "SC012",
+      "salt_name": "Guaifenesin",
+      "linked_medicines": [
+        "M012"
+      ],
+      "drug_class": "Expectorant"
+    },
+    {
+      "id": "SC013",
+      "salt_name": "Salbutamol Sulfate",
+      "linked_medicines": [
+        "M013"
+      ],
+      "drug_class": "Beta-2 Agonist"
+    },
+    {
+      "id": "SC014",
+      "salt_name": "Montelukast Sodium",
+      "linked_medicines": [
+        "M014"
+      ],
+      "drug_class": "Leukotriene Receptor Antagonist"
+    },
+    {
+      "id": "SC015",
+      "salt_name": "Budesonide",
+      "linked_medicines": [
+        "M015"
+      ],
+      "drug_class": "Corticosteroid Inhaled"
+    },
+    {
+      "id": "SC016",
+      "salt_name": "Omeprazole",
+      "linked_medicines": [
+        "M016"
+      ],
+      "drug_class": "Proton Pump Inhibitor"
+    },
+    {
+      "id": "SC017",
+      "salt_name": "Pantoprazole Sodium",
+      "linked_medicines": [
+        "M017"
+      ],
+      "drug_class": "Proton Pump Inhibitor"
+    },
+    {
+      "id": "SC018",
+      "salt_name": "Famotidine",
+      "linked_medicines": [
+        "M018"
+      ],
+      "drug_class": "H2 Receptor Blocker"
+    },
+    {
+      "id": "SC019",
+      "salt_name": "Aluminium Hydroxide + Magnesium Hydroxide",
+      "linked_medicines": [
+        "M019"
+      ],
+      "drug_class": "Antacid"
+    },
+    {
+      "id": "SC020",
+      "salt_name": "Domperidone",
+      "linked_medicines": [
+        "M020"
+      ],
+      "drug_class": "Dopamine Antagonist Prokinetic"
+    },
+    {
+      "id": "SC021",
+      "salt_name": "Ondansetron Hydrochloride",
+      "linked_medicines": [
+        "M021"
+      ],
+      "drug_class": "5-HT3 Antagonist Antiemetic"
+    },
+    {
+      "id": "SC022",
+      "salt_name": "Sodium Chloride + Potassium Chloride + Glucose (ORS)",
+      "linked_medicines": [
+        "M022"
+      ],
+      "drug_class": "Electrolyte Replenisher"
+    },
+    {
+      "id": "SC023",
+      "salt_name": "Loperamide Hydrochloride",
+      "linked_medicines": [
+        "M023"
+      ],
+      "drug_class": "Opioid Receptor Agonist Gut"
+    },
+    {
+      "id": "SC024",
+      "salt_name": "Metronidazole",
+      "linked_medicines": [
+        "M024"
+      ],
+      "drug_class": "Nitroimidazole Antibiotic"
+    },
+    {
+      "id": "SC025",
+      "salt_name": "Lactulose",
+      "linked_medicines": [
+        "M025"
+      ],
+      "drug_class": "Osmotic Laxative"
+    },
+    {
+      "id": "SC026",
+      "salt_name": "Bisacodyl",
+      "linked_medicines": [
+        "M026"
+      ],
+      "drug_class": "Stimulant Laxative"
+    },
+    {
+      "id": "SC027",
+      "salt_name": "Ispaghula Husk (Psyllium)",
+      "linked_medicines": [
+        "M027"
+      ],
+      "drug_class": "Bulk-forming Fibre"
+    },
+    {
+      "id": "SC028",
+      "salt_name": "Amoxicillin Trihydrate",
+      "linked_medicines": [
+        "M028"
+      ],
+      "drug_class": "Aminopenicillin Antibiotic"
+    },
+    {
+      "id": "SC029",
+      "salt_name": "Azithromycin Dihydrate",
+      "linked_medicines": [
+        "M029"
+      ],
+      "drug_class": "Macrolide Antibiotic"
+    },
+    {
+      "id": "SC030",
+      "salt_name": "Ciprofloxacin Hydrochloride",
+      "linked_medicines": [
+        "M030",
+        "M079"
+      ],
+      "drug_class": "Fluoroquinolone Antibiotic"
+    },
+    {
+      "id": "SC031",
+      "salt_name": "Ceftriaxone Sodium",
+      "linked_medicines": [
+        "M031"
+      ],
+      "drug_class": "3rd Gen Cephalosporin"
+    },
+    {
+      "id": "SC032",
+      "salt_name": "Doxycycline Hyclate",
+      "linked_medicines": [
+        "M032"
+      ],
+      "drug_class": "Tetracycline Antibiotic"
+    },
+    {
+      "id": "SC033",
+      "salt_name": "Sulfamethoxazole + Trimethoprim",
+      "linked_medicines": [
+        "M033"
+      ],
+      "drug_class": "Sulfonamide Combination"
+    },
+    {
+      "id": "SC034",
+      "salt_name": "Hydroxychloroquine Sulfate",
+      "linked_medicines": [
+        "M034"
+      ],
+      "drug_class": "Aminoquinoline Antimalarial"
+    },
+    {
+      "id": "SC035",
+      "salt_name": "Artemether + Lumefantrine",
+      "linked_medicines": [
+        "M035"
+      ],
+      "drug_class": "Artemisinin Combination Therapy"
+    },
+    {
+      "id": "SC036",
+      "salt_name": "Clotrimazole",
+      "linked_medicines": [
+        "M036",
+        "M094"
+      ],
+      "drug_class": "Azole Antifungal"
+    },
+    {
+      "id": "SC037",
+      "salt_name": "Fluconazole",
+      "linked_medicines": [
+        "M037"
+      ],
+      "drug_class": "Triazole Antifungal"
+    },
+    {
+      "id": "SC038",
+      "salt_name": "Terbinafine Hydrochloride",
+      "linked_medicines": [
+        "M038"
+      ],
+      "drug_class": "Allylamine Antifungal"
+    },
+    {
+      "id": "SC039",
+      "salt_name": "Betamethasone Valerate",
+      "linked_medicines": [
+        "M039"
+      ],
+      "drug_class": "Corticosteroid Topical"
+    },
+    {
+      "id": "SC040",
+      "salt_name": "Hydrocortisone Acetate",
+      "linked_medicines": [
+        "M040"
+      ],
+      "drug_class": "Corticosteroid Mild Topical"
+    },
+    {
+      "id": "SC041",
+      "salt_name": "Zinc Oxide + Calamine",
+      "linked_medicines": [
+        "M041"
+      ],
+      "drug_class": "Antipruritic"
+    },
+    {
+      "id": "SC042",
+      "salt_name": "Permethrin",
+      "linked_medicines": [
+        "M042"
+      ],
+      "drug_class": "Pyrethroid Scabicide"
+    },
+    {
+      "id": "SC043",
+      "salt_name": "Acyclovir",
+      "linked_medicines": [
+        "M043"
+      ],
+      "drug_class": "Nucleoside Analogue Antiviral"
+    },
+    {
+      "id": "SC044",
+      "salt_name": "Valacyclovir Hydrochloride",
+      "linked_medicines": [
+        "M044"
+      ],
+      "drug_class": "Prodrug of Acyclovir"
+    },
+    {
+      "id": "SC045",
+      "salt_name": "Ferrous Sulfate / Ferrous Fumarate",
+      "linked_medicines": [
+        "M045"
+      ],
+      "drug_class": "Iron Salt Haematinic"
+    },
+    {
+      "id": "SC046",
+      "salt_name": "Methylcobalamin (Vit B12)",
+      "linked_medicines": [
+        "M046"
+      ],
+      "drug_class": "Cobalamin Supplement"
+    },
+    {
+      "id": "SC047",
+      "salt_name": "Cholecalciferol (Vitamin D3)",
+      "linked_medicines": [
+        "M047"
+      ],
+      "drug_class": "Fat-soluble Vitamin"
+    },
+    {
+      "id": "SC048",
+      "salt_name": "Calcium Carbonate + Vitamin D3",
+      "linked_medicines": [
+        "M048"
+      ],
+      "drug_class": "Calcium + Vitamin D Supplement"
+    },
+    {
+      "id": "SC049",
+      "salt_name": "Folic Acid (Pteroylglutamic Acid)",
+      "linked_medicines": [
+        "M049"
+      ],
+      "drug_class": "B-Vitamin Supplement"
+    },
+    {
+      "id": "SC050",
+      "salt_name": "Multivitamin + Multimineral Complex",
+      "linked_medicines": [
+        "M050"
+      ],
+      "drug_class": "Nutritional Supplement"
+    },
+    {
+      "id": "SC051",
+      "salt_name": "Metformin Hydrochloride",
+      "linked_medicines": [
+        "M051"
+      ],
+      "drug_class": "Biguanide Antidiabetic"
+    },
+    {
+      "id": "SC052",
+      "salt_name": "Glibenclamide / Glipizide",
+      "linked_medicines": [
+        "M052"
+      ],
+      "drug_class": "Sulfonylurea Antidiabetic"
+    },
+    {
+      "id": "SC053",
+      "salt_name": "Human Insulin (Recombinant)",
+      "linked_medicines": [
+        "M053"
+      ],
+      "drug_class": "Insulin Hormone"
+    },
+    {
+      "id": "SC054",
+      "salt_name": "Levothyroxine Sodium",
+      "linked_medicines": [
+        "M054"
+      ],
+      "drug_class": "Thyroid Hormone Replacement"
+    },
+    {
+      "id": "SC055",
+      "salt_name": "Methimazole / Carbimazole",
+      "linked_medicines": [
+        "M055"
+      ],
+      "drug_class": "Thionamide Antithyroid"
+    },
+    {
+      "id": "SC056",
+      "salt_name": "Amlodipine Besylate",
+      "linked_medicines": [
+        "M056"
+      ],
+      "drug_class": "Calcium Channel Blocker"
+    },
+    {
+      "id": "SC057",
+      "salt_name": "Lisinopril / Enalapril Maleate",
+      "linked_medicines": [
+        "M057"
+      ],
+      "drug_class": "ACE Inhibitor"
+    },
+    {
+      "id": "SC058",
+      "salt_name": "Metoprolol Succinate / Atenolol",
+      "linked_medicines": [
+        "M058"
+      ],
+      "drug_class": "Beta-1 Selective Blocker"
+    },
+    {
+      "id": "SC059",
+      "salt_name": "Furosemide",
+      "linked_medicines": [
+        "M059"
+      ],
+      "drug_class": "Loop Diuretic"
+    },
+    {
+      "id": "SC060",
+      "salt_name": "Atorvastatin Calcium / Rosuvastatin",
+      "linked_medicines": [
+        "M060"
+      ],
+      "drug_class": "HMG-CoA Reductase Inhibitor Statin"
+    },
+    {
+      "id": "SC061",
+      "salt_name": "Allopurinol",
+      "linked_medicines": [
+        "M061"
+      ],
+      "drug_class": "Xanthine Oxidase Inhibitor"
+    },
+    {
+      "id": "SC062",
+      "salt_name": "Colchicine",
+      "linked_medicines": [
+        "M062"
+      ],
+      "drug_class": "Colchicine Antigout"
+    },
+    {
+      "id": "SC063",
+      "salt_name": "Methotrexate",
+      "linked_medicines": [
+        "M063"
+      ],
+      "drug_class": "Antimetabolite DMARD"
+    },
+    {
+      "id": "SC064",
+      "salt_name": "Prednisolone",
+      "linked_medicines": [
+        "M064"
+      ],
+      "drug_class": "Glucocorticoid Systemic"
+    },
+    {
+      "id": "SC065",
+      "salt_name": "Betahistine Dihydrochloride",
+      "linked_medicines": [
+        "M065"
+      ],
+      "drug_class": "Histamine Analogue"
+    },
+    {
+      "id": "SC066",
+      "salt_name": "Cinnarizine / Meclizine Hydrochloride",
+      "linked_medicines": [
+        "M066"
+      ],
+      "drug_class": "Piperazine Antihistamine"
+    },
+    {
+      "id": "SC067",
+      "salt_name": "Promethazine Hydrochloride",
+      "linked_medicines": [
+        "M067"
+      ],
+      "drug_class": "Phenothiazine Antihistamine"
+    },
+    {
+      "id": "SC068",
+      "salt_name": "Melatonin",
+      "linked_medicines": [
+        "M068"
+      ],
+      "drug_class": "Neurohormone Supplement"
+    },
+    {
+      "id": "SC069",
+      "salt_name": "Zolpidem Tartrate",
+      "linked_medicines": [
+        "M069"
+      ],
+      "drug_class": "Non-Benzodiazepine Hypnotic"
+    },
+    {
+      "id": "SC070",
+      "salt_name": "Alprazolam",
+      "linked_medicines": [
+        "M070"
+      ],
+      "drug_class": "Benzodiazepine"
+    },
+    {
+      "id": "SC071",
+      "salt_name": "Sertraline Hydrochloride",
+      "linked_medicines": [
+        "M071"
+      ],
+      "drug_class": "Selective Serotonin Reuptake Inhibitor"
+    },
+    {
+      "id": "SC072",
+      "salt_name": "Escitalopram Oxalate",
+      "linked_medicines": [
+        "M072"
+      ],
+      "drug_class": "Selective Serotonin Reuptake Inhibitor"
+    },
+    {
+      "id": "SC073",
+      "salt_name": "Sodium Chloride 0.9% (Saline)",
+      "linked_medicines": [
+        "M073"
+      ],
+      "drug_class": "Isotonic Saline"
+    },
+    {
+      "id": "SC074",
+      "salt_name": "Xylometazoline Hydrochloride",
+      "linked_medicines": [
+        "M074"
+      ],
+      "drug_class": "Alpha Adrenergic Agonist Nasal"
+    },
+    {
+      "id": "SC075",
+      "salt_name": "Fluticasone Propionate",
+      "linked_medicines": [
+        "M075"
+      ],
+      "drug_class": "Intranasal Corticosteroid"
+    },
+    {
+      "id": "SC076",
+      "salt_name": "Chloramphenicol",
+      "linked_medicines": [
+        "M076"
+      ],
+      "drug_class": "Broad-spectrum Antibiotic"
+    },
+    {
+      "id": "SC077",
+      "salt_name": "Hydroxypropyl Methylcellulose (HPMC)",
+      "linked_medicines": [
+        "M077"
+      ],
+      "drug_class": "Ophthalmic Lubricant"
+    },
+    {
+      "id": "SC078",
+      "salt_name": "Timolol Maleate",
+      "linked_medicines": [
+        "M078"
+      ],
+      "drug_class": "Beta Blocker Ophthalmic"
+    },
+    {
+      "id": "SC079",
+      "salt_name": "Docusate Sodium / H2O2 (Ear)",
+      "linked_medicines": [
+        "M080"
+      ],
+      "drug_class": "Cerumenolytic"
+    },
+    {
+      "id": "SC080",
+      "salt_name": "Mupirocin",
+      "linked_medicines": [
+        "M082"
+      ],
+      "drug_class": "Pseudomonic Acid Antibiotic"
+    },
+    {
+      "id": "SC081",
+      "salt_name": "Silver Sulfadiazine",
+      "linked_medicines": [
+        "M083"
+      ],
+      "drug_class": "Sulfonamide + Silver Topical"
+    },
+    {
+      "id": "SC082",
+      "salt_name": "Povidone-Iodine",
+      "linked_medicines": [
+        "M084"
+      ],
+      "drug_class": "Iodophor Antiseptic"
+    },
+    {
+      "id": "SC083",
+      "salt_name": "Clobetasol Propionate",
+      "linked_medicines": [
+        "M085"
+      ],
+      "drug_class": "Super-potent Topical Corticosteroid"
+    },
+    {
+      "id": "SC084",
+      "salt_name": "Benzyl Benzoate",
+      "linked_medicines": [
+        "M086"
+      ],
+      "drug_class": "Scabicide/Acaricide"
+    },
+    {
+      "id": "SC085",
+      "salt_name": "Coal Tar",
+      "linked_medicines": [
+        "M087"
+      ],
+      "drug_class": "Keratolytic/Antipsoriatic"
+    },
+    {
+      "id": "SC086",
+      "salt_name": "Minoxidil",
+      "linked_medicines": [
+        "M088"
+      ],
+      "drug_class": "Potassium Channel Opener Vasodilator"
+    },
+    {
+      "id": "SC087",
+      "salt_name": "Ketoconazole",
+      "linked_medicines": [
+        "M089"
+      ],
+      "drug_class": "Imidazole Antifungal"
+    },
+    {
+      "id": "SC088",
+      "salt_name": "Nitrofurantoin / Trimethoprim",
+      "linked_medicines": [
+        "M090"
+      ],
+      "drug_class": "Urinary Tract Antibiotic"
+    },
+    {
+      "id": "SC089",
+      "salt_name": "Tamsulosin Hydrochloride",
+      "linked_medicines": [
+        "M091"
+      ],
+      "drug_class": "Selective Alpha-1a Blocker"
+    },
+    {
+      "id": "SC090",
+      "salt_name": "Norethisterone / Mifepristone",
+      "linked_medicines": [
+        "M092"
+      ],
+      "drug_class": "Progestogen / Antiprogestogen"
+    },
+    {
+      "id": "SC091",
+      "salt_name": "Mefenamic Acid",
+      "linked_medicines": [
+        "M093"
+      ],
+      "drug_class": "Fenamate NSAID"
+    },
+    {
+      "id": "SC092",
+      "salt_name": "Conjugated Estrogen + Progestogen",
+      "linked_medicines": [
+        "M095"
+      ],
+      "drug_class": "Combined HRT"
+    },
+    {
+      "id": "SC093",
+      "salt_name": "Dicyclomine Hydrochloride / Mebeverine",
+      "linked_medicines": [
+        "M096"
+      ],
+      "drug_class": "Anticholinergic Antispasmodic"
+    },
+    {
+      "id": "SC094",
+      "salt_name": "Sucralfate",
+      "linked_medicines": [
+        "M097"
+      ],
+      "drug_class": "Cytoprotective Agent"
+    },
+    {
+      "id": "SC095",
+      "salt_name": "Ursodeoxycholic Acid",
+      "linked_medicines": [
+        "M098"
+      ],
+      "drug_class": "Bile Acid Hepatoprotective"
+    },
+    {
+      "id": "SC096",
+      "salt_name": "Silymarin (Silibinin)",
+      "linked_medicines": [
+        "M099"
+      ],
+      "drug_class": "Flavonolignan Hepatoprotective"
+    },
+    {
+      "id": "SC097",
+      "salt_name": "Warfarin Sodium / Clopidogrel",
+      "linked_medicines": [
+        "M100"
+      ],
+      "drug_class": "Vitamin K Antagonist / ADP Inhibitor"
+    },
+    {
+      "id": "SC098",
+      "salt_name": "Lactobacillus acidophilus (Probiotic)",
+      "linked_medicines": [
+        "M102"
+      ],
+      "drug_class": "Probiotic"
+    },
+    {
+      "id": "SC099",
+      "salt_name": "Amitriptyline Hydrochloride",
+      "linked_medicines": [
+        "M106"
+      ],
+      "drug_class": "Tricyclic Antidepressant"
+    },
+    {
+      "id": "SC100",
+      "salt_name": "Gabapentin",
+      "linked_medicines": [
+        "M107"
+      ],
+      "drug_class": "GABA Analogue Anticonvulsant"
+    },
+    {
+      "id": "SC101",
+      "salt_name": "Sumatriptan Succinate",
+      "linked_medicines": [
+        "M108"
+      ],
+      "drug_class": "Serotonin 5-HT1 Agonist Triptan"
+    },
+    {
+      "id": "SC102",
+      "salt_name": "Ergotamine + Caffeine",
+      "linked_medicines": [
+        "M109"
+      ],
+      "drug_class": "Ergot Alkaloid"
+    },
+    {
+      "id": "SC103",
+      "salt_name": "Topiramate",
+      "linked_medicines": [
+        "M110"
+      ],
+      "drug_class": "Sulfamate-substituted Monosaccharide Anticonvulsant"
+    },
+    {
+      "id": "SC104",
+      "salt_name": "Codeine Phosphate",
+      "linked_medicines": [
+        "M111"
+      ],
+      "drug_class": "Opioid Analgesic/Antitussive"
+    },
+    {
+      "id": "SC105",
+      "salt_name": "Benzydamine Hydrochloride",
+      "linked_medicines": [
+        "M112"
+      ],
+      "drug_class": "NSAID Oral Topical"
+    },
+    {
+      "id": "SC106",
+      "salt_name": "Chlorhexidine Gluconate",
+      "linked_medicines": [
+        "M113"
+      ],
+      "drug_class": "Antiseptic Bisbiguanide"
+    },
+    {
+      "id": "SC107",
+      "salt_name": "Salicylic Acid",
+      "linked_medicines": [
+        "M114"
+      ],
+      "drug_class": "Beta-hydroxy Keratolytic"
+    },
+    {
+      "id": "SC108",
+      "salt_name": "Diosmin + Hesperidin",
+      "linked_medicines": [
+        "M115"
+      ],
+      "drug_class": "Flavonoid Phlebotonic"
+    },
+    {
+      "id": "SC109",
+      "salt_name": "Zinc Gluconate / Sulfate",
+      "linked_medicines": [
+        "M103"
+      ],
+      "drug_class": "Trace Mineral Supplement"
+    },
+    {
+      "id": "SC110",
+      "salt_name": "Magnesium Citrate / Oxide",
+      "linked_medicines": [
+        "M104"
+      ],
+      "drug_class": "Mineral Supplement"
+    },
+    {
+      "id": "SC111",
+      "salt_name": "Omega-3 Fatty Acids (EPA + DHA)",
+      "linked_medicines": [
+        "M105"
+      ],
+      "drug_class": "Polyunsaturated Fatty Acid Supplement"
+    }
+  ],
+  "dosage_strengths": {
+    "note": "Dosage strengths are grouped by medicine type. Select based on medicine type dispensed.",
+    "Tablet": [
+      {
+        "label": "Paracetamol 500mg",
+        "medicine_ids": [
+          "M001"
+        ]
+      },
+      {
+        "label": "Paracetamol 650mg",
+        "medicine_ids": [
+          "M001"
+        ]
+      },
+      {
+        "label": "Ibuprofen 200mg",
+        "medicine_ids": [
+          "M002"
+        ]
+      },
+      {
+        "label": "Ibuprofen 400mg",
+        "medicine_ids": [
+          "M002"
+        ]
+      },
+      {
+        "label": "Ibuprofen 600mg",
+        "medicine_ids": [
+          "M002"
+        ]
+      },
+      {
+        "label": "Aspirin 75mg (Cardioprotective)",
+        "medicine_ids": [
+          "M003"
+        ]
+      },
+      {
+        "label": "Aspirin 325mg",
+        "medicine_ids": [
+          "M003"
+        ]
+      },
+      {
+        "label": "Aspirin 500mg",
+        "medicine_ids": [
+          "M003"
+        ]
+      },
+      {
+        "label": "Diclofenac 50mg",
+        "medicine_ids": [
+          "M004"
+        ]
+      },
+      {
+        "label": "Diclofenac 75mg SR",
+        "medicine_ids": [
+          "M004"
+        ]
+      },
+      {
+        "label": "Cetirizine 5mg",
+        "medicine_ids": [
+          "M006"
+        ]
+      },
+      {
+        "label": "Cetirizine 10mg",
+        "medicine_ids": [
+          "M006"
+        ]
+      },
+      {
+        "label": "Loratadine 10mg",
+        "medicine_ids": [
+          "M007"
+        ]
+      },
+      {
+        "label": "Fexofenadine 120mg",
+        "medicine_ids": [
+          "M008"
+        ]
+      },
+      {
+        "label": "Fexofenadine 180mg",
+        "medicine_ids": [
+          "M008"
+        ]
+      },
+      {
+        "label": "Chlorpheniramine 4mg",
+        "medicine_ids": [
+          "M009"
+        ]
+      },
+      {
+        "label": "Metronidazole 200mg",
+        "medicine_ids": [
+          "M024"
+        ]
+      },
+      {
+        "label": "Metronidazole 400mg",
+        "medicine_ids": [
+          "M024"
+        ]
+      },
+      {
+        "label": "Amoxicillin 250mg",
+        "medicine_ids": [
+          "M028"
+        ]
+      },
+      {
+        "label": "Amoxicillin 500mg",
+        "medicine_ids": [
+          "M028"
+        ]
+      },
+      {
+        "label": "Azithromycin 250mg",
+        "medicine_ids": [
+          "M029"
+        ]
+      },
+      {
+        "label": "Azithromycin 500mg",
+        "medicine_ids": [
+          "M029"
+        ]
+      },
+      {
+        "label": "Ciprofloxacin 250mg",
+        "medicine_ids": [
+          "M030"
+        ]
+      },
+      {
+        "label": "Ciprofloxacin 500mg",
+        "medicine_ids": [
+          "M030"
+        ]
+      },
+      {
+        "label": "Metformin 500mg",
+        "medicine_ids": [
+          "M051"
+        ]
+      },
+      {
+        "label": "Metformin 850mg",
+        "medicine_ids": [
+          "M051"
+        ]
+      },
+      {
+        "label": "Metformin 1000mg",
+        "medicine_ids": [
+          "M051"
+        ]
+      },
+      {
+        "label": "Amlodipine 2.5mg",
+        "medicine_ids": [
+          "M056"
+        ]
+      },
+      {
+        "label": "Amlodipine 5mg",
+        "medicine_ids": [
+          "M056"
+        ]
+      },
+      {
+        "label": "Amlodipine 10mg",
+        "medicine_ids": [
+          "M056"
+        ]
+      },
+      {
+        "label": "Atorvastatin 10mg",
+        "medicine_ids": [
+          "M060"
+        ]
+      },
+      {
+        "label": "Atorvastatin 20mg",
+        "medicine_ids": [
+          "M060"
+        ]
+      },
+      {
+        "label": "Atorvastatin 40mg",
+        "medicine_ids": [
+          "M060"
+        ]
+      },
+      {
+        "label": "Omeprazole 10mg",
+        "medicine_ids": [
+          "M016"
+        ]
+      },
+      {
+        "label": "Omeprazole 20mg",
+        "medicine_ids": [
+          "M016"
+        ]
+      },
+      {
+        "label": "Omeprazole 40mg",
+        "medicine_ids": [
+          "M016"
+        ]
+      },
+      {
+        "label": "Pantoprazole 20mg",
+        "medicine_ids": [
+          "M017"
+        ]
+      },
+      {
+        "label": "Pantoprazole 40mg",
+        "medicine_ids": [
+          "M017"
+        ]
+      },
+      {
+        "label": "Levothyroxine 25mcg",
+        "medicine_ids": [
+          "M054"
+        ]
+      },
+      {
+        "label": "Levothyroxine 50mcg",
+        "medicine_ids": [
+          "M054"
+        ]
+      },
+      {
+        "label": "Levothyroxine 100mcg",
+        "medicine_ids": [
+          "M054"
+        ]
+      },
+      {
+        "label": "Allopurinol 100mg",
+        "medicine_ids": [
+          "M061"
+        ]
+      },
+      {
+        "label": "Allopurinol 300mg",
+        "medicine_ids": [
+          "M061"
+        ]
+      },
+      {
+        "label": "Prednisolone 5mg",
+        "medicine_ids": [
+          "M064"
+        ]
+      },
+      {
+        "label": "Prednisolone 10mg",
+        "medicine_ids": [
+          "M064"
+        ]
+      },
+      {
+        "label": "Prednisolone 20mg",
+        "medicine_ids": [
+          "M064"
+        ]
+      },
+      {
+        "label": "Mefenamic Acid 250mg",
+        "medicine_ids": [
+          "M093"
+        ]
+      },
+      {
+        "label": "Mefenamic Acid 500mg",
+        "medicine_ids": [
+          "M093"
+        ]
+      },
+      {
+        "label": "Sertraline 25mg",
+        "medicine_ids": [
+          "M071"
+        ]
+      },
+      {
+        "label": "Sertraline 50mg",
+        "medicine_ids": [
+          "M071"
+        ]
+      },
+      {
+        "label": "Sertraline 100mg",
+        "medicine_ids": [
+          "M071"
+        ]
+      },
+      {
+        "label": "Metoprolol 25mg",
+        "medicine_ids": [
+          "M058"
+        ]
+      },
+      {
+        "label": "Metoprolol 50mg",
+        "medicine_ids": [
+          "M058"
+        ]
+      },
+      {
+        "label": "Atenolol 25mg",
+        "medicine_ids": [
+          "M058"
+        ]
+      },
+      {
+        "label": "Atenolol 50mg",
+        "medicine_ids": [
+          "M058"
+        ]
+      },
+      {
+        "label": "Famotidine 20mg",
+        "medicine_ids": [
+          "M018"
+        ]
+      },
+      {
+        "label": "Famotidine 40mg",
+        "medicine_ids": [
+          "M018"
+        ]
+      },
+      {
+        "label": "Montelukast 5mg (Child)",
+        "medicine_ids": [
+          "M014"
+        ]
+      },
+      {
+        "label": "Montelukast 10mg (Adult)",
+        "medicine_ids": [
+          "M014"
+        ]
+      },
+      {
+        "label": "Betahistine 8mg",
+        "medicine_ids": [
+          "M065"
+        ]
+      },
+      {
+        "label": "Betahistine 16mg",
+        "medicine_ids": [
+          "M065"
+        ]
+      },
+      {
+        "label": "Diosmin 450mg + Hesperidin 50mg",
+        "medicine_ids": [
+          "M115"
+        ]
+      }
+    ],
+    "Capsule": [
+      {
+        "label": "Amoxicillin 250mg Capsule",
+        "medicine_ids": [
+          "M028"
+        ]
+      },
+      {
+        "label": "Amoxicillin 500mg Capsule",
+        "medicine_ids": [
+          "M028"
+        ]
+      },
+      {
+        "label": "Gabapentin 100mg",
+        "medicine_ids": [
+          "M107"
+        ]
+      },
+      {
+        "label": "Gabapentin 300mg",
+        "medicine_ids": [
+          "M107"
+        ]
+      },
+      {
+        "label": "Gabapentin 400mg",
+        "medicine_ids": [
+          "M107"
+        ]
+      },
+      {
+        "label": "Vitamin D3 1000 IU",
+        "medicine_ids": [
+          "M047"
+        ]
+      },
+      {
+        "label": "Vitamin D3 60000 IU (Weekly)",
+        "medicine_ids": [
+          "M047"
+        ]
+      },
+      {
+        "label": "Vitamin B12 500mcg",
+        "medicine_ids": [
+          "M046"
+        ]
+      },
+      {
+        "label": "Vitamin B12 1000mcg",
+        "medicine_ids": [
+          "M046"
+        ]
+      },
+      {
+        "label": "Omeprazole 20mg Capsule",
+        "medicine_ids": [
+          "M016"
+        ]
+      },
+      {
+        "label": "Fluconazole 50mg",
+        "medicine_ids": [
+          "M037"
+        ]
+      },
+      {
+        "label": "Fluconazole 150mg Single Dose",
+        "medicine_ids": [
+          "M037"
+        ]
+      },
+      {
+        "label": "Probiotics 1 Billion CFU",
+        "medicine_ids": [
+          "M102"
+        ]
+      },
+      {
+        "label": "Probiotics 5 Billion CFU",
+        "medicine_ids": [
+          "M102"
+        ]
+      },
+      {
+        "label": "Omega-3 500mg (EPA+DHA)",
+        "medicine_ids": [
+          "M105"
+        ]
+      },
+      {
+        "label": "Omega-3 1000mg (EPA+DHA)",
+        "medicine_ids": [
+          "M105"
+        ]
+      },
+      {
+        "label": "Tamsulosin 0.4mg",
+        "medicine_ids": [
+          "M091"
+        ]
+      }
+    ],
+    "Syrup": [
+      {
+        "label": "Paracetamol 125mg/5ml (Paediatric)",
+        "medicine_ids": [
+          "M001"
+        ]
+      },
+      {
+        "label": "Paracetamol 250mg/5ml",
+        "medicine_ids": [
+          "M001"
+        ]
+      },
+      {
+        "label": "Ambroxol 15mg/5ml",
+        "medicine_ids": [
+          "M011"
+        ]
+      },
+      {
+        "label": "Ambroxol 30mg/5ml",
+        "medicine_ids": [
+          "M011"
+        ]
+      },
+      {
+        "label": "Dextromethorphan 10mg/5ml",
+        "medicine_ids": [
+          "M010"
+        ]
+      },
+      {
+        "label": "Lactulose 10g/15ml",
+        "medicine_ids": [
+          "M025"
+        ]
+      },
+      {
+        "label": "Domperidone 5mg/5ml",
+        "medicine_ids": [
+          "M020"
+        ]
+      },
+      {
+        "label": "Iron Syrup 25mg/5ml (Paediatric)",
+        "medicine_ids": [
+          "M045"
+        ]
+      },
+      {
+        "label": "Cetirizine Syrup 5mg/5ml",
+        "medicine_ids": [
+          "M006"
+        ]
+      },
+      {
+        "label": "Promethazine 5mg/5ml",
+        "medicine_ids": [
+          "M067"
+        ]
+      }
+    ],
+    "Inhaler": [
+      {
+        "label": "Salbutamol MDI 100mcg/dose",
+        "medicine_ids": [
+          "M013"
+        ]
+      },
+      {
+        "label": "Budesonide 100mcg/dose",
+        "medicine_ids": [
+          "M015"
+        ]
+      },
+      {
+        "label": "Budesonide 200mcg/dose",
+        "medicine_ids": [
+          "M015"
+        ]
+      },
+      {
+        "label": "Budesonide 400mcg/dose",
+        "medicine_ids": [
+          "M015"
+        ]
+      }
+    ],
+    "Cream_Gel_Ointment": [
+      {
+        "label": "Clotrimazole Cream 1%",
+        "medicine_ids": [
+          "M036"
+        ]
+      },
+      {
+        "label": "Betamethasone Cream 0.1%",
+        "medicine_ids": [
+          "M039"
+        ]
+      },
+      {
+        "label": "Hydrocortisone Cream 0.5%",
+        "medicine_ids": [
+          "M040"
+        ]
+      },
+      {
+        "label": "Hydrocortisone Cream 1%",
+        "medicine_ids": [
+          "M040"
+        ]
+      },
+      {
+        "label": "Terbinafine Cream 1%",
+        "medicine_ids": [
+          "M038"
+        ]
+      },
+      {
+        "label": "Mupirocin Ointment 2%",
+        "medicine_ids": [
+          "M082"
+        ]
+      },
+      {
+        "label": "Permethrin Cream 5%",
+        "medicine_ids": [
+          "M042"
+        ]
+      },
+      {
+        "label": "Silver Sulfadiazine Cream 1%",
+        "medicine_ids": [
+          "M083"
+        ]
+      },
+      {
+        "label": "Clobetasol Cream 0.05%",
+        "medicine_ids": [
+          "M085"
+        ]
+      },
+      {
+        "label": "Diclofenac Gel 1%",
+        "medicine_ids": [
+          "M081"
+        ]
+      },
+      {
+        "label": "Diclofenac Gel 2%",
+        "medicine_ids": [
+          "M081"
+        ]
+      },
+      {
+        "label": "Acyclovir Cream 5%",
+        "medicine_ids": [
+          "M043"
+        ]
+      }
+    ],
+    "Eye_Drops": [
+      {
+        "label": "Chloramphenicol Eye Drops 0.5%",
+        "medicine_ids": [
+          "M076"
+        ]
+      },
+      {
+        "label": "Artificial Tears 0.3% HPMC",
+        "medicine_ids": [
+          "M077"
+        ]
+      },
+      {
+        "label": "Artificial Tears 0.5% HPMC",
+        "medicine_ids": [
+          "M077"
+        ]
+      },
+      {
+        "label": "Timolol Eye Drops 0.25%",
+        "medicine_ids": [
+          "M078"
+        ]
+      },
+      {
+        "label": "Timolol Eye Drops 0.5%",
+        "medicine_ids": [
+          "M078"
+        ]
+      }
+    ],
+    "Ear_Drops": [
+      {
+        "label": "Ciprofloxacin Ear Drops 0.3%",
+        "medicine_ids": [
+          "M079"
+        ]
+      },
+      {
+        "label": "Ear Wax Softener H2O2 3%",
+        "medicine_ids": [
+          "M080"
+        ]
+      }
+    ],
+    "Nasal_Spray_Drops": [
+      {
+        "label": "Saline Nasal Spray Isotonic",
+        "medicine_ids": [
+          "M073"
+        ]
+      },
+      {
+        "label": "Xylometazoline 0.05% Child",
+        "medicine_ids": [
+          "M074"
+        ]
+      },
+      {
+        "label": "Xylometazoline 0.1% Adult",
+        "medicine_ids": [
+          "M074"
+        ]
+      },
+      {
+        "label": "Fluticasone Nasal Spray 50mcg/spray",
+        "medicine_ids": [
+          "M075"
+        ]
+      }
+    ],
+    "Injection": [
+      {
+        "label": "Ceftriaxone 250mg/vial",
+        "medicine_ids": [
+          "M031"
+        ]
+      },
+      {
+        "label": "Ceftriaxone 500mg/vial",
+        "medicine_ids": [
+          "M031"
+        ]
+      },
+      {
+        "label": "Ceftriaxone 1g/vial",
+        "medicine_ids": [
+          "M031"
+        ]
+      },
+      {
+        "label": "Ondansetron 4mg/2ml",
+        "medicine_ids": [
+          "M021"
+        ]
+      },
+      {
+        "label": "Ondansetron 8mg/4ml",
+        "medicine_ids": [
+          "M021"
+        ]
+      },
+      {
+        "label": "Insulin Regular 100 IU/ml",
+        "medicine_ids": [
+          "M053"
+        ]
+      },
+      {
+        "label": "Vitamin B12 1mg/ml",
+        "medicine_ids": [
+          "M046"
+        ]
+      }
+    ],
+    "Powder_Sachet": [
+      {
+        "label": "ORS Sachet WHO Formula 27.9g",
+        "medicine_ids": [
+          "M022"
+        ]
+      },
+      {
+        "label": "ORS Sachet Low Osmolarity 245 mOsm",
+        "medicine_ids": [
+          "M022"
+        ]
+      },
+      {
+        "label": "Ispaghula Husk Sachet 3.5g",
+        "medicine_ids": [
+          "M027"
+        ]
+      }
+    ],
+    "Lotion_Solution_Shampoo": [
+      {
+        "label": "Calamine Lotion Standard",
+        "medicine_ids": [
+          "M041"
+        ]
+      },
+      {
+        "label": "Benzyl Benzoate Lotion 25%",
+        "medicine_ids": [
+          "M086"
+        ]
+      },
+      {
+        "label": "Minoxidil Solution 2%",
+        "medicine_ids": [
+          "M088"
+        ]
+      },
+      {
+        "label": "Minoxidil Solution 5%",
+        "medicine_ids": [
+          "M088"
+        ]
+      },
+      {
+        "label": "Ketoconazole Shampoo 2%",
+        "medicine_ids": [
+          "M089"
+        ]
+      },
+      {
+        "label": "Coal Tar Shampoo 2-5%",
+        "medicine_ids": [
+          "M087"
+        ]
+      },
+      {
+        "label": "Salicylic Acid Solution 10%",
+        "medicine_ids": [
+          "M114"
+        ]
+      },
+      {
+        "label": "Povidone-Iodine Solution 10%",
+        "medicine_ids": [
+          "M084"
+        ]
+      }
+    ],
+    "Mouthwash": [
+      {
+        "label": "Benzydamine Mouthwash 0.15%",
+        "medicine_ids": [
+          "M112"
+        ]
+      },
+      {
+        "label": "Chlorhexidine Mouthwash 0.2%",
+        "medicine_ids": [
+          "M113"
+        ]
+      }
+    ]
+  },
+  "usage_guidelines": {
+    "note": "Usage guidelines are grouped by medicine type. Apply the relevant set when dispensing.",
+    "Tablet_Capsule": [
+      "Take with a full glass of water",
+      "Take after meals to reduce GI irritation (NSAIDs, antibiotics, iron)",
+      "Take on an empty stomach 30-60 min before meals (PPIs, Levothyroxine)",
+      "Do not crush or chew enteric-coated or SR tablets",
+      "Take at the same time daily for chronic medications",
+      "Complete the full antibiotic course even if symptoms improve",
+      "Avoid alcohol during treatment",
+      "Do not double-dose if a dose is missed - skip and continue schedule",
+      "Swallow capsules whole with water - do not open unless instructed",
+      "Store at room temperature away from sunlight and moisture",
+      "Space Calcium + Thyroid medication doses by at least 4 hours",
+      "Do not stop blood pressure, thyroid or diabetes medicines without doctor advice"
+    ],
+    "Syrup": [
+      "Shake well before each use",
+      "Use the measuring spoon or cup provided for accurate dosing",
+      "Do not dilute unless specifically instructed",
+      "Refrigerate after opening if label advises",
+      "Discard opened bottle within 14 days",
+      "Give children only paediatric-appropriate doses per weight or age",
+      "Do not share the measuring spoon between patients"
+    ],
+    "Inhaler": [
+      "Shake MDI canister well before each use",
+      "Exhale fully before placing mouthpiece in mouth",
+      "Press canister down firmly as you begin to inhale slowly and deeply",
+      "Hold breath for 10 seconds after inhalation then exhale slowly",
+      "Rinse mouth with water after using corticosteroid inhaler to prevent oral thrush",
+      "Clean mouthpiece weekly with a dry cloth",
+      "Use a spacer device for children and elderly patients",
+      "Keep rescue inhaler accessible at all times",
+      "Monitor dose counter and replace inhaler before reaching zero",
+      "Wait 1 minute between puffs if more than one dose is prescribed"
+    ],
+    "Cream_Gel_Ointment": [
+      "Apply a thin layer to the affected area only",
+      "Wash hands thoroughly before and after application",
+      "Do not apply to broken or infected skin unless it is a wound-specific product",
+      "Avoid contact with eyes, nostrils, and mouth",
+      "Do not cover with airtight dressing unless specifically advised",
+      "Apply 2-3 times daily or as directed on the label",
+      "Do not use potent corticosteroid cream on face, groin, or underarms long-term",
+      "For antifungal creams, continue for 7 days after symptoms resolve to prevent relapse",
+      "Do not stop steroid cream abruptly after prolonged use - taper as advised"
+    ],
+    "Eye_Drops": [
+      "Wash hands thoroughly before instilling eye drops",
+      "Tilt head back and gently pull lower eyelid down to create a pocket",
+      "Do not let dropper tip touch the eye or any surface to prevent contamination",
+      "Wait at least 5 minutes between instillation of different eye drops",
+      "Press gently on the inner corner of the eye for 1 minute after instillation",
+      "Discard opened bottle after 28 days even if solution remains",
+      "Remove contact lenses before use and reinsert after 15 minutes",
+      "Store in a cool dry place - some formulations require refrigeration"
+    ],
+    "Ear_Drops": [
+      "Warm the bottle gently in your hands for 1-2 minutes before use",
+      "Lie down with the affected ear facing upward",
+      "For adults pull earlobe gently back and upward to straighten the canal",
+      "For children pull earlobe gently back and downward",
+      "Instill the prescribed number of drops and remain in position for 5-10 minutes",
+      "Plug ear lightly with a small cotton ball if instructed",
+      "Do not use ear drops if eardrum perforation is suspected unless specifically prescribed",
+      "Complete the full prescribed course even if symptoms resolve early"
+    ],
+    "Nasal_Spray_Drops": [
+      "Blow nose gently before use to clear nasal passages",
+      "Shake nasal spray before each use",
+      "Prime the spray pump before first use by pressing several times",
+      "Tilt head slightly forward during instillation for nasal drops",
+      "Breathe in gently through the nose while pressing the spray",
+      "Do not tilt head back after spraying to avoid swallowing",
+      "Do not use decongestant nasal spray for more than 3-5 days - risk of rebound congestion",
+      "Clean the nasal spray tip with a clean tissue after each use",
+      "Do not share nasal sprays between patients"
+    ],
+    "Injection": [
+      "Administer only by a trained healthcare professional",
+      "Verify dosage strength and check patient allergy history before administration",
+      "Use strict aseptic technique at the injection site",
+      "Rotate injection sites for insulin - use abdomen, thigh or upper arm",
+      "Do not share needles or syringes under any circumstances",
+      "Discard used needles immediately in a sharps disposal container",
+      "Observe patient for at least 30 minutes after injection for allergic reactions",
+      "Check insulin vial for clarity - do not use if cloudy or discoloured unless expected"
+    ],
+    "Powder_Sachet_Oral_Liquid": [
+      "Dissolve the sachet in the prescribed volume of clean drinking water only",
+      "Do not use fruit juice, milk, or carbonated beverages for dissolving ORS",
+      "Stir thoroughly until the powder is fully dissolved before consuming",
+      "Consume the prepared solution within 1 hour of preparation",
+      "Store unmixed sachets at room temperature in a dry place",
+      "For ORS in diarrhoea give small sips frequently rather than large amounts at once",
+      "Offer children ORS solution using a spoon or cup not a bottle"
+    ],
+    "Lotion_Shampoo": [
+      "For shampoo wet hair thoroughly then apply and massage into the scalp",
+      "Leave medicated shampoo on for 3-5 minutes before rinsing thoroughly",
+      "For body lotion or scabicide apply to the entire body from neck downward on clean dry skin",
+      "Leave scabicide lotion on for 8-12 hours typically overnight then wash off",
+      "Do not apply to the face or mucous membranes unless specifically instructed",
+      "Wash all clothing bedding and towels in hot water after scabicide treatment",
+      "Repeat scabicide application after 7 days if advised"
+    ],
+    "Mouthwash": [
+      "Do not eat or drink for at least 30 minutes before and after using mouthwash",
+      "Measure the correct volume using the cap provided",
+      "Swish vigorously in the mouth for 30 seconds then spit out - do not swallow",
+      "Dilute with equal amount of water if mouth is sensitive",
+      "Do not use chlorhexidine mouthwash for more than 2 consecutive weeks",
+      "Avoid using immediately after brushing teeth to preserve effectiveness"
+    ]
+  },
+  "side_effects": [
+    {
+      "id": "SE001",
+      "effect": "Nausea",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M002",
+        "M003",
+        "M004",
+        "M028",
+        "M029",
+        "M030",
+        "M051",
+        "M024"
+      ]
+    },
+    {
+      "id": "SE002",
+      "effect": "Vomiting",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M030",
+        "M024",
+        "M004",
+        "M029"
+      ]
+    },
+    {
+      "id": "SE003",
+      "effect": "Diarrhea",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M028",
+        "M029",
+        "M030",
+        "M051",
+        "M024"
+      ]
+    },
+    {
+      "id": "SE004",
+      "effect": "Constipation",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M023",
+        "M019",
+        "M066",
+        "M048"
+      ]
+    },
+    {
+      "id": "SE005",
+      "effect": "Stomach Pain / GI Upset",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M002",
+        "M003",
+        "M004",
+        "M005",
+        "M093"
+      ]
+    },
+    {
+      "id": "SE006",
+      "effect": "Gastric Ulcer / GI Bleeding",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M002",
+        "M003",
+        "M004",
+        "M005"
+      ]
+    },
+    {
+      "id": "SE007",
+      "effect": "Headache",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M056",
+        "M016",
+        "M017",
+        "M060",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE008",
+      "effect": "Dizziness / Lightheadedness",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M066",
+        "M067",
+        "M070",
+        "M065",
+        "M058"
+      ]
+    },
+    {
+      "id": "SE009",
+      "effect": "Drowsiness / Sedation",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M009",
+        "M066",
+        "M067",
+        "M070",
+        "M069",
+        "M106"
+      ]
+    },
+    {
+      "id": "SE010",
+      "effect": "Dry Mouth",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M009",
+        "M070",
+        "M106",
+        "M067",
+        "M074"
+      ]
+    },
+    {
+      "id": "SE011",
+      "effect": "Skin Rash / Urticaria",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M028",
+        "M029",
+        "M024",
+        "M033",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE012",
+      "effect": "Anaphylaxis (Severe Allergy)",
+      "severity": "critical",
+      "commonly_linked_medicines": [
+        "M028",
+        "M031",
+        "M064",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE013",
+      "effect": "Photosensitivity (Sun Sensitivity)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M032",
+        "M030",
+        "M034",
+        "M062"
+      ]
+    },
+    {
+      "id": "SE014",
+      "effect": "Muscle Pain / Myopathy",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M060",
+        "M063",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE015",
+      "effect": "Liver Enzyme Elevation / Hepatotoxicity",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M063",
+        "M060",
+        "M001",
+        "M024",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE016",
+      "effect": "Kidney Damage (Nephrotoxicity)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M002",
+        "M003",
+        "M004",
+        "M030",
+        "M031"
+      ]
+    },
+    {
+      "id": "SE017",
+      "effect": "Hypokalemia (Low Potassium)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M059",
+        "M013"
+      ]
+    },
+    {
+      "id": "SE018",
+      "effect": "Hypoglycemia (Low Blood Sugar)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M052",
+        "M053",
+        "M051"
+      ]
+    },
+    {
+      "id": "SE019",
+      "effect": "Increased Blood Pressure",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M002",
+        "M004",
+        "M064",
+        "M074"
+      ]
+    },
+    {
+      "id": "SE020",
+      "effect": "Tachycardia / Heart Rate Increase",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M013",
+        "M045",
+        "M055",
+        "M074"
+      ]
+    },
+    {
+      "id": "SE021",
+      "effect": "Bradycardia (Slow Heart Rate)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M058",
+        "M078"
+      ]
+    },
+    {
+      "id": "SE022",
+      "effect": "Dry Cough (ACE Inhibitor)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M057"
+      ]
+    },
+    {
+      "id": "SE023",
+      "effect": "Ankle Swelling / Edema",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M056",
+        "M064",
+        "M095"
+      ]
+    },
+    {
+      "id": "SE024",
+      "effect": "Fatigue / Weakness",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M058",
+        "M060",
+        "M071",
+        "M072"
+      ]
+    },
+    {
+      "id": "SE025",
+      "effect": "Insomnia / Sleep Disturbance",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M013",
+        "M045",
+        "M055",
+        "M071"
+      ]
+    },
+    {
+      "id": "SE026",
+      "effect": "Weight Gain",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M064",
+        "M070",
+        "M051",
+        "M069"
+      ]
+    },
+    {
+      "id": "SE027",
+      "effect": "Weight Loss / Appetite Loss",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M063",
+        "M110",
+        "M071"
+      ]
+    },
+    {
+      "id": "SE028",
+      "effect": "Bone Density Loss (Osteoporosis Risk)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M064",
+        "M015",
+        "M063"
+      ]
+    },
+    {
+      "id": "SE029",
+      "effect": "Menstrual Irregularity",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M064",
+        "M092",
+        "M071",
+        "M072"
+      ]
+    },
+    {
+      "id": "SE030",
+      "effect": "Sexual Dysfunction",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M071",
+        "M072",
+        "M058",
+        "M091"
+      ]
+    },
+    {
+      "id": "SE031",
+      "effect": "Hair Loss (Drug-induced)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M063",
+        "M100",
+        "M054"
+      ]
+    },
+    {
+      "id": "SE032",
+      "effect": "Metallic Taste in Mouth",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M024",
+        "M051",
+        "M061",
+        "M113"
+      ]
+    },
+    {
+      "id": "SE033",
+      "effect": "Oral Candidiasis (Thrush)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M015",
+        "M064"
+      ]
+    },
+    {
+      "id": "SE034",
+      "effect": "Tendon Rupture Risk",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M030"
+      ]
+    },
+    {
+      "id": "SE035",
+      "effect": "CNS Effects (Confusion / Seizures)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M030",
+        "M024",
+        "M107",
+        "M106"
+      ]
+    },
+    {
+      "id": "SE036",
+      "effect": "Peripheral Neuropathy (Drug-induced)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M024",
+        "M030",
+        "M063"
+      ]
+    },
+    {
+      "id": "SE037",
+      "effect": "Vitamin B12 Deficiency (Long-term PPI/Metformin)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M051",
+        "M016",
+        "M017"
+      ]
+    },
+    {
+      "id": "SE038",
+      "effect": "Lactic Acidosis",
+      "severity": "critical",
+      "commonly_linked_medicines": [
+        "M051"
+      ]
+    },
+    {
+      "id": "SE039",
+      "effect": "Thyroid Dysfunction (Drug-induced)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M100",
+        "M060"
+      ]
+    },
+    {
+      "id": "SE040",
+      "effect": "Adrenal Suppression",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M064",
+        "M039",
+        "M085",
+        "M015"
+      ]
+    },
+    {
+      "id": "SE041",
+      "effect": "Skin Thinning / Atrophy (Topical Steroid)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M039",
+        "M085",
+        "M040"
+      ]
+    },
+    {
+      "id": "SE042",
+      "effect": "Stinging / Burning Sensation (Local)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M036",
+        "M038",
+        "M082",
+        "M084",
+        "M113"
+      ]
+    },
+    {
+      "id": "SE043",
+      "effect": "Rebound Nasal Congestion (Rhinitis Medicamentosa)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M074"
+      ]
+    },
+    {
+      "id": "SE044",
+      "effect": "Eye Irritation (Local)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M076",
+        "M077",
+        "M078"
+      ]
+    },
+    {
+      "id": "SE045",
+      "effect": "Increased Intraocular Pressure",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M064",
+        "M039",
+        "M085"
+      ]
+    },
+    {
+      "id": "SE046",
+      "effect": "Urinary Retention",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M009",
+        "M067",
+        "M106"
+      ]
+    },
+    {
+      "id": "SE047",
+      "effect": "Blurred Vision (Drug-induced)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M009",
+        "M067",
+        "M070",
+        "M106"
+      ]
+    },
+    {
+      "id": "SE048",
+      "effect": "Photosensitivity Rash",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M032",
+        "M030",
+        "M006"
+      ]
+    },
+    {
+      "id": "SE049",
+      "effect": "QT Prolongation (Cardiac Risk)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M029",
+        "M030",
+        "M071",
+        "M072"
+      ]
+    },
+    {
+      "id": "SE050",
+      "effect": "Withdrawal Symptoms / Dependence",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M070",
+        "M069",
+        "M104",
+        "M111"
+      ]
+    },
+    {
+      "id": "SE051",
+      "effect": "Hypertension (Paradoxical / Drug-induced)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M002",
+        "M004",
+        "M064",
+        "M074"
+      ]
+    },
+    {
+      "id": "SE052",
+      "effect": "Flushing / Hot Sensation",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M056",
+        "M045",
+        "M060"
+      ]
+    },
+    {
+      "id": "SE053",
+      "effect": "Muscle Cramps",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M059",
+        "M013",
+        "M060"
+      ]
+    },
+    {
+      "id": "SE054",
+      "effect": "Increased Appetite",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M064",
+        "M107"
+      ]
+    },
+    {
+      "id": "SE055",
+      "effect": "Mood Changes / Depression",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M064",
+        "M058",
+        "M095"
+      ]
+    },
+    {
+      "id": "SE056",
+      "effect": "Serotonin Syndrome",
+      "severity": "critical",
+      "commonly_linked_medicines": [
+        "M071",
+        "M072",
+        "M106"
+      ]
+    },
+    {
+      "id": "SE057",
+      "effect": "Antibiotic-Associated Colitis (C. difficile)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M028",
+        "M029",
+        "M024",
+        "M033",
+        "M030"
+      ]
+    },
+    {
+      "id": "SE058",
+      "effect": "Teeth Discoloration (Paediatric Tetracycline)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M032"
+      ]
+    },
+    {
+      "id": "SE059",
+      "effect": "Hearing Loss (Ototoxicity)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M059",
+        "M031"
+      ]
+    },
+    {
+      "id": "SE060",
+      "effect": "Injection Site Reaction (Pain / Swelling)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M031",
+        "M053",
+        "M046"
+      ]
+    },
+    {
+      "id": "SE061",
+      "effect": "Hyponatremia (Low Sodium)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M059",
+        "M071",
+        "M072"
+      ]
+    },
+    {
+      "id": "SE062",
+      "effect": "Blood Thinning / Bleeding Risk",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M100",
+        "M003",
+        "M002",
+        "M004"
+      ]
+    },
+    {
+      "id": "SE063",
+      "effect": "Gynecomastia in Males",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M016",
+        "M017",
+        "M020"
+      ]
+    },
+    {
+      "id": "SE064",
+      "effect": "Agranulocytosis (Low WBC)",
+      "severity": "critical",
+      "commonly_linked_medicines": [
+        "M055",
+        "M063"
+      ]
+    },
+    {
+      "id": "SE065",
+      "effect": "Dark / Discolored Urine",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M024",
+        "M045",
+        "M032"
+      ]
+    },
+    {
+      "id": "SE066",
+      "effect": "Flatulence / Gas",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M051",
+        "M027",
+        "M025"
+      ]
+    },
+    {
+      "id": "SE067",
+      "effect": "Bloating / Abdominal Fullness",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M027",
+        "M025",
+        "M019",
+        "M051"
+      ]
+    },
+    {
+      "id": "SE068",
+      "effect": "Hypertrichosis (Excess Hair Growth)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M088"
+      ]
+    },
+    {
+      "id": "SE069",
+      "effect": "Acne / Skin Breakout",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M064",
+        "M095",
+        "M092"
+      ]
+    },
+    {
+      "id": "SE070",
+      "effect": "Perioral Dermatitis",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M039",
+        "M085"
+      ]
+    },
+    {
+      "id": "SE071",
+      "effect": "Worsening of Asthma (Bronchospasm)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M003",
+        "M058",
+        "M002"
+      ]
+    },
+    {
+      "id": "SE072",
+      "effect": "Hypercalcemia (Too Much Calcium)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M048",
+        "M047"
+      ]
+    },
+    {
+      "id": "SE073",
+      "effect": "Gout Flare (Initial Treatment Paradox)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M061"
+      ]
+    },
+    {
+      "id": "SE074",
+      "effect": "Hemolytic Anemia",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M033",
+        "M024"
+      ]
+    },
+    {
+      "id": "SE075",
+      "effect": "Stevens-Johnson Syndrome (Rare)",
+      "severity": "critical",
+      "commonly_linked_medicines": [
+        "M033",
+        "M024",
+        "M110"
+      ]
+    },
+    {
+      "id": "SE076",
+      "effect": "Reduced White Blood Cell Count",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M063",
+        "M055",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE077",
+      "effect": "Pancreatitis (Rare)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M051",
+        "M029",
+        "M100"
+      ]
+    },
+    {
+      "id": "SE078",
+      "effect": "Peripheral Edema",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M056",
+        "M107",
+        "M064"
+      ]
+    },
+    {
+      "id": "SE079",
+      "effect": "Urinary Frequency Increase",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M059",
+        "M057"
+      ]
+    },
+    {
+      "id": "SE080",
+      "effect": "Nasal Irritation / Epistaxis (Nasal Spray)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M075",
+        "M074",
+        "M073"
+      ]
+    },
+    {
+      "id": "SE081",
+      "effect": "Heartburn (Paradoxical from Supplements)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M048",
+        "M047",
+        "M045"
+      ]
+    },
+    {
+      "id": "SE082",
+      "effect": "Dry Eyes (Drug-induced)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M058",
+        "M078"
+      ]
+    },
+    {
+      "id": "SE083",
+      "effect": "Increased Blood Glucose",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M064",
+        "M013",
+        "M055"
+      ]
+    },
+    {
+      "id": "SE084",
+      "effect": "Hyperuricemia (Raised Uric Acid)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M059",
+        "M003"
+      ]
+    },
+    {
+      "id": "SE085",
+      "effect": "Facial Flushing",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M056",
+        "M100",
+        "M045"
+      ]
+    },
+    {
+      "id": "SE086",
+      "effect": "Leg Cramps at Night",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M059",
+        "M058"
+      ]
+    },
+    {
+      "id": "SE087",
+      "effect": "Photophobia / Eye Sensitivity (Ocular Drops)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M078",
+        "M076"
+      ]
+    },
+    {
+      "id": "SE088",
+      "effect": "Scalp Irritation / Dryness (Shampoo)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M089",
+        "M087",
+        "M088"
+      ]
+    },
+    {
+      "id": "SE089",
+      "effect": "Transient Hearing Disturbance",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M065",
+        "M080"
+      ]
+    },
+    {
+      "id": "SE090",
+      "effect": "Muscle Weakness / Fatigue",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M060",
+        "M064",
+        "M063"
+      ]
+    },
+    {
+      "id": "SE091",
+      "effect": "Respiratory Depression",
+      "severity": "critical",
+      "commonly_linked_medicines": [
+        "M111",
+        "M070",
+        "M069"
+      ]
+    },
+    {
+      "id": "SE092",
+      "effect": "Hallucinations / Confusion in Elderly",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M009",
+        "M067",
+        "M069",
+        "M070"
+      ]
+    },
+    {
+      "id": "SE093",
+      "effect": "Reduced Libido",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M058",
+        "M071",
+        "M072",
+        "M095"
+      ]
+    },
+    {
+      "id": "SE094",
+      "effect": "Photosensitive Nail Changes",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M032"
+      ]
+    },
+    {
+      "id": "SE095",
+      "effect": "Vaginal Dryness / Discharge Change",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M095",
+        "M092",
+        "M094"
+      ]
+    },
+    {
+      "id": "SE096",
+      "effect": "Increased Suicidal Ideation (Initiation Phase)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M071",
+        "M072",
+        "M106",
+        "M110"
+      ]
+    },
+    {
+      "id": "SE097",
+      "effect": "Tardive Dyskinesia (Long-term Antiemetic)",
+      "severity": "severe",
+      "commonly_linked_medicines": [
+        "M020",
+        "M067"
+      ]
+    },
+    {
+      "id": "SE098",
+      "effect": "Hypothyroidism (Drug-induced)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M100",
+        "M034"
+      ]
+    },
+    {
+      "id": "SE099",
+      "effect": "Photodamage / Increased UV Sensitivity",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M032",
+        "M060",
+        "M033"
+      ]
+    },
+    {
+      "id": "SE100",
+      "effect": "Tinnitus (Drug-induced)",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M003",
+        "M059",
+        "M002"
+      ]
+    },
+    {
+      "id": "SE101",
+      "effect": "Abdominal Bloating from Fibre Supplement",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M027"
+      ]
+    },
+    {
+      "id": "SE102",
+      "effect": "Warm or Numb Injection Site Feeling",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M053",
+        "M031"
+      ]
+    },
+    {
+      "id": "SE103",
+      "effect": "Bad Taste in Mouth Post Inhaler",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M015",
+        "M013"
+      ]
+    },
+    {
+      "id": "SE104",
+      "effect": "Subconjunctival Hemorrhage (Eye Drops)",
+      "severity": "mild",
+      "commonly_linked_medicines": [
+        "M076",
+        "M078"
+      ]
+    },
+    {
+      "id": "SE105",
+      "effect": "Chemical Burn from Improper Antiseptic Use",
+      "severity": "moderate",
+      "commonly_linked_medicines": [
+        "M084",
+        "M083"
+      ]
+    }
+  ],
+  "suspicious_health_issues": [
+    {
+      "id": "SHI001",
+      "issue": "Medicine ineffective after 3 days of expected response",
+      "flag_type": "outcome_failure",
+      "action": "Review diagnosis; consider alternative medicine or referral"
+    },
+    {
+      "id": "SHI002",
+      "issue": "Same medicine batch causing adverse reactions in multiple patients",
+      "flag_type": "batch_anomaly",
+      "action": "Flag batch for investigation; notify drug authority"
+    },
+    {
+      "id": "SHI003",
+      "issue": "Symptom worsening despite correct treatment",
+      "flag_type": "treatment_failure",
+      "action": "Rule out drug resistance or wrong diagnosis; refer to physician"
+    },
+    {
+      "id": "SHI004",
+      "issue": "Unusual side effect not listed in standard drug profile",
+      "flag_type": "pharmacovigilance",
+      "action": "Document and report to ADR monitoring cell"
+    },
+    {
+      "id": "SHI005",
+      "issue": "Patient allergic reaction to first dose",
+      "flag_type": "allergy_event",
+      "action": "Stop medicine; document allergy in record; provide safe alternative"
+    },
+    {
+      "id": "SHI006",
+      "issue": "Severe GI bleeding after NSAID use",
+      "flag_type": "serious_adverse_event",
+      "action": "Immediate hospital referral; stop NSAID permanently"
+    },
+    {
+      "id": "SHI007",
+      "issue": "Recurrent UTI despite completing antibiotic course",
+      "flag_type": "drug_resistance",
+      "action": "Urine culture and sensitivity; change antibiotic class"
+    },
+    {
+      "id": "SHI008",
+      "issue": "Blood sugar uncontrolled on maximum oral dose",
+      "flag_type": "treatment_inadequacy",
+      "action": "Refer to physician for insulin initiation review"
+    },
+    {
+      "id": "SHI009",
+      "issue": "Patient returned with jaundice after antibiotic use",
+      "flag_type": "hepatotoxicity_signal",
+      "action": "LFT testing; discontinue suspect drug; hepatologist referral"
+    },
+    {
+      "id": "SHI010",
+      "issue": "Multiple patients reporting rash from same medicine lot number",
+      "flag_type": "batch_contamination_signal",
+      "action": "Quarantine batch; report to manufacturer and drug regulator"
+    },
+    {
+      "id": "SHI011",
+      "issue": "Patient purchasing same medicine from multiple pharmacy branches",
+      "flag_type": "overuse_misuse",
+      "action": "Patient counselling; inform treating doctor"
+    },
+    {
+      "id": "SHI012",
+      "issue": "Antibiotic dispensed without prescription returning with worsening infection",
+      "flag_type": "prescription_bypass_outcome",
+      "action": "Enforce Rx policy strictly; refer patient to doctor"
+    },
+    {
+      "id": "SHI013",
+      "issue": "Paediatric patient given adult dose (pharmacist error)",
+      "flag_type": "dosing_error",
+      "action": "Immediate dose review and correction; internal error report"
+    },
+    {
+      "id": "SHI014",
+      "issue": "Expired medicine found in dispensed pack reported by patient",
+      "flag_type": "quality_control_breach",
+      "action": "Recall entire lot from shelf; reimburse patient; audit stock"
+    },
+    {
+      "id": "SHI015",
+      "issue": "Patient reports counterfeit packaging (different colour or texture)",
+      "flag_type": "counterfeit_medicine_suspicion",
+      "action": "Quarantine; report to drug controller; send sample for testing"
+    },
+    {
+      "id": "SHI016",
+      "issue": "Unexpected neurological symptom matching medication side effect profile",
+      "flag_type": "neurological_adverse_signal",
+      "action": "Stop medicine; neurology referral; document ADR"
+    },
+    {
+      "id": "SHI017",
+      "issue": "Anaphylactic shock post-injection at pharmacy",
+      "flag_type": "critical_adverse_event",
+      "action": "Administer epinephrine immediately; call emergency services; document"
+    },
+    {
+      "id": "SHI018",
+      "issue": "Corticosteroid cream causing facial skin thinning from long-term use",
+      "flag_type": "misuse_adverse_effect",
+      "action": "Stop steroid cream on face; taper; dermatologist referral"
+    },
+    {
+      "id": "SHI019",
+      "issue": "Patient showing signs of benzodiazepine dependence with monthly repeat requests",
+      "flag_type": "dependency_signal",
+      "action": "Flag in system; psychiatry referral; taper plan required"
+    },
+    {
+      "id": "SHI020",
+      "issue": "Hypoglycaemia episode after sulfonylurea in elderly patient",
+      "flag_type": "serious_adverse_event",
+      "action": "Administer glucose; review and reduce dose; physician review"
+    },
+    {
+      "id": "SHI021",
+      "issue": "Medicine disintegrating or showing unusual odour in pack",
+      "flag_type": "degraded_product",
+      "action": "Do not dispense; quarantine; report to supplier immediately"
+    },
+    {
+      "id": "SHI022",
+      "issue": "Pregnant patient given Category D or X drug unknowingly",
+      "flag_type": "contraindication_breach",
+      "action": "Stop immediately; obstetric referral; document incident"
+    },
+    {
+      "id": "SHI023",
+      "issue": "Renal patient given nephrotoxic NSAID without renal check",
+      "flag_type": "contraindication_breach",
+      "action": "Stop NSAID; substitute paracetamol; nephrology review"
+    },
+    {
+      "id": "SHI024",
+      "issue": "Cluster of fever cases unresponsive to standard antipyretics in same locality",
+      "flag_type": "outbreak_signal",
+      "action": "Notify public health authority; report cluster data"
+    },
+    {
+      "id": "SHI025",
+      "issue": "Child given tetracycline by parent (contraindicated under 8 years)",
+      "flag_type": "contraindication_breach_paediatric",
+      "action": "Stop drug immediately; monitor teeth; dentist referral"
+    },
+    {
+      "id": "SHI026",
+      "issue": "High frequency of same disease diagnosis from single zone within short period",
+      "flag_type": "epidemiological_signal",
+      "action": "Report to local health authority for epidemiological investigation"
+    },
+    {
+      "id": "SHI027",
+      "issue": "Unusual or non-standard lot number format on medicine packaging",
+      "flag_type": "supply_chain_anomaly",
+      "action": "Verify with manufacturer; quarantine stock pending investigation"
+    },
+    {
+      "id": "SHI028",
+      "issue": "QR code on pack scanning to incorrect or unknown manufacturer",
+      "flag_type": "counterfeit_medicine_signal",
+      "action": "Remove from shelf; verify entire stock; report to drug regulator"
+    },
+    {
+      "id": "SHI029",
+      "issue": "Drug interaction detected by system during dispensing review",
+      "flag_type": "drug_drug_interaction",
+      "action": "Alert pharmacist; consult physician before proceeding with dispensing"
+    },
+    {
+      "id": "SHI030",
+      "issue": "Patient on warfarin requesting ibuprofen or NSAID OTC",
+      "flag_type": "drug_drug_interaction_request",
+      "action": "Do not dispense NSAID; recommend paracetamol; contact prescriber"
+    },
+    {
+      "id": "SHI031",
+      "issue": "Insulin vial appears cloudy when it should be clear (degradation suspected)",
+      "flag_type": "product_quality",
+      "action": "Do not dispense; quarantine vial; replace from verified new stock"
+    },
+    {
+      "id": "SHI032",
+      "issue": "Children syrup colour or smell differs noticeably from previous batch",
+      "flag_type": "batch_quality_signal",
+      "action": "Withhold batch; send for testing; report to QC team"
+    },
+    {
+      "id": "SHI033",
+      "issue": "Persistent dry cough lasting over 8 weeks in patient on ACE inhibitor",
+      "flag_type": "known_side_effect_unrecognised",
+      "action": "Switch to ARB class; document outcome and notify prescriber"
+    },
+    {
+      "id": "SHI034",
+      "issue": "Patient vomiting within 15 minutes of oral dose (absorption failure)",
+      "flag_type": "dose_failure",
+      "action": "Assess for repeat dose; consider alternative route; physician input"
+    },
+    {
+      "id": "SHI035",
+      "issue": "Repeated prescription for same antibiotic without culture review",
+      "flag_type": "antimicrobial_stewardship_concern",
+      "action": "Recommend culture sensitivity test; alert prescribing physician"
+    },
+    {
+      "id": "SHI036",
+      "issue": "OTC antifungal repeat purchase every week suggesting systemic cause",
+      "flag_type": "chronic_undiagnosed_condition_signal",
+      "action": "Refer to physician; rule out diabetes or immunodeficiency"
+    },
+    {
+      "id": "SHI037",
+      "issue": "Skin whitening steroid cream sold OTC causing facial complications",
+      "flag_type": "cosmetic_steroid_misuse",
+      "action": "Counsel patient; stop product; dermatologist referral"
+    },
+    {
+      "id": "SHI038",
+      "issue": "Patient presenting with overdose symptoms after self-medication",
+      "flag_type": "overdose_emergency",
+      "action": "Emergency referral; do not dispense further; document incident"
+    },
+    {
+      "id": "SHI039",
+      "issue": "Temperature-sensitive medicine stored improperly (cold chain break)",
+      "flag_type": "cold_chain_failure",
+      "action": "Do not dispense; check temperature log; discard if breached"
+    },
+    {
+      "id": "SHI040",
+      "issue": "Multiple patients from same household with identical rare adverse effect",
+      "flag_type": "household_cluster_adverse_event",
+      "action": "Investigate shared medicine batch; report to pharmacovigilance"
+    },
+    {
+      "id": "SHI041",
+      "issue": "Patient age under 12 requesting prescription-only medicine OTC",
+      "flag_type": "paediatric_safety_concern",
+      "action": "Decline dispensing; counsel parent; refer to paediatrician"
+    },
+    {
+      "id": "SHI042",
+      "issue": "High-dose corticosteroid use over 4 weeks without physician oversight",
+      "flag_type": "steroid_overuse_signal",
+      "action": "Escalate to physician; implement taper protocol"
+    },
+    {
+      "id": "SHI043",
+      "issue": "Pattern of high sedative or anxiolytic requests from specific age group",
+      "flag_type": "abuse_misuse_pattern",
+      "action": "Flag in system; pharmacy management review; may require reporting"
+    },
+    {
+      "id": "SHI044",
+      "issue": "Inhaler technique error causing inadequate asthma control",
+      "flag_type": "device_technique_failure",
+      "action": "Re-demonstrate technique; consider spacer; reassess control"
+    },
+    {
+      "id": "SHI045",
+      "issue": "Same patient purchasing narcotics from multiple pharmacy branches",
+      "flag_type": "doctor_shopping_narcotics",
+      "action": "Cross-pharmacy flag; refuse dispensing; report to drug controller"
+    },
+    {
+      "id": "SHI046",
+      "issue": "Batch recall received from manufacturer while stock still on pharmacy shelf",
+      "flag_type": "active_recall_not_actioned",
+      "action": "Immediately quarantine and return recalled batch; notify patients"
+    },
+    {
+      "id": "SHI047",
+      "issue": "Unusual spike in antidiarrheal sales in one zone suggesting local outbreak",
+      "flag_type": "disease_outbreak_signal",
+      "action": "Report to local health authority for epidemiological assessment"
+    },
+    {
+      "id": "SHI048",
+      "issue": "Medicine sold as generic equivalent but with different composition",
+      "flag_type": "substitution_error",
+      "action": "Remove from dispensing; pharmacist retraining; update database"
+    },
+    {
+      "id": "SHI049",
+      "issue": "Patient with active hepatitis on hepatotoxic drug combination",
+      "flag_type": "contraindication_hepatic",
+      "action": "Stop hepatotoxic drug; hepatologist referral; monitor LFT"
+    },
+    {
+      "id": "SHI050",
+      "issue": "Elderly patient on multiple CNS depressants from different prescribers",
+      "flag_type": "polypharmacy_risk",
+      "action": "Comprehensive medication review; alert all prescribing physicians"
+    },
+    {
+      "id": "SHI051",
+      "issue": "Drug temperature exceeded 30 degrees C during transport (heat damage)",
+      "flag_type": "temperature_excursion",
+      "action": "Quarantine stock; verify manufacturer stability data before use"
+    },
+    {
+      "id": "SHI052",
+      "issue": "Batch showing unusual opacity in liquid formulation",
+      "flag_type": "visual_quality_defect",
+      "action": "Do not dispense; separate batch; report to QC team"
+    },
+    {
+      "id": "SHI053",
+      "issue": "Prescription appears illegible or suspected to be forged",
+      "flag_type": "prescription_fraud",
+      "action": "Refuse dispensing; verify with prescribing doctor; report to authority"
+    },
+    {
+      "id": "SHI054",
+      "issue": "Child given ORS incorrectly diluted with too little water (hypernatremia risk)",
+      "flag_type": "preparation_error_paediatric",
+      "action": "Correct immediately; monitor child; educate parent on preparation"
+    },
+    {
+      "id": "SHI055",
+      "issue": "Patient developed tendon pain after fluoroquinolone course (tendinopathy)",
+      "flag_type": "serious_known_adverse_effect",
+      "action": "Stop fluoroquinolone; orthopedic review; document ADR report"
+    },
+    {
+      "id": "SHI056",
+      "issue": "Antiviral medication given after Day 5 of symptom onset (too late)",
+      "flag_type": "treatment_timing_failure",
+      "action": "Counsel patient on timing; audit prescribing practice"
+    },
+    {
+      "id": "SHI057",
+      "issue": "Multiple anaphylaxis events tied to same vaccine or injection batch",
+      "flag_type": "vaccine_batch_signal",
+      "action": "Report to health ministry; quarantine batch; activate pharmacovigilance"
+    },
+    {
+      "id": "SHI058",
+      "issue": "Patient develops Stevens-Johnson syndrome post sulfonamide use",
+      "flag_type": "critical_skin_adverse_event",
+      "action": "Immediate hospitalisation; stop drug; allergy documented permanently"
+    },
+    {
+      "id": "SHI059",
+      "issue": "Prescription drug sold without Rx check caught in system audit",
+      "flag_type": "internal_compliance_failure",
+      "action": "Staff retraining; enforce mandatory Rx check; system audit review"
+    },
+    {
+      "id": "SHI060",
+      "issue": "Pain reliever ineffective across 3 consecutive visits suggesting systemic cause",
+      "flag_type": "red_flag_symptom",
+      "action": "Refer to physician urgently; cancer or systemic screening protocol"
+    },
+    {
+      "id": "SHI061",
+      "issue": "Patient on thyroid medication requesting stimulants or weight loss pills",
+      "flag_type": "polypharmacy_thyroid_risk",
+      "action": "Counsel patient; pharmacist review; notify physician"
+    },
+    {
+      "id": "SHI062",
+      "issue": "Unexplained tachycardia in multiple patients on same bronchodilator batch",
+      "flag_type": "batch_cardiovascular_signal",
+      "action": "Quarantine batch; pharmacovigilance alert; arrange batch testing"
+    },
+    {
+      "id": "SHI063",
+      "issue": "Patients returning with skin darkening after topical hydroquinone or steroid combo",
+      "flag_type": "ochronosis_signal",
+      "action": "Stop product; dermatologist referral; review product safety"
+    },
+    {
+      "id": "SHI064",
+      "issue": "Unusually high product returns for a specific medicine lot",
+      "flag_type": "quality_feedback_signal",
+      "action": "Analyse return data; contact manufacturer QC department"
+    },
+    {
+      "id": "SHI065",
+      "issue": "Patient on blood thinner requesting ibuprofen OTC for pain relief",
+      "flag_type": "drug_interaction_prevention",
+      "action": "Do not dispense ibuprofen; recommend paracetamol; advise prescriber"
+    },
+    {
+      "id": "SHI066",
+      "issue": "Chronic antacid user presenting with vitamin B12 deficiency symptoms",
+      "flag_type": "long_term_ppi_side_effect",
+      "action": "Supplement B12; review PPI necessity; gastroenterologist referral"
+    },
+    {
+      "id": "SHI067",
+      "issue": "Patient develops liver failure after herbal supplement combined with prescription drug",
+      "flag_type": "herb_drug_interaction",
+      "action": "Emergency referral; document herbal supplement; update patient record"
+    },
+    {
+      "id": "SHI068",
+      "issue": "Insulin pen device malfunction leading to incorrect dosing",
+      "flag_type": "device_failure",
+      "action": "Replace device; check dosing history; report to manufacturer"
+    },
+    {
+      "id": "SHI069",
+      "issue": "Antimalarial stock shortage causing treatment delay in high-risk zone",
+      "flag_type": "supply_chain_risk",
+      "action": "Alert procurement; contact alternative supplier; escalate to health authority"
+    },
+    {
+      "id": "SHI070",
+      "issue": "Patient taking same medicine in two brand names unknowingly (duplicate therapy)",
+      "flag_type": "duplicate_therapy_error",
+      "action": "Counsel patient; reconcile all medicines; alert prescriber"
+    },
+    {
+      "id": "SHI071",
+      "issue": "Post-operative patient requesting prescription painkillers without documentation",
+      "flag_type": "controlled_substance_request_flag",
+      "action": "Verify with surgical team; do not dispense without valid Rx"
+    },
+    {
+      "id": "SHI072",
+      "issue": "Cream or gel showing phase separation or unusual texture change in batch",
+      "flag_type": "formulation_stability_failure",
+      "action": "Quarantine; do not dispense; contact QA department"
+    },
+    {
+      "id": "SHI073",
+      "issue": "Minor (under 18) requesting multiple purchases of sedatives",
+      "flag_type": "misuse_risk_in_minor",
+      "action": "Refuse dispensing; escalate to pharmacist-in-charge; safeguarding protocol"
+    },
+    {
+      "id": "SHI074",
+      "issue": "Patient requests emergency contraceptive for third time in one month",
+      "flag_type": "repeated_emergency_contraception",
+      "action": "Counsel on regular contraception options; GP referral"
+    },
+    {
+      "id": "SHI075",
+      "issue": "Inhaler dose counter shows zero but patient says medicine still feels active",
+      "flag_type": "placebo_use_risk",
+      "action": "Educate on dose counter importance; replace inhaler; re-check technique"
+    },
+    {
+      "id": "SHI076",
+      "issue": "Patient with known kidney disease requesting NSAID (ibuprofen or diclofenac)",
+      "flag_type": "renal_contraindication",
+      "action": "Decline NSAID; recommend paracetamol; notify nephrologist"
+    },
+    {
+      "id": "SHI077",
+      "issue": "Multiple pharmacy branches flagging complaints about same drug manufacturer",
+      "flag_type": "manufacturer_wide_signal",
+      "action": "Escalate to drug controller; suspend manufacturer lot across all branches"
+    },
+    {
+      "id": "SHI078",
+      "issue": "Inconsistent tablet size within same blister pack reported by patient",
+      "flag_type": "manufacturing_defect",
+      "action": "Quarantine; report to manufacturer; pharmacy manager review"
+    },
+    {
+      "id": "SHI079",
+      "issue": "Oral antibiotic prescribed for clearly viral illness (AMR concern)",
+      "flag_type": "antimicrobial_stewardship_breach",
+      "action": "Alert prescribing physician; educate on antibiotic stewardship guidelines"
+    },
+    {
+      "id": "SHI080",
+      "issue": "Gel or cream pack seal found broken at point of purchase",
+      "flag_type": "tamper_evident_breach",
+      "action": "Do not sell; return to supplier; inspect entire lot"
+    },
+    {
+      "id": "SHI081",
+      "issue": "Unusual spike in cough syrup sales in a zone more than 3x normal volume",
+      "flag_type": "misuse_or_outbreak_signal",
+      "action": "Restrict OTC sales; notify zonal health officer; investigate cause"
+    },
+    {
+      "id": "SHI082",
+      "issue": "Patient presents hypertensive emergency while currently on antihypertensives",
+      "flag_type": "treatment_failure_emergency",
+      "action": "Emergency referral; review medication compliance and drug efficacy"
+    },
+    {
+      "id": "SHI083",
+      "issue": "Topical antibiotic used over 2 weeks causing resistant skin infection",
+      "flag_type": "resistance_from_overuse",
+      "action": "Stop topical antibiotic; take swab for culture; dermatologist referral"
+    },
+    {
+      "id": "SHI084",
+      "issue": "Eye drops dispensed for ear use or ear drops dispensed for eye use",
+      "flag_type": "dispensing_error",
+      "action": "Correct immediately; clarify with patient; internal dispensing audit"
+    },
+    {
+      "id": "SHI085",
+      "issue": "Patient with G6PD deficiency given nitrofurantoin or primaquine",
+      "flag_type": "genetic_contraindication",
+      "action": "Withdraw drug; G6PD-safe alternative; haematology review"
+    },
+    {
+      "id": "SHI086",
+      "issue": "Adverse event rate at specific pharmacy unusually high in internal audit",
+      "flag_type": "pharmacy_level_quality_issue",
+      "action": "Internal audit; staff training; inspection by QA team"
+    },
+    {
+      "id": "SHI087",
+      "issue": "Medicine packaging lacks required regional language labelling as per regulations",
+      "flag_type": "regulatory_compliance",
+      "action": "Flag to compliance officer; do not dispense; return to supplier"
+    },
+    {
+      "id": "SHI088",
+      "issue": "Customer confused between two similar-looking drug names (LASA error)",
+      "flag_type": "look_alike_sound_alike_error",
+      "action": "Update shelf labelling; add TALL MAN letters; staff education"
+    },
+    {
+      "id": "SHI089",
+      "issue": "Diabetic patient on metformin with lactic acidosis symptoms (confusion and breathing difficulty)",
+      "flag_type": "critical_metabolic_emergency",
+      "action": "Stop metformin; emergency hospital referral; monitor renal function urgently"
+    },
+    {
+      "id": "SHI090",
+      "issue": "Nasal decongestant requested for daily use beyond 5 days",
+      "flag_type": "dependency_rebound_signal",
+      "action": "Counsel on rhinitis medicamentosa; switch to saline spray; ENT referral if needed"
+    },
+    {
+      "id": "SHI091",
+      "issue": "Skin infection spreading despite 5 days of topical treatment (systemic infection suspected)",
+      "flag_type": "treatment_inadequacy_systemic",
+      "action": "Refer to physician for oral or IV antibiotics; wound culture"
+    },
+    {
+      "id": "SHI092",
+      "issue": "Unexpected interaction between self-purchased OTC drug and prescribed medication",
+      "flag_type": "self_medication_interaction",
+      "action": "Medication reconciliation; counsel patient; notify prescriber immediately"
+    },
+    {
+      "id": "SHI093",
+      "issue": "Pharmacist repeatedly dispensing without checking allergy history (system audit flag)",
+      "flag_type": "internal_process_failure",
+      "action": "Retrain pharmacist; enforce mandatory allergy check at every dispensing"
+    },
+    {
+      "id": "SHI094",
+      "issue": "Calcium supplement and thyroid medicine dispensed together without spacing warning",
+      "flag_type": "absorption_interaction_alert",
+      "action": "Counsel patient to space doses by 4 hours; document interaction in record"
+    },
+    {
+      "id": "SHI095",
+      "issue": "Unusual metallic taste in medicine reported by 3 or more patients from same batch",
+      "flag_type": "batch_organoleptic_signal",
+      "action": "Quarantine batch; arrange chemical analysis; report to QC"
+    },
+    {
+      "id": "SHI096",
+      "issue": "Patient using antidepressant plus tramadol simultaneously (serotonin syndrome risk)",
+      "flag_type": "dangerous_drug_combination",
+      "action": "Do not dispense combination; contact prescriber; monitor patient closely"
+    },
+    {
+      "id": "SHI097",
+      "issue": "Child accidentally ingested adult blood pressure medicine from home (poisoning)",
+      "flag_type": "accidental_poisoning_paediatric",
+      "action": "Poison control referral; emergency care; counsel family on safe storage"
+    },
+    {
+      "id": "SHI098",
+      "issue": "Patient requests medicine associated with national shortage",
+      "flag_type": "supply_shortage_patient_impact",
+      "action": "Notify patient; check approved substitutes; escalate to procurement"
+    },
+    {
+      "id": "SHI099",
+      "issue": "Student requesting cognitive enhancers without valid prescription",
+      "flag_type": "smart_drug_misuse_request",
+      "action": "Decline dispensing; educate on risks; no prescription means no dispensing"
+    },
+    {
+      "id": "SHI100",
+      "issue": "Batch with smeared print or unreadable manufacturing and expiry date",
+      "flag_type": "labelling_defect",
+      "action": "Quarantine; do not dispense; report defect to manufacturer and drug regulator"
+    }
+  ],
+  "sample_transaction_records": [
+    {
+      "transaction_id": "TXN20260601001",
+      "date": "2026-06-01",
+      "time": "09:15:00",
+      "pharmacy_id": "PH042",
+      "pharmacy_location": "Indore, MP",
+      "zone": "Central Zone",
+      "pharmacist_id": "PHARM007",
+      "patient_age_group": "Adult (18-45)",
+      "patient_gender": "Female",
+      "disease_selected": "D001",
+      "symptoms_selected": [
+        "S001",
+        "S002",
+        "S004",
+        "S007"
+      ],
+      "ml_recommended_medicines": [
+        "M001",
+        "M009",
+        "M010"
+      ],
+      "medicine_dispensed": "M001",
+      "salt_composition": "SC001",
+      "dosage_dispensed": "Paracetamol 500mg",
+      "usage_instruction": "Take after meals; 1 tablet every 4-6 hours; max 4 tablets per day",
+      "batch_number": "PCM2026A041",
+      "manufacturer": "Cipla Ltd",
+      "treatment_outcome": "Effective",
+      "follow_up_date": "2026-06-04",
+      "outcome_confidence_update": "+0.02"
+    },
+    {
+      "transaction_id": "TXN20260601002",
+      "date": "2026-06-01",
+      "time": "10:32:00",
+      "pharmacy_id": "PH042",
+      "pharmacy_location": "Indore, MP",
+      "zone": "Central Zone",
+      "pharmacist_id": "PHARM007",
+      "patient_age_group": "Child (2-12)",
+      "patient_gender": "Male",
+      "disease_selected": "D023",
+      "symptoms_selected": [
+        "S012",
+        "S010",
+        "S080"
+      ],
+      "ml_recommended_medicines": [
+        "M022",
+        "M023",
+        "M102"
+      ],
+      "medicine_dispensed": "M022",
+      "salt_composition": "SC022",
+      "dosage_dispensed": "ORS Sachet Low Osmolarity 245 mOsm",
+      "usage_instruction": "Dissolve in 200ml clean water; give small sips every few minutes",
+      "batch_number": "ORS2026B017",
+      "manufacturer": "FDC Ltd",
+      "treatment_outcome": "Pending",
+      "follow_up_date": "2026-06-03",
+      "outcome_confidence_update": null
+    },
+    {
+      "transaction_id": "TXN20260602001",
+      "date": "2026-06-02",
+      "time": "11:05:00",
+      "pharmacy_id": "PH015",
+      "pharmacy_location": "Bhopal, MP",
+      "zone": "North Zone",
+      "pharmacist_id": "PHARM019",
+      "patient_age_group": "Senior (60+)",
+      "patient_gender": "Male",
+      "disease_selected": "D039",
+      "symptoms_selected": [
+        "S026",
+        "S089",
+        "S007"
+      ],
+      "ml_recommended_medicines": [
+        "M056",
+        "M057",
+        "M058"
+      ],
+      "medicine_dispensed": "M056",
+      "salt_composition": "SC056",
+      "dosage_dispensed": "Amlodipine 5mg",
+      "usage_instruction": "Take once daily at same time; do not stop without doctor advice",
+      "batch_number": "AMLO2026C009",
+      "manufacturer": "Sun Pharma",
+      "treatment_outcome": "Effective",
+      "follow_up_date": "2026-07-02",
+      "outcome_confidence_update": "+0.01"
+    },
+    {
+      "transaction_id": "TXN20260603001",
+      "date": "2026-06-03",
+      "time": "14:20:00",
+      "pharmacy_id": "PH088",
+      "pharmacy_location": "Jabalpur, MP",
+      "zone": "East Zone",
+      "pharmacist_id": "PHARM031",
+      "patient_age_group": "Adult (45-60)",
+      "patient_gender": "Female",
+      "disease_selected": "D011",
+      "symptoms_selected": [
+        "S002",
+        "S048",
+        "S049",
+        "S020"
+      ],
+      "ml_recommended_medicines": [
+        "M006",
+        "M007",
+        "M075"
+      ],
+      "medicine_dispensed": "M007",
+      "salt_composition": "SC007",
+      "dosage_dispensed": "Loratadine 10mg",
+      "usage_instruction": "Take once daily; avoid alcohol; may cause mild drowsiness",
+      "batch_number": "LOR2026D022",
+      "manufacturer": "Glenmark Pharma",
+      "treatment_outcome": "Effective",
+      "follow_up_date": "2026-06-10",
+      "outcome_confidence_update": "+0.01"
+    },
+    {
+      "transaction_id": "TXN20260603002",
+      "date": "2026-06-03",
+      "time": "16:45:00",
+      "pharmacy_id": "PH042",
+      "pharmacy_location": "Indore, MP",
+      "zone": "Central Zone",
+      "pharmacist_id": "PHARM007",
+      "patient_age_group": "Adult (18-45)",
+      "patient_gender": "Male",
+      "disease_selected": "D019",
+      "symptoms_selected": [
+        "S015",
+        "S014",
+        "S016"
+      ],
+      "ml_recommended_medicines": [
+        "M016",
+        "M017",
+        "M019"
+      ],
+      "medicine_dispensed": "M016",
+      "salt_composition": "SC016",
+      "dosage_dispensed": "Omeprazole 20mg",
+      "usage_instruction": "Take 30 minutes before breakfast; do not crush capsule",
+      "batch_number": "OMZ2026A088",
+      "manufacturer": "Dr Reddys Laboratories",
+      "treatment_outcome": "Not Yet Reported",
+      "follow_up_date": "2026-06-17",
+      "outcome_confidence_update": null
+    }
+  ]
+}

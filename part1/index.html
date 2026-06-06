@@ -26,9 +26,34 @@
         <!-- Top Navigation Bar -->
         <header class="top-bar">
             <div class="top-bar-left">
-                <div class="logo-mark">
+                <div class="logo-mark" id="module-switcher-toggle">
                     <span class="logo-icon">⬡</span>
                     <span class="logo-text">AYUVANT</span>
+                    <span class="material-icons-round" style="font-size:16px;color:var(--on-surface-variant);margin-left:2px;">expand_more</span>
+                </div>
+                <!-- Module Switcher Dropdown -->
+                <div class="module-switcher" id="module-switcher">
+                    <a href="../part1/index.html" class="module-link active">
+                        <span class="material-icons-round">inventory_2</span>
+                        <div class="module-link-text">
+                            <span class="module-link-name">Inventory</span>
+                            <span class="module-link-desc">Batch & Stock Management</span>
+                        </div>
+                    </a>
+                    <a href="../part2/index.html" class="module-link">
+                        <span class="material-icons-round">psychology</span>
+                        <div class="module-link-text">
+                            <span class="module-link-name">AI Intelligence</span>
+                            <span class="module-link-desc">Predictions, Zones & Alerts</span>
+                        </div>
+                    </a>
+                    <a href="../part3/index.html" class="module-link">
+                        <span class="material-icons-round">hub</span>
+                        <div class="module-link-text">
+                            <span class="module-link-name">Smart Distribution</span>
+                            <span class="module-link-desc">Network, Diagnosis & Follow-Up</span>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="top-bar-right">
@@ -180,5 +205,19 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+    // Module Switcher Toggle
+    (function(){
+        var toggle = document.getElementById('module-switcher-toggle');
+        var dropdown = document.getElementById('module-switcher');
+        if(!toggle||!dropdown) return;
+        toggle.addEventListener('click', function(e){
+            e.stopPropagation();
+            dropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', function(){ dropdown.classList.remove('open'); });
+        dropdown.addEventListener('click', function(e){ e.stopPropagation(); });
+    })();
+    </script>
 </body>
 </html>
