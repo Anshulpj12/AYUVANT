@@ -1775,3 +1775,117 @@ input, button, textarea, select { font-family: inherit; font-size: inherit; colo
     border-radius: 6px;
     display: block;
 }
+
+/* --- Stock and Autocomplete Custom Styles --- */
+.badge-in-stock {
+    background: rgba(63, 255, 139, 0.12);
+    color: var(--tertiary);
+    border: 1px solid rgba(63, 255, 139, 0.2);
+}
+
+.badge-out-of-stock {
+    background: rgba(255, 113, 108, 0.12);
+    color: var(--error);
+    border: 1px solid rgba(255, 113, 108, 0.2);
+}
+
+.dx-rec-card.out-of-stock {
+    opacity: 0.85;
+    border-color: rgba(255, 113, 108, 0.15);
+}
+
+.stock-action-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.stock-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--primary);
+    background: rgba(0, 229, 255, 0.05);
+    border: 1px solid rgba(0, 229, 255, 0.1);
+    padding: 4px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.stock-action-link:hover {
+    background: rgba(0, 229, 255, 0.12);
+    border-color: rgba(0, 229, 255, 0.2);
+    color: var(--on-surface);
+}
+
+.stock-action-link.warning {
+    color: var(--warning);
+    background: rgba(255, 183, 77, 0.05);
+    border-color: rgba(255, 183, 77, 0.1);
+}
+
+.stock-action-link.warning:hover {
+    background: rgba(255, 183, 77, 0.12);
+    border-color: rgba(255, 183, 77, 0.2);
+}
+
+/* Autocomplete logic */
+.autocomplete-suggestions {
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: rgba(25, 25, 31, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    display: none;
+}
+
+.autocomplete-suggestions.show {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.suggestion-item:last-child {
+    border-bottom: none;
+}
+
+.suggestion-item:hover {
+    background: rgba(129, 236, 255, 0.08);
+}
+
+.suggestion-name {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--on-surface);
+    font-weight: 500;
+}
+
+.suggestion-meta {
+    font-family: var(--font-label);
+    font-size: 10px;
+    color: var(--primary);
+    background: rgba(129, 236, 255, 0.08);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-transform: uppercase;
+}

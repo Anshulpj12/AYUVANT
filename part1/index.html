@@ -141,13 +141,57 @@
                 </div>
 
                 <!-- 2. Medicine Name -->
-                <div class="form-group">
+                <div class="form-group" style="position: relative;">
                     <label class="form-label" for="medicineName">
                         <span class="material-icons-round field-icon">medication</span>
                         Medicine Name
                     </label>
-                    <input type="text" id="medicineName" class="form-input" placeholder="e.g. Paracetamol 500mg" required>
-                    <span class="field-hint">Name of the medicine</span>
+                    <input type="text" id="medicineName" class="form-input" placeholder="e.g. Paracetamol" required autocomplete="off">
+                    <div id="medicine-suggestions" class="autocomplete-suggestions"></div>
+                    <span class="field-hint">Search and select from master database, or type custom name</span>
+                </div>
+
+                <!-- 2b. Medicine Type / Dosage Form -->
+                <div class="form-group">
+                    <label class="form-label" for="medicineType">
+                        <span class="material-icons-round field-icon">category</span>
+                        Medicine Type / Dosage Form
+                    </label>
+                    <select id="medicineType" class="form-input" required>
+                        <option value="">-- Select Type --</option>
+                        <option value="Tablet">Tablet</option>
+                        <option value="Capsule">Capsule</option>
+                        <option value="Syrup">Syrup</option>
+                        <option value="Inhaler">Inhaler</option>
+                        <option value="Cream">Cream</option>
+                        <option value="Gel">Gel</option>
+                        <option value="Ointment">Ointment</option>
+                        <option value="Eye Drops">Eye Drops</option>
+                        <option value="Ear Drops">Ear Drops</option>
+                        <option value="Nasal Spray/Drops">Nasal Spray/Drops</option>
+                        <option value="Injection">Injection</option>
+                        <option value="Powder/Sachet">Powder/Sachet</option>
+                        <option value="Lotion">Lotion</option>
+                        <option value="Solution">Solution</option>
+                        <option value="Shampoo">Shampoo</option>
+                        <option value="Mouthwash">Mouthwash</option>
+                    </select>
+                    <span class="field-hint">Select the dosage form of this batch</span>
+                </div>
+
+                <!-- 2c. Dosage Strength -->
+                <div class="form-group">
+                    <label class="form-label" for="dosageStrength">
+                        <span class="material-icons-round field-icon">straighten</span>
+                        Dosage Strength
+                    </label>
+                    <div style="display: flex; gap: 8px;">
+                        <select id="dosageStrength" class="form-input" style="flex: 1;">
+                            <option value="">-- Select Strength --</option>
+                        </select>
+                        <input type="text" id="customStrength" class="form-input" placeholder="Or enter custom strength" style="flex: 1;">
+                    </div>
+                    <span class="field-hint">Select matching strength from database or type custom strength</span>
                 </div>
 
                 <!-- 3. Quantity -->
@@ -204,6 +248,8 @@
 
     </div>
 
+    <script src="../part3/data/medicines.js"></script>
+    <script src="../part3/data/clinical-intelligence.js"></script>
     <script src="app.js"></script>
     <script>
     // Module Switcher Toggle

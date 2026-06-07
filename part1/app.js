@@ -26,6 +26,10 @@
     // Form inputs
     const batchNumberInput = document.getElementById('batchNumber');
     const medicineNameInput = document.getElementById('medicineName');
+    const medicineSuggestions = document.getElementById('medicine-suggestions');
+    const medicineTypeSelect = document.getElementById('medicineType');
+    const dosageStrengthSelect = document.getElementById('dosageStrength');
+    const customStrengthInput = document.getElementById('customStrength');
     const quantityInput = document.getElementById('quantity');
     const mfgDateInput = document.getElementById('mfgDate');
     const expDateInput = document.getElementById('expDate');
@@ -34,6 +38,9 @@
     // Stepper buttons
     const qtyMinus = document.getElementById('qty-minus');
     const qtyPlus = document.getElementById('qty-plus');
+
+    // ---- State ----
+    let selectedMedicineId = 'custom';
 
     // ---- Data ----
     function loadBatches() {
@@ -113,18 +120,179 @@
         }
     }
 
+    // ---- Autocomplete Suggestions & Dropdowns ----
+    const masterMedicines = window.AYUVANT_MEDICINES || [];
+
+    medicineNameInput.addEventListener('input', debounce(function () {
+        const query = medicineNameInput.value.trim().toLowerCase();
+        if (query.length < 2) {
+            medicineSuggestions.innerHTML = '';
+            medicineSuggestions.classList.remove('show');
+            return;
+        }
+
+        const matches = masterMedicines.filter(med => 
+            med.name.toLowerCase().includes(query) ||
+            med.genericName.toLowerCase().includes(query) ||
+            (med.tags && med.tags.some(tag => tag.toLowerCase().includes(query)))
+        ).slice(0, 10);
+
+        if (matches.length === 0) {
+            medicineSuggestions.innerHTML = '<div class="suggestion-item" style="cursor:default;color:var(--outline);font-size:12.5px;padding:12px;">No matches in master list. Keep typing custom name...</div>';
+            medicineSuggestions.classList.add('show');
+            return;
+        }
+
+        medicineSuggestions.innerHTML = matches.map(med => `
+            <div class="suggestion-item" data-id="${med.id}" data-name="${escapeHtml(med.name)}" data-form="${escapeHtml(med.dosageForm)}">
+                <span class="suggestion-name">${escapeHtml(med.name)}</span>
+                <span class="suggestion-meta">${escapeHtml(med.dosageForm)}</span>
+            </div>
+        `).join('');
+        medicineSuggestions.classList.add('show');
+    }, 200));
+
+    // Handle suggestion click
+    medicineSuggestions.addEventListener('click', function (e) {
+        const item = e.target.closest('.suggestion-item');
+        if (!item) return;
+
+        const id = item.dataset.id;
+        const name = item.dataset.name;
+        const form = item.dataset.form;
+
+        selectedMedicineId = id;
+        medicineNameInput.value = name;
+        medicineSuggestions.classList.remove('show');
+
+        // Set medicine type options
+        selectTypeOption(form);
+        // Load strengths
+        loadDosageStrengths(id, form);
+    });
+
+    // Close suggestions dropdown when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('.autocomplete-container') && e.target !== medicineNameInput) {
+            medicineSuggestions.classList.remove('show');
+        }
+    });
+
+    // Helper to select the medicine type dropdown
+    function selectTypeOption(form) {
+        if (!form) return;
+        const formLower = form.toLowerCase();
+        
+        // Find best option in dropdown
+        for (let i = 0; i < medicineTypeSelect.options.length; i++) {
+            const optVal = medicineTypeSelect.options[i].value.toLowerCase();
+            if (optVal && (formLower.includes(optVal) || optVal.includes(formLower))) {
+                medicineTypeSelect.selectedIndex = i;
+                return;
+            }
+        }
+        
+        // Fallbacks
+        if (formLower.includes('tablet')) medicineTypeSelect.value = 'Tablet';
+        else if (formLower.includes('capsule')) medicineTypeSelect.value = 'Capsule';
+        else if (formLower.includes('syrup')) medicineTypeSelect.value = 'Syrup';
+        else if (formLower.includes('inhaler')) medicineTypeSelect.value = 'Inhaler';
+        else if (formLower.includes('cream') || formLower.includes('gel')) medicineTypeSelect.value = 'Cream';
+        else if (formLower.includes('injection')) medicineTypeSelect.value = 'Injection';
+    }
+
+    // Helper to match type to dosage keys from clinical-intelligence.js
+    function matchTypeToDosageKey(t) {
+        if (!t) return null;
+        var val = t.toLowerCase();
+        if (val.indexOf('tablet') !== -1) return 'Tablet';
+        if (val.indexOf('capsule') !== -1) return 'Capsule';
+        if (val.indexOf('syrup') !== -1) return 'Syrup';
+        if (val.indexOf('inhaler') !== -1) return 'Inhaler';
+        if (val.indexOf('cream') !== -1 || val.indexOf('gel') !== -1 || val.indexOf('ointment') !== -1) return 'Cream_Gel_Ointment';
+        if (val.indexOf('eye') !== -1) return 'Eye_Drops';
+        if (val.indexOf('ear') !== -1) return 'Ear_Drops';
+        if (val.indexOf('nasal') !== -1) return 'Nasal_Spray_Drops';
+        if (val.indexOf('injection') !== -1) return 'Injection';
+        if (val.indexOf('powder') !== -1 || val.indexOf('sachet') !== -1) return 'Powder_Sachet';
+        if (val.indexOf('lotion') !== -1 || val.indexOf('shampoo') !== -1 || val.indexOf('solution') !== -1) return 'Lotion_Solution_Shampoo';
+        if (val.indexOf('mouthwash') !== -1) return 'Mouthwash';
+        return null;
+    }
+
+    // Populate dosage strength dropdown based on medicine and selected type
+    function loadDosageStrengths(medId, formType) {
+        // Clear strengths
+        dosageStrengthSelect.innerHTML = '<option value="">-- Select Strength --</option>';
+        customStrengthInput.value = '';
+
+        if (!window.AYUVANT_CLINICAL_DATA || !window.AYUVANT_CLINICAL_DATA.dosageStrengthsByType) {
+            return;
+        }
+
+        const dosageKey = matchTypeToDosageKey(formType || medicineTypeSelect.value);
+        if (!dosageKey) return;
+
+        const list = window.AYUVANT_CLINICAL_DATA.dosageStrengthsByType[dosageKey] || [];
+        
+        // Find strengths that link to this medicine ID
+        let matched = list.filter(item => 
+            item.medicine_ids && item.medicine_ids.includes(medId)
+        ).map(item => item.label);
+
+        // Fallback to all strengths for this type
+        if (matched.length === 0) {
+            matched = list.map(item => item.label);
+        }
+
+        matched.forEach(label => {
+            const opt = document.createElement('option');
+            opt.value = label;
+            opt.textContent = label;
+            dosageStrengthSelect.appendChild(opt);
+        });
+    }
+
+    // Listen to type dropdown changes to refresh strengths
+    medicineTypeSelect.addEventListener('change', function () {
+        loadDosageStrengths(selectedMedicineId, medicineTypeSelect.value);
+    });
+
+    medicineNameInput.addEventListener('change', function() {
+        const val = medicineNameInput.value.trim().toLowerCase();
+        const found = masterMedicines.find(m => m.name.toLowerCase() === val);
+        if (!found) {
+            selectedMedicineId = 'custom';
+            dosageStrengthSelect.innerHTML = '<option value="">-- Select Strength --</option>';
+        }
+    });
+
+    // Debounce helper
+    function debounce(fn, delay) {
+        let timer;
+        return function () {
+            const args = arguments;
+            const ctx = this;
+            clearTimeout(timer);
+            timer = setTimeout(function () { fn.apply(ctx, args); }, delay);
+        };
+    }
+
     // ---- Form Submit ----
     batchForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const batchNumber = batchNumberInput.value.trim();
         const medicineName = medicineNameInput.value.trim();
+        const dosageForm = medicineTypeSelect.value;
+        const dosageStrength = dosageStrengthSelect.value || customStrengthInput.value.trim();
         const quantity = parseInt(quantityInput.value);
         const mfgDate = mfgDateInput.value;
         const expDate = expDateInput.value;
 
         // Validate
-        if (!batchNumber || !medicineName || !quantity || !mfgDate || !expDate) {
+        if (!batchNumber || !medicineName || !dosageForm || !dosageStrength || !quantity || !mfgDate || !expDate) {
+            showToast('Please fill out all fields!', true);
             return;
         }
 
@@ -144,7 +312,10 @@
         const newBatch = {
             id: Date.now().toString(),
             batchNumber: batchNumber,
+            medicineId: selectedMedicineId,
             medicineName: medicineName,
+            dosageForm: dosageForm,
+            dosageStrength: dosageStrength,
             quantity: quantity,
             manufacturingDate: mfgDate,
             expiryDate: expDate,
@@ -158,6 +329,8 @@
 
         // Reset form
         batchForm.reset();
+        selectedMedicineId = 'custom';
+        dosageStrengthSelect.innerHTML = '<option value="">-- Select Strength --</option>';
         expiryHint.textContent = 'When this batch expires';
         expiryHint.className = 'field-hint';
 
@@ -243,6 +416,10 @@
                             <span class="batch-detail-value">${escapeHtml(batch.batchNumber)}</span>
                         </div>
                         <div class="batch-detail">
+                            <span class="batch-detail-label">Type & Strength</span>
+                            <span class="batch-detail-value">${escapeHtml(batch.dosageForm || '—')} (${escapeHtml(batch.dosageStrength || '—')})</span>
+                        </div>
+                        <div class="batch-detail">
                             <span class="batch-detail-label">Mfg. Date</span>
                             <span class="batch-detail-value">${formatDate(batch.manufacturingDate)}</span>
                         </div>
@@ -252,7 +429,7 @@
                         </div>
                         <div class="batch-detail">
                             <span class="batch-detail-label">Quantity</span>
-                            <span class="batch-detail-value">${batch.quantity}</span>
+                            <span class="batch-detail-value">${batch.quantity} units</span>
                         </div>
                     </div>
                     <div class="batch-card-footer">

@@ -245,6 +245,9 @@
         const batchIdx = batches.findIndex(b => b.batchNumber === selectedBatch);
         if (batchIdx !== -1) {
             batches[batchIdx].quantity = Math.max(0, batches[batchIdx].quantity - qty);
+            if (batches[batchIdx].quantity <= 0) {
+                batches[batchIdx].status = 'out_of_stock';
+            }
         }
         save(BATCHES_KEY, batches);
 

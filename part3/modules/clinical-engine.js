@@ -134,8 +134,15 @@ window.ClinicalEngine = (function () {
             });
         });
 
-        // Sort by score descending
-        results.sort(function (a, b) { return b.score - a.score; });
+        // Sort by priority ascending, then by score descending
+        results.sort(function (a, b) {
+            var pA = a.mapping.priority || 99;
+            var pB = b.mapping.priority || 99;
+            if (pA !== pB) {
+                return pA - pB;
+            }
+            return b.score - a.score;
+        });
 
         return results;
     }
@@ -275,6 +282,7 @@ window.ClinicalEngine = (function () {
     // TRANSACTION RECORDING
     // ================================================
     function recordTransaction(payload) {
+        var qty = parseInt(payload.quantity) || 10;
         var txn = {
             id: 'TXN-' + Date.now() + '-' + Math.random().toString(36).substr(2, 4),
             diseaseId: payload.diseaseId,
@@ -286,6 +294,7 @@ window.ClinicalEngine = (function () {
             saltComposition: payload.saltComposition || '',
             dosageStrength: payload.dosageStrength || '',
             usageGuidelines: payload.usageGuidelines || '',
+            quantity: qty,
             patientId: payload.patientId || null,
             patientMobile: payload.patientMobile || '',
             batchNumber: payload.batchNumber || '',
@@ -296,6 +305,66 @@ window.ClinicalEngine = (function () {
 
         transactions.push(txn);
         _saveJSON(STORAGE_KEY_TRANSACTIONS, transactions);
+
+        // Deduct inventory stock if batch number provided
+        if (payload.batchNumber) {
+            var batchesKey = 'ayuvant_batches';
+            try {
+                var rawBatches = localStorage.getItem(batchesKey);
+                var batches = rawBatches ? JSON.parse(rawBatches) : [];
+                var batchFound = false;
+
+                for (var j = 0; j < batches.length; j++) {
+                    if (batches[j].batchNumber === payload.batchNumber) {
+                        batches[j].quantity = Math.max(0, batches[j].quantity - qty);
+                        if (batches[j].quantity <= 0) {
+                            batches[j].status = 'out_of_stock';
+                        }
+                        batchFound = true;
+                        break;
+                    }
+                }
+
+                if (batchFound) {
+                    localStorage.setItem(batchesKey, JSON.stringify(batches));
+                    console.log('ClinicalEngine: Deducted ' + qty + ' units from batch ' + payload.batchNumber);
+                }
+            } catch (e) {
+                console.error('ClinicalEngine: Error updating batch stock', e);
+            }
+        }
+
+        // Also record this as a sale in 'ayuvant_sales' for Part 2 AI predictions
+        try {
+            var salesKey = 'ayuvant_sales';
+            var rawSales = localStorage.getItem(salesKey);
+            var sales = rawSales ? JSON.parse(rawSales) : [];
+            
+            // Calculate default zone Z-14954210 based on Jaipur's coordinates
+            // (matches DEFAULT_LAT/LNG and GRID_SIZE_DEG in Part 2)
+            var lat = 26.9124;
+            var lng = 75.7873;
+            var gridDeg = 0.018;
+            var zoneX = Math.floor(lng / gridDeg);
+            var zoneY = Math.floor(lat / gridDeg);
+            var zoneNumber = 'Z-' + Math.abs(zoneY) + Math.abs(zoneX);
+
+            var newSale = {
+                id: 'SALE-' + txn.id,
+                medicineName: payload.medicineName || '',
+                batchNumber: payload.batchNumber || 'N/A',
+                quantity: qty,
+                zone: zoneNumber,
+                date: new Date().toISOString(),
+                dayOfWeek: new Date().getDay(),
+                month: new Date().getMonth()
+            };
+            sales.unshift(newSale);
+            localStorage.setItem(salesKey, JSON.stringify(sales));
+            console.log('ClinicalEngine: Logged AI-sync sale for ' + payload.medicineName);
+        } catch (err) {
+            console.error('ClinicalEngine: Error logging to ayuvant_sales', err);
+        }
 
         console.log('ClinicalEngine: Transaction recorded — ' + txn.id);
         return txn;

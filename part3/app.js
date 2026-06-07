@@ -1036,12 +1036,50 @@
             return;
         }
 
+        // Load inventory batches
+        var inventory = [];
+        try {
+            var rawBatches = localStorage.getItem('ayuvant_batches');
+            inventory = rawBatches ? JSON.parse(rawBatches) : [];
+        } catch (e) {
+            console.error('Error loading inventory', e);
+        }
+
         var html = '';
         dxRecommendations.forEach(function (rec) {
             var med = rec.medicine;
             var conf = rec.confidence;
             var confClass = conf >= 70 ? 'high' : (conf >= 40 ? 'medium' : 'low');
             var successPct = Math.round(rec.historicalSuccess * 100);
+
+            // Calculate total stock for this medicine
+            var totalQty = 0;
+            inventory.forEach(function (b) {
+                if (b.medicineId === med.id || b.medicineName.toLowerCase() === med.name.toLowerCase()) {
+                    var exp = new Date(b.expiryDate);
+                    if (exp > new Date()) {
+                        totalQty += (b.quantity || 0);
+                    }
+                }
+            });
+
+            var stockBadge = '';
+            var stockActionsHtml = '';
+            var isOutOfStock = totalQty === 0;
+
+            if (totalQty > 0) {
+                stockBadge = ' <span class="badge badge-in-stock">' + totalQty + ' left</span>';
+            } else {
+                stockBadge = ' <span class="badge badge-out-of-stock">0 left</span>';
+                stockActionsHtml = '<div class="stock-action-container">' +
+                    '<button type="button" class="stock-action-link btn-dx-transfer" data-action="transfer" data-name="' + escapeHtml(med.name) + '">' +
+                    '<span class="material-icons-round" style="font-size:12px;">swap_horiz</span>Transfer</button>' +
+                    '<button type="button" class="stock-action-link btn-dx-alt" data-action="substitute" data-name="' + escapeHtml(med.name) + '">' +
+                    '<span class="material-icons-round" style="font-size:12px;">medication</span>Substitute</button>' +
+                    '<button type="button" class="stock-action-link warning btn-dx-order" data-action="order" data-id="' + med.id + '" data-name="' + escapeHtml(med.name) + '" data-form="' + escapeHtml(med.dosageForm) + '">' +
+                    '<span class="material-icons-round" style="font-size:12px;">shopping_cart</span>Quick Order</button>' +
+                    '</div>';
+            }
 
             // Salt tags
             var saltHtml = '';
@@ -1072,12 +1110,12 @@
             var otcBadgeClass = (med.subCategory && med.subCategory.toLowerCase() === 'otc') ? 'badge-otc' : 'badge-rx';
             var otcLabel = med.subCategory || 'Rx';
 
-            html += '<div class="dx-rec-card" data-med-id="' + med.id + '">' +
+            html += '<div class="dx-rec-card ' + (isOutOfStock ? 'out-of-stock' : '') + '" data-med-id="' + med.id + '">' +
                 '<div class="dx-rec-header">' +
                 '<div class="dx-rec-confidence ' + confClass + '">' + conf + '%</div>' +
                 '<div class="dx-rec-info">' +
                 '<div class="dx-rec-name">' + escapeHtml(med.name) + 
-                ' <span class="badge ' + otcBadgeClass + '">' + escapeHtml(otcLabel) + '</span></div>' +
+                ' <span class="badge ' + otcBadgeClass + '">' + escapeHtml(otcLabel) + '</span>' + stockBadge + '</div>' +
                 '<div class="dx-rec-generic">' + escapeHtml(med.genericName) + ' • <span style="color:var(--primary); font-size:11px;">' + escapeHtml(med.dosageForm) + '</span></div>' +
                 '</div></div>' +
                 '<div class="dx-rec-salt">' + saltHtml + '</div>' +
@@ -1088,10 +1126,11 @@
                 '<div class="dx-rec-success-bar"><div class="dx-rec-success-fill" style="width:' + successPct + '%;"></div></div>' +
                 '<span class="dx-rec-uses">' + successPct + '%</span>' +
                 '</div>' +
-                '<button class="dx-rec-select-btn" data-med-id="' + med.id + '">' +
-                '<span class="material-icons-round">check_circle</span>Select</button>' +
+                '<button class="dx-rec-select-btn" data-med-id="' + med.id + '"' + (isOutOfStock ? ' disabled style="opacity: 0.5; cursor: not-allowed; pointer-events: none;"' : '') + '>' +
+                '<span class="material-icons-round">' + (isOutOfStock ? 'block' : 'check_circle') + '</span>' + (isOutOfStock ? 'Out of Stock' : 'Select') + '</button>' +
                 '</div>' +
                 sideHtml +
+                stockActionsHtml +
                 '</div>';
         });
         container.innerHTML = html;
@@ -1102,19 +1141,41 @@
         if (!container || !dxSelectedMedicine || !dxSelectedDisease) return;
 
         var details = ClinicalEngine.getMedicineDetails(dxSelectedMedicine.id, dxSelectedDisease.id);
-        if (!details) return;
+        
+        var med = dxSelectedMedicine;
+        var saltCompositions = [];
+        var dosageStrengths = [];
+        var usageGuidelines = "";
+        var sideEffects = null;
+        var therapeuticClass = med.category || "General";
 
-        var med = details.medicine;
+        if (details) {
+            med = details.medicine;
+            saltCompositions = details.saltCompositions || [];
+            dosageStrengths = details.dosageStrengths || [];
+            usageGuidelines = details.usageGuidelines || "";
+            sideEffects = details.sideEffects;
+            therapeuticClass = med.therapeuticClass || med.category;
+        } else {
+            saltCompositions = med.activeSalts ? med.activeSalts.map(function(s) { return s.name; }) : [];
+            dosageStrengths = ClinicalEngine.getDosagesByType(med.dosageForm) || [];
+            var guidelinesList = ClinicalEngine.getUsageGuidelinesByType(med.dosageForm) || [];
+            usageGuidelines = guidelinesList.join("; ");
+            sideEffects = ClinicalEngine.getSideEffectsForMedicine(med.id);
+        }
 
         // Salt composition pills
         var saltPills = '';
-        details.saltCompositions.forEach(function (s, i) {
+        saltCompositions.forEach(function (s, i) {
             saltPills += '<div class="dx-selector-pill' + (i === 0 ? ' selected' : '') + '" data-type="salt" data-value="' + escapeHtml(s) + '">' + escapeHtml(s) + '</div>';
         });
+        if (saltCompositions.length === 0) {
+            saltPills = '<div style="font-size:12px;color:var(--outline);padding:4px 0;">No active salt compositions defined</div>';
+        }
 
         // Dosage strengths dropdown options
         var dosageOptions = '';
-        details.dosageStrengths.forEach(function (d) {
+        dosageStrengths.forEach(function (d) {
             dosageOptions += '<option value="' + escapeHtml(d) + '">' + escapeHtml(d) + '</option>';
         });
         
@@ -1124,8 +1185,8 @@
 
         // Usage guidelines checklist
         var usageChecklistHtml = '';
-        if (details.usageGuidelines) {
-            var items = details.usageGuidelines.split('; ');
+        if (usageGuidelines) {
+            var items = usageGuidelines.split('; ');
             items.forEach(function (item, idx) {
                 var itemId = 'dx-usage-item-' + idx;
                 usageChecklistHtml += '<div class="usage-checklist-item" style="display:flex; align-items:flex-start; gap:8px; margin-bottom:8px;">' +
@@ -1139,10 +1200,10 @@
 
         // Side effects warning with severity badges
         var sideHtml = '';
-        if (details.sideEffects && details.sideEffects.effects.length > 0) {
+        if (sideEffects && sideEffects.effects && sideEffects.effects.length > 0) {
             var sideEffectsListHtml = '';
-            details.sideEffects.effects.forEach(function (eff) {
-                var severity = (details.sideEffects.severity_map && details.sideEffects.severity_map[eff]) || 'mild';
+            sideEffects.effects.forEach(function (eff) {
+                var severity = (sideEffects.severity_map && sideEffects.severity_map[eff]) || 'mild';
                 var badgeClass = 'severity-' + severity;
                 sideEffectsListHtml += '<span class="side-effect-tag ' + badgeClass + '" style="margin-right:6px; margin-bottom:6px; display:inline-block; padding:4px 8px; border-radius:4px; font-size:11px; font-weight:600; text-transform:capitalize;">' + 
                     escapeHtml(eff) + ' (' + severity + ')</span>';
@@ -1154,6 +1215,48 @@
                 '<div style="display:flex; flex-wrap:wrap;">' + sideEffectsListHtml + '</div>' +
                 '</div>';
         }
+
+        // Load active inventory batches for this medicine
+        var batches = [];
+        try {
+            var rawB = localStorage.getItem('ayuvant_batches');
+            batches = rawB ? JSON.parse(rawB) : [];
+        } catch(e) {}
+
+        var medicineBatches = batches.filter(function(b) {
+            return (b.medicineId === med.id || b.medicineName.toLowerCase() === med.name.toLowerCase()) && b.quantity > 0;
+        });
+
+        var batchOptions = '';
+        if (medicineBatches.length > 0) {
+            medicineBatches.forEach(function(b) {
+                var expDate = new Date(b.expiryDate);
+                var today = new Date();
+                var threeMonths = new Date();
+                threeMonths.setMonth(threeMonths.getMonth() + 3);
+                var expWarning = '';
+                if (expDate <= today) {
+                    expWarning = ' - EXPIRED';
+                } else if (expDate <= threeMonths) {
+                    expWarning = ' - Expiring soon';
+                }
+
+                batchOptions += '<option value="' + escapeHtml(b.batchNumber) + '" data-qty="' + b.quantity + '">' +
+                    escapeHtml(b.batchNumber) + ' (' + b.quantity + ' units left, Exp: ' + formatDate(b.expiryDate) + expWarning + ')' +
+                    '</option>';
+            });
+        } else {
+            batchOptions = '<option value="">No active batches in stock (Prescribe only)</option>';
+        }
+        batchOptions += '<option value="custom_manual">Manual Entry / Custom Batch...</option>';
+
+        var batchSelectHtml = '<div class="form-group">' +
+            '<label class="form-label"><span class="material-icons-round field-icon">qr_code_2</span>Select Stock Batch</label>' +
+            '<select id="dx-batch-select" class="form-input" style="background:rgba(25, 25, 31, 0.6); border:1px solid rgba(255,255,255,0.08); color:var(--on-surface); border-radius:var(--radius); padding:10px; width:100%; cursor:pointer;">' +
+            batchOptions +
+            '</select>' +
+            '<input type="text" id="dx-batch-number-manual" class="form-input" placeholder="Enter manual batch number..." style="display:none; margin-top:8px;">' +
+            '</div>';
 
         var otcBadgeClass = (med.subCategory && med.subCategory.toLowerCase() === 'otc') ? 'badge-otc' : 'badge-rx';
         var otcLabel = med.subCategory || 'Rx';
@@ -1167,7 +1270,7 @@
             '</div>' +
             // Salt Composition
             '<div class="dx-selector-group">' +
-            '<div class="dx-selector-label"><span class="material-icons-round field-icon">science</span>Active Salt & Drug Class <span class="badge drug-class-badge">' + escapeHtml(med.therapeuticClass) + '</span></div>' +
+            '<div class="dx-selector-label"><span class="material-icons-round field-icon">science</span>Active Salt & Drug Class <span class="badge drug-class-badge">' + escapeHtml(therapeuticClass) + '</span></div>' +
             '<div class="dx-selector-pills" id="dx-salt-pills">' + saltPills + '</div>' +
             '</div>' +
             // Dosage Strength (dropdown)
@@ -1182,16 +1285,22 @@
             '</div>' +
             // Side Effects
             sideHtml +
+            // Quantity to Dispense
+            '<div class="form-group">' +
+            '<label class="form-label"><span class="material-icons-round field-icon">shopping_bag</span>Quantity to Dispense</label>' +
+            '<div class="stepper-wrapper">' +
+            '<button type="button" class="stepper-btn" id="dx-qty-dispense-minus"><span class="material-icons-round">remove</span></button>' +
+            '<input type="number" id="dx-qty-dispense" class="form-input stepper-input" value="10" min="1" max="100">' +
+            '<button type="button" class="stepper-btn" id="dx-qty-dispense-plus"><span class="material-icons-round">add</span></button>' +
+            '</div>' +
+            '</div>' +
             // Patient Mobile (optional)
             '<div class="form-group">' +
             '<label class="form-label"><span class="material-icons-round field-icon">phone</span>Patient Mobile (Optional)</label>' +
             '<input type="tel" id="dx-patient-mobile" class="form-input" placeholder="10-digit mobile number" maxlength="10">' +
             '</div>' +
-            // Batch Number (optional)
-            '<div class="form-group">' +
-            '<label class="form-label"><span class="material-icons-round field-icon">qr_code_2</span>Batch Number (Optional)</label>' +
-            '<input type="text" id="dx-batch-number" class="form-input" placeholder="Enter batch number">' +
-            '</div>' +
+            // Batch Select & Dropdown
+            batchSelectHtml +
             // Pharmacist Notes
             '<div class="form-group">' +
             '<label class="form-label"><span class="material-icons-round field-icon">notes</span>Pharmacist Notes</label>' +
@@ -1201,6 +1310,60 @@
             '<button class="submit-btn" id="dx-submit-prescription">' +
             '<span class="material-icons-round">task_alt</span>Record Prescription' +
             '</button>';
+
+        // Stepper buttons event listeners
+        setTimeout(function() {
+            var qtyDispense = document.getElementById('dx-qty-dispense');
+            var minusBtn = document.getElementById('dx-qty-dispense-minus');
+            var plusBtn = document.getElementById('dx-qty-dispense-plus');
+            if (qtyDispense && minusBtn && plusBtn) {
+                minusBtn.addEventListener('click', function() {
+                    qtyDispense.value = Math.max(1, parseInt(qtyDispense.value) - 5);
+                });
+                plusBtn.addEventListener('click', function() {
+                    qtyDispense.value = Math.min(100, parseInt(qtyDispense.value) + 5);
+                });
+            }
+        }, 100);
+    }
+
+    function triggerQuickOrder(medId, medName, medForm) {
+        showToast('Ordering 100 units for ' + medName + '...', 'info');
+        
+        setTimeout(function() {
+            var batchesKey = 'ayuvant_batches';
+            var batches = [];
+            try {
+                var rawB = localStorage.getItem(batchesKey);
+                batches = rawB ? JSON.parse(rawB) : [];
+            } catch(e) {}
+            
+            var strengths = ClinicalEngine.getDosagesByType(medForm) || ["500mg"];
+            var strength = strengths[0] || "500mg";
+
+            var newBatch = {
+                id: Date.now().toString(),
+                batchNumber: 'B-' + medId + '-' + Math.random().toString(36).substr(2, 5).toUpperCase(),
+                medicineId: medId,
+                medicineName: medName,
+                dosageForm: medForm || 'Tablet',
+                dosageStrength: strength,
+                quantity: 100,
+                manufacturingDate: new Date().toISOString().split('T')[0],
+                expiryDate: new Date(Date.now() + 365*24*60*60*1000).toISOString().split('T')[0],
+                entryDate: new Date().toISOString().split('T')[0],
+                status: 'active'
+            };
+            
+            batches.unshift(newBatch);
+            localStorage.setItem(batchesKey, JSON.stringify(batches));
+            
+            showToast('Stock replenishment complete: Batch ' + newBatch.batchNumber + ' added (100 units)', 'success');
+            
+            if (dxCurrentStep === 3) {
+                renderRecommendations();
+            }
+        }, 2000);
     }
 
     function setupDiagnoseEvents() {
@@ -1284,37 +1447,161 @@
             });
         }
 
-        // Recommendation select
+        // Recommendation select & stock actions click handlers
         var recList = document.getElementById('dx-recommendations-list');
         if (recList) {
             recList.addEventListener('click', function (e) {
-                var btn = e.target.closest('.dx-rec-select-btn');
-                if (!btn) return;
-                var medId = btn.dataset.medId;
-                var medicines = window.AYUVANT_MEDICINES || [];
-                for (var i = 0; i < medicines.length; i++) {
-                    if (medicines[i].id === medId) {
-                        dxSelectedMedicine = medicines[i];
-                        break;
+                var selectBtn = e.target.closest('.dx-rec-select-btn');
+                if (selectBtn) {
+                    if (selectBtn.hasAttribute('disabled')) {
+                        return;
+                    }
+                    var medId = selectBtn.dataset.medId;
+                    var medicines = window.AYUVANT_MEDICINES || [];
+                    for (var i = 0; i < medicines.length; i++) {
+                        if (medicines[i].id === medId) {
+                            dxSelectedMedicine = medicines[i];
+                            break;
+                        }
+                    }
+                    if (dxSelectedMedicine) {
+                        renderDxStep(4);
+                        renderPrescriptionForm();
+                    }
+                    return;
+                }
+
+                // Handle out-of-stock links
+                var stockLink = e.target.closest('.stock-action-link');
+                if (stockLink) {
+                    var action = stockLink.dataset.action;
+                    var medName = stockLink.dataset.name;
+                    
+                    if (action === 'transfer') {
+                        switchTab('transfer');
+                        var trInput = document.getElementById('transfer-search');
+                        if (trInput) {
+                            trInput.value = medName;
+                            trInput.dispatchEvent(new Event('input'));
+                        }
+                    } else if (action === 'substitute') {
+                        switchTab('alternatives');
+                        var altInput = document.getElementById('alt-search');
+                        if (altInput) {
+                            altInput.value = medName;
+                            altInput.dispatchEvent(new Event('input'));
+                        }
+                    } else if (action === 'order') {
+                        var medId = stockLink.dataset.id;
+                        var medForm = stockLink.dataset.form;
+                        triggerQuickOrder(medId, medName, medForm);
                     }
                 }
+            });
+        }
+
+        // Custom Prescribing autocomplete events
+        var customMedSearch = document.getElementById('dx-custom-med-search');
+        var customSuggestions = document.getElementById('dx-custom-med-suggestions');
+        
+        if (customMedSearch && customSuggestions) {
+            customMedSearch.addEventListener('input', debounce(function () {
+                var query = customMedSearch.value.trim().toLowerCase();
+                if (query.length < 2) {
+                    customSuggestions.innerHTML = '';
+                    customSuggestions.classList.remove('show');
+                    return;
+                }
+                
+                var master = window.AYUVANT_MEDICINES || [];
+                var matches = master.filter(function (m) {
+                    return m.name.toLowerCase().indexOf(query) !== -1 ||
+                           m.genericName.toLowerCase().indexOf(query) !== -1;
+                }).slice(0, 8);
+                
+                var html = '';
+                matches.forEach(function (m) {
+                    html += '<div class="suggestion-item" data-id="' + m.id + '" data-name="' + escapeHtml(m.name) + '">' +
+                        '<span class="suggestion-name">' + escapeHtml(m.name) + '</span>' +
+                        '<span class="suggestion-meta">' + escapeHtml(m.dosageForm) + '</span>' +
+                        '</div>';
+                });
+                
+                html += '<div class="suggestion-item custom-new" data-id="custom" data-name="' + escapeHtml(customMedSearch.value.trim()) + '">' +
+                    '<span class="suggestion-name">Prescribe custom: "' + escapeHtml(customMedSearch.value.trim()) + '"</span>' +
+                    '<span class="suggestion-meta">New</span>' +
+                    '</div>';
+                
+                customSuggestions.innerHTML = html;
+                customSuggestions.classList.add('show');
+            }, 200));
+            
+            customSuggestions.addEventListener('click', function (e) {
+                var item = e.target.closest('.suggestion-item');
+                if (!item) return;
+                
+                var id = item.dataset.id;
+                var name = item.dataset.name;
+                
+                customSuggestions.classList.remove('show');
+                customSuggestions.innerHTML = '';
+                customMedSearch.value = '';
+                
+                if (id === 'custom') {
+                    dxSelectedMedicine = {
+                        id: 'custom-' + Date.now(),
+                        name: name,
+                        genericName: 'Custom Prescription',
+                        dosageForm: 'Tablet',
+                        category: 'General',
+                        activeSalts: [],
+                        subCategory: 'Rx'
+                    };
+                } else {
+                    var master = window.AYUVANT_MEDICINES || [];
+                    dxSelectedMedicine = master.find(function (m) { return m.id === id; });
+                }
+                
                 if (dxSelectedMedicine) {
                     renderDxStep(4);
                     renderPrescriptionForm();
                 }
             });
+            
+            document.addEventListener('click', function (e) {
+                if (!e.target.closest('#dx-custom-prescribe-section')) {
+                    customSuggestions.classList.remove('show');
+                }
+            });
         }
 
-        // Prescription pill selectors
-        document.getElementById('dx-prescription-card').addEventListener('click', function (e) {
-            var pill = e.target.closest('.dx-selector-pill');
-            if (!pill) return;
-            var type = pill.dataset.type;
-            // Deselect siblings
-            var parent = pill.parentElement;
-            parent.querySelectorAll('.dx-selector-pill').forEach(function (p) { p.classList.remove('selected'); });
-            pill.classList.add('selected');
-        });
+        // Prescription pill selectors & manual batch toggle
+        var prescCard = document.getElementById('dx-prescription-card');
+        if (prescCard) {
+            prescCard.addEventListener('click', function (e) {
+                var pill = e.target.closest('.dx-selector-pill');
+                if (!pill) return;
+                var parent = pill.parentElement;
+                parent.querySelectorAll('.dx-selector-pill').forEach(function (p) { p.classList.remove('selected'); });
+                pill.classList.add('selected');
+            });
+
+            prescCard.addEventListener('change', function (e) {
+                if (e.target.id === 'dx-batch-select') {
+                    var manualInput = document.getElementById('dx-batch-number-manual');
+                    if (manualInput) {
+                        if (e.target.value === 'custom_manual') {
+                            manualInput.style.display = 'block';
+                            manualInput.required = true;
+                        } else {
+                            manualInput.style.display = 'none';
+                            manualInput.required = false;
+                            manualInput.value = '';
+                        }
+                    }
+                }
+            });
+        }
 
         // Submit prescription
         document.addEventListener('click', function (e) {
@@ -1325,23 +1612,37 @@
                 return;
             }
 
-            // Get selected values
             var selectedSalt = document.querySelector('#dx-salt-pills .dx-selector-pill.selected');
             var dosageSelect = document.getElementById('dx-dosage-select');
             var dosageStrength = dosageSelect ? dosageSelect.value : '';
             var mobileInput = document.getElementById('dx-patient-mobile');
-            var batchInput = document.getElementById('dx-batch-number');
             var notesInput = document.getElementById('dx-notes');
+            
+            var batchSelect = document.getElementById('dx-batch-select');
+            var batchNumber = '';
+            if (batchSelect) {
+                if (batchSelect.value === 'custom_manual') {
+                    var manualInput = document.getElementById('dx-batch-number-manual');
+                    batchNumber = manualInput ? manualInput.value.trim() : '';
+                    if (!batchNumber) {
+                        showToast('Please enter batch number', 'error');
+                        return;
+                    }
+                } else {
+                    batchNumber = batchSelect.value;
+                }
+            }
+
+            var qtyInput = document.getElementById('dx-qty-dispense');
+            var quantityDispensed = qtyInput ? parseInt(qtyInput.value) : 10;
 
             var details = ClinicalEngine.getMedicineDetails(dxSelectedMedicine.id, dxSelectedDisease.id);
 
-            // Get symptom names
             var symptomNames = dxSelectedSymptoms.map(function (sid) {
                 var sym = ClinicalEngine.getSymptomById(sid);
                 return sym ? sym.name : sid;
             });
 
-            // Gather customized usage guidelines from checklist
             var checkedGuidelines = [];
             var checkboxes = document.querySelectorAll('.usage-checkbox');
             checkboxes.forEach(function (cb) {
@@ -1362,14 +1663,14 @@
                 saltComposition: selectedSalt ? selectedSalt.dataset.value : '',
                 dosageStrength: dosageStrength,
                 usageGuidelines: usageGuidelinesStr,
+                quantity: quantityDispensed,
                 patientMobile: mobileInput ? mobileInput.value.trim() : '',
-                batchNumber: batchInput ? batchInput.value.trim() : '',
+                batchNumber: batchNumber,
                 pharmacistNotes: notesInput ? notesInput.value.trim() : ''
             });
 
-            showToast('Prescription recorded: ' + txn.id, 'success');
+            showToast('Prescription recorded: ' + txn.id + ' (' + quantityDispensed + ' units)', 'success');
 
-            // Reset and go back to step 1
             dxCurrentStep = 1;
             dxSelectedDisease = null;
             dxSelectedSymptoms = [];

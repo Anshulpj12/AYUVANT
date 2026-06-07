@@ -70,6 +70,10 @@
                 <span class="material-icons-round">swap_horiz</span>
                 <span class="tab-label">Transfer</span>
             </button>
+            <button class="tab-btn" data-tab="diagnose" id="tab-diagnose">
+                <span class="material-icons-round">stethoscope</span>
+                <span class="tab-label">Diagnose</span>
+            </button>
             <button class="tab-btn" data-tab="alternatives" id="tab-alternatives">
                 <span class="material-icons-round">medication</span>
                 <span class="tab-label">Alts</span>
@@ -90,10 +94,6 @@
             <button class="tab-btn" data-tab="insights" id="tab-insights">
                 <span class="material-icons-round">analytics</span>
                 <span class="tab-label">Insights</span>
-            </button>
-            <button class="tab-btn" data-tab="diagnose" id="tab-diagnose">
-                <span class="material-icons-round">stethoscope</span>
-                <span class="tab-label">Diagnose</span>
             </button>
             <button class="tab-btn" data-tab="followup" id="tab-followup">
                 <span class="material-icons-round">follow_the_signs</span>
@@ -471,7 +471,24 @@
                     <span class="section-subtitle" id="dx-rec-subtitle">Ranked by ML confidence score</span>
                 </div>
                 <div id="dx-recommendations-list"></div>
-                <button class="dx-back-btn" id="dx-back-to-2">
+
+                <!-- Prescribe Other Medicine Panel -->
+                <div id="dx-custom-prescribe-section" class="glass-card" style="margin-top: 24px; padding: 18px; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: var(--radius-lg); position: relative;">
+                    <div style="font-size: 13.5px; font-weight: 600; color: var(--on-surface); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                        <span class="material-icons-round" style="color: var(--primary); font-size: 18px;">search</span>
+                        Prescribe Another Medicine
+                    </div>
+                    <div style="font-size: 11.5px; color: var(--on-surface-variant); margin-bottom: 12px; line-height: 1.4;">
+                        If the recommended medicines are out of stock or do not match requirements, search the database to prescribe any other medicine.
+                    </div>
+                    <div class="search-bar" style="margin-bottom: 0; position: relative; width: 100%;">
+                        <span class="material-icons-round search-icon">search</span>
+                        <input type="text" id="dx-custom-med-search" class="search-input" placeholder="Search master medicine list..." autocomplete="off">
+                        <div id="dx-custom-med-suggestions" class="autocomplete-suggestions"></div>
+                    </div>
+                </div>
+
+                <button class="dx-back-btn" id="dx-back-to-2" style="margin-top: 16px;">
                     <span class="material-icons-round">arrow_back</span>
                     Back to Symptoms
                 </button>
